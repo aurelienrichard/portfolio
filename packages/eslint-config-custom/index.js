@@ -16,6 +16,7 @@ module.exports = {
 		'prettier'
 	],
 	plugins: ['@typescript-eslint'],
+	ignorePatterns: ['node_modules'],
 	rules: {
 		'import/prefer-default-export': 'off',
 		'import/no-default-export': 'error',
