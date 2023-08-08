@@ -2,16 +2,17 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"display": "Default",
 	"compilerOptions": {
-		"target": "ESNext",
-		"composite": false,
+		"target": "es6",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
-		"module": "NodeNext",
-		"moduleResolution": "nodenext",
+		"module": "esnext",
+		"moduleResolution": "node",
 		"preserveWatchOutput": true,
 		"skipLibCheck": true,
-		"strict": true
+		"noUncheckedIndexedAccess": true,
+		"strict": true,
+		"incremental": true
 	},
 	"exclude": ["node_modules"]
 }
