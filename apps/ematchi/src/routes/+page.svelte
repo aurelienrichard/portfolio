@@ -1,6 +1,5 @@
 <script>
 	let name = ''
-	const arr = []
 </script>
 
 <h1>Welcome to SvelteKit</h1>

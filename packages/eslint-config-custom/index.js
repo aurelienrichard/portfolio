@@ -1,7 +1,6 @@
 module.exports = {
 	extends: [
-		'airbnb-base',
-		'airbnb-typescript/base',
+		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:svelte/recommended',
 		'turbo',
@@ -9,17 +8,24 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		ecmaVersion: 'latest',
 		sourceType: 'module',
 		extraFileExtensions: ['.svelte']
 	},
 	plugins: ['@typescript-eslint'],
 	env: {
+		es2020: true,
 		node: true,
 		browser: true
 	},
 	ignorePatterns: ['node_modules', '*.cjs'],
-	rules: {
-		'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
-	}
+	overrides: [
+		{
+			files: ['*.svelte'],
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: '@typescript-eslint/parser'
+			}
+		}
+	],
+	rules: {}
 }
