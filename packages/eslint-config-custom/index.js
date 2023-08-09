@@ -1,14 +1,4 @@
 module.exports = {
-	env: {
-		node: true,
-		browser: true
-	},
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module'
-		// extraFileExtensions: ['.svelte']
-	},
 	extends: [
 		'airbnb-base',
 		'airbnb-typescript/base',
@@ -17,7 +7,19 @@ module.exports = {
 		'turbo',
 		'prettier'
 	],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		ecmaVersion: 'latest',
+		sourceType: 'module',
+		extraFileExtensions: ['.svelte']
+	},
 	plugins: ['@typescript-eslint'],
+	env: {
+		node: true,
+		browser: true
+	},
 	ignorePatterns: ['node_modules', '*.cjs'],
-	rules: {}
+	rules: {
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
+	}
 }
