@@ -1,6 +1,6 @@
 <script>
-	let name = ''
+	import Game from './Game.svelte'
+	import '../styles.css'
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>hello {name}</p>
+<Game />
