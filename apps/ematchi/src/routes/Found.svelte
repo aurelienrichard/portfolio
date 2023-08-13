@@ -1,10 +1,11 @@
 <script lang="ts">
-	export let found: string[]
+	import type { Emoji } from '../emojis'
+	export let found: Emoji[]
 </script>
 
 <div class="found">
 	{#each found as emoji}
-		<span>{emoji}</span>
+		<img src={emoji.url} alt={emoji.alt} />
 	{/each}
 </div>
 
@@ -13,11 +14,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 0.5em;
+		gap: 1em;
 		height: 100%;
 	}
 
-	span {
-		font-size: 4em;
+	img {
+		width: 5em;
+		height: 5em;
+		pointer-events: none;
 	}
 </style>

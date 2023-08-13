@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte'
 	import Grid from './Grid.svelte'
 	import { emojis } from '../emojis'
+	import type { Emoji } from '../emojis'
 	import { levels } from '../levels'
 	import type { Level } from '../levels'
 	import { shuffle } from '../utils'
@@ -35,13 +36,13 @@
 
 	const initializeGrid = (level: Level) => {
 		const emojisCopy = [...emojis]
-		const pairs: string[] = []
+		const pairs: Emoji[] = []
 
 		for (let i = 0; i < level.size ** 2 / 2; i += 1) {
 			const randomIndex = Math.floor(Math.random() * emojisCopy.length)
-			const [emoji] = emojisCopy.splice(randomIndex, 1)
+			const [emoji] = emojisCopy.splice(randomIndex, 1) as [Emoji]
 
-			pairs.push(emoji as string)
+			pairs.push(emoji)
 		}
 
 		pairs.push(...pairs)
@@ -50,8 +51,8 @@
 	}
 
 	let size: number = level.size
-	let grid: string[] = initializeGrid(level)
-	let found: string[] = []
+	let grid: Emoji[] = initializeGrid(level)
+	let found: Emoji[] = []
 </script>
 
 <div class="game">

@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { Emoji } from '../emojis'
 	import { createEventDispatcher } from 'svelte'
 	import Square from './Square.svelte'
-	export let grid: string[]
-	export let found: string[]
+	export let grid: Emoji[]
+	export let found: Emoji[]
 
 	const dispatch = createEventDispatcher()
 	let a = -1
@@ -15,6 +16,7 @@
 		<Square
 			{emoji}
 			on:click={() => {
+				if (found.some((e) => e.alt === emoji.alt)) return
 				clearTimeout(timeoutId)
 				if (a === -1 && b === -1) {
 					a = i
@@ -35,7 +37,7 @@
 				}
 			}}
 			flipped={a === i || b === i}
-			found={found.includes(emoji)}
+			found={found.some((e) => e.alt === emoji.alt)}
 		/>
 	{/each}
 </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let emoji: string
+	import type { Emoji } from '../emojis'
+	export let emoji: Emoji
 	export let flipped: boolean
 	export let found: boolean
 </script>
@@ -7,7 +8,7 @@
 <div class="square">
 	<button on:click class:flipped></button>
 	{#if !found}
-		<span>{emoji}</span>
+		<img src={emoji.url} alt={emoji.alt} />
 	{/if}
 </div>
 
@@ -29,8 +30,9 @@
 		height: 100%;
 	}
 
-	span {
-		font-size: 5em;
+	img {
+		height: 7em;
+		width: 7em;
 		pointer-events: none;
 	}
 </style>
