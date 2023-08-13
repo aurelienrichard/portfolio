@@ -1,12 +1,37 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import Grid from './Grid.svelte'
 	import { emojis } from '../emojis'
 	import { levels } from '../levels'
 	import type { Level } from '../levels'
 	import { shuffle } from '../utils'
 	import Found from './Found.svelte'
+	import Countdown from './Countdown.svelte'
 
 	const level = levels[0] as Level
+	const { duration } = level
+	let remaining = duration
+	let playing = false
+
+	const countdown = () => {
+		const start = Date.now()
+		const remainingAtStart = remaining
+
+		const loop = () => {
+			if (playing) return
+
+			requestAnimationFrame(loop)
+			remaining = remainingAtStart - (Date.now() - start)
+
+			if (remaining <= 0) {
+				playing = false
+			}
+		}
+
+		loop()
+	}
+
+	onMount(countdown)
 
 	const initializeGrid = (level: Level) => {
 		const emojisCopy = [...emojis]
@@ -30,7 +55,9 @@
 </script>
 
 <div class="game">
-	<div class="info"></div>
+	<div class="info">
+		<Countdown {duration} {remaining} />
+	</div>
 
 	<div class="grid-container">
 		<Grid
@@ -60,12 +87,10 @@
 	.info {
 		width: 80em;
 		height: 10em;
-		background: purple;
 	}
 
 	.grid-container {
 		width: 80em;
 		height: 80em;
-		background: teal;
 	}
 </style>
