@@ -22,6 +22,8 @@
 		font-size: 8em;
 		height: 1em;
 		width: 1em;
+		background: transparent;
+		border: none;
 	}
 
 	svg {
@@ -43,6 +45,8 @@
 		flex: 1;
 		height: 1em;
 		background: #ccc;
+		border-radius: 1em;
+		overflow: hidden;
 	}
 
 	.remaining {
