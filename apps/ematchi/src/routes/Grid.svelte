@@ -16,7 +16,7 @@
 		<Square
 			{emoji}
 			on:click={() => {
-				if (found.some((e) => e.alt === emoji.alt)) return
+				// if (found.some((e) => e.alt === emoji.alt)) return
 				clearTimeout(timeoutId)
 				if (a === -1 && b === -1) {
 					a = i
@@ -38,6 +38,7 @@
 			}}
 			flipped={a === i || b === i}
 			found={found.some((e) => e.alt === emoji.alt)}
+			group={grid.indexOf(emoji) === i ? 'a' : 'b'}
 		/>
 	{/each}
 </div>
@@ -45,8 +46,8 @@
 <style>
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(4, 1fr);
+		grid-template-columns: repeat(var(--size), 1fr);
+		grid-template-rows: repeat(var(--size), 1fr);
 		height: 100%;
 		grid-gap: 0.5em;
 		perspective: 100vw;

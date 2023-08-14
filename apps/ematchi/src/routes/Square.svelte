@@ -1,30 +1,59 @@
 <script lang="ts">
 	import type { Emoji } from '../emojis'
+	import { send } from '../transitions'
 	export let emoji: Emoji
 	export let flipped: boolean
 	export let found: boolean
+	export let group: 'a' | 'b'
 </script>
 
 <div class="square" class:flipped={flipped || found}>
-	<button on:click />
-	<div class="background" />
+	<button on:click disabled={flipped || found} />
+	<div class="background" class:found />
 
 	{#if !found}
-		<img src={emoji.url} alt={emoji.alt} />
+		<img out:send={{ key: `${emoji}:${group}` }} src={emoji.url} alt={emoji.alt} />
 	{/if}
 </div>
 
 <style>
 	.square {
 		display: flex;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+		transition: filter 0.2s;
+		transform-style: preserve-3d;
+		transform: rotateY(180deg);
+		transition: transform 0.4s;
+		user-select: none;
+	}
+
+	.square * {
+		backface-visibility: hidden;
+	}
+
+	button {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border: none;
+		display: flex;
 		justify-content: center;
 		align-items: center;
-		transform-style: preserve-3d;
-		transition: transform 0.4s;
+		background: #eee;
+		border-radius: 1em;
+		transform: rotateY(180deg);
+	}
+
+	button:disabled {
+		color: inherit;
 	}
 
 	.flipped {
-		transform: rotateY(180deg);
+		transform: rotateY(0);
+		z-index: 2;
 	}
 
 	.background {
@@ -32,28 +61,23 @@
 		width: 100%;
 		height: 100%;
 		background: white;
-		transform: rotateY(180deg);
-		backface-visibility: hidden;
 		border: 0.5em solid #eee;
 		border-radius: 1em;
+		transition: border 0.2s;
+		pointer-events: none;
 	}
 
-	button {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		backface-visibility: hidden;
-		background: #eee;
-		border: 0;
-		border-radius: 1em;
-		font-size: inherit;
+	.background.found {
+		border: 2px solid #eee;
 	}
 
 	img {
-		height: 7em;
-		width: 7em;
+		display: block;
+		font-size: 6em;
+		width: 1em;
+		height: 1em;
+		line-height: 1;
+		z-index: 2;
 		pointer-events: none;
-		backface-visibility: hidden;
-		transform: rotateY(180deg);
 	}
 </style>
