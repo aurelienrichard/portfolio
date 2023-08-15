@@ -12,6 +12,7 @@
 		"skipLibCheck": true,
 		"noUncheckedIndexedAccess": true,
 		"strict": true,
+		"sourceMap": true,
 		"incremental": true
 	},
 	"exclude": ["node_modules"]
