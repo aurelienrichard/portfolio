@@ -8,6 +8,7 @@
 <div class="countdown" transition:fade={{ duration: 200 }}>
 	<button on:click>
 		<img src="/pause-circle.svg" alt="pause-circle" />
+		<div class="hover-surface" />
 	</button>
 	<div class="duration">
 		<div class="remaining" style="--p: {remaining / duration}" />
@@ -25,13 +26,20 @@
 
 	img {
 		border-radius: 100%;
-		cursor: pointer;
 		opacity: 0.4;
 		position: absolute;
-		height: 100%;
-		width: 100%;
 		left: 0;
 		top: 0;
+	}
+
+	.hover-surface {
+		position: absolute;
+		left: calc(0.15em / 2);
+		top: calc(0.15em / 2);
+		height: calc(100% - 0.15em);
+		width: calc(100% - 0.15em);
+		border-radius: 100%;
+		cursor: pointer;
 	}
 
 	.countdown {
