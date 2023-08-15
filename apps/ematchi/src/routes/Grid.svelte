@@ -25,7 +25,7 @@
 					b = i
 
 					if (grid[a] === grid[b]) {
-						dispatch('found', { emoji })
+						dispatch('found', emoji)
 					} else {
 						timeoutId = window.setTimeout(() => {
 							a = -1

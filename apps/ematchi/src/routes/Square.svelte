@@ -13,7 +13,7 @@
 	<div class="background" class:found />
 
 	{#if !found}
-		<img out:send={{ key: `${emoji}:${group}` }} src={emoji.url} alt={emoji.alt} />
+		<img out:send={{ key: `${emoji.alt}:${group}` }} src={emoji.url} alt={emoji.alt} />
 	{/if}
 </div>
 

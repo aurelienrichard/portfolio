@@ -62,6 +62,18 @@
 
 		dispatch('play')
 	}
+
+	const handleFound = (e: CustomEvent<Emoji>) => {
+		const emoji = e.detail
+		found = [...found, emoji]
+
+		if (found.length === size ** 2 / 2) {
+			playing = false
+			window.setTimeout(() => {
+				dispatch('win')
+			}, 1000)
+		}
+	}
 </script>
 
 <svelte:window
@@ -89,20 +101,7 @@
 
 	<div class="grid-container">
 		{#key grid}
-			<Grid
-				{grid}
-				{found}
-				on:found={(e) => {
-					found = [...found, e.detail.emoji]
-
-					if (found.length === size ** 2 / 2) {
-						playing = false
-						window.setTimeout(() => {
-							dispatch('win')
-						}, 1000)
-					}
-				}}
-			/>
+			<Grid {grid} {found} on:found={handleFound} />
 		{/key}
 	</div>
 

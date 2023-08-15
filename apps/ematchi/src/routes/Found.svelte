@@ -10,8 +10,8 @@
 <div class="found">
 	{#each found as emoji (emoji)}
 		<div in:fade={{ delay: 500 }} animate:flip={{ duration: 200, delay: 500 }} class="pair">
-			<img in:receive={{ key: `${emoji}:a` }} src={emoji.url} alt={emoji.alt} />
-			<img in:receive={{ key: `${emoji}:b` }} src={emoji.url} alt={emoji.alt} />
+			<img in:receive={{ key: `${emoji.alt}:a` }} src={emoji.url} alt={emoji.alt} />
+			<img in:receive={{ key: `${emoji.alt}:b` }} src={emoji.url} alt={emoji.alt} />
 		</div>
 	{/each}
 </div>

@@ -1,7 +1,7 @@
 module.exports = {
 	extends: [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/recommended-type-checked',
 		'plugin:svelte/recommended',
 		'turbo',
 		'prettier'
@@ -17,7 +17,7 @@ module.exports = {
 		node: true,
 		browser: true
 	},
-	ignorePatterns: ['node_modules', '*.cjs'],
+	ignorePatterns: ['node_modules', '*.cjs', 'svelte.config.js'],
 	overrides: [
 		{
 			files: ['*.svelte'],
