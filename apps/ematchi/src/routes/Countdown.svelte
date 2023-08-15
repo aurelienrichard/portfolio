@@ -24,6 +24,8 @@
 	}
 
 	img {
+		border-radius: 100%;
+		cursor: pointer;
 		opacity: 0.4;
 		position: absolute;
 		height: 100%;

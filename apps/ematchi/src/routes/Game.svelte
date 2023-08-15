@@ -64,6 +64,15 @@
 	}
 </script>
 
+<svelte:window
+	on:keydown|preventDefault={(e) => {
+		if (e.key === 'Escape') {
+			playing = false
+			dispatch('pause')
+		}
+	}}
+/>
+
 <div class="game" style="--size: {size}">
 	<div class="info">
 		{#if playing}
