@@ -5,6 +5,16 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--bg-1: #fff;
+	--bg-2: #eee;
+	--bg-3: #999;
+	--card-border: #222;
+	--card-border-found: #777;
+	--accent: #744eaa;
+	--accent-2: #777;
+}
+
 html,
 body {
 	height: 100%;
@@ -21,8 +31,6 @@ body {
 		'Open Sans',
 		'Helvetica Neue',
 		sans-serif;
-}
-
-h1 {
-	font-family: poppins;
+	background: var(--bg-1);
+	color: var(--fg);
 }

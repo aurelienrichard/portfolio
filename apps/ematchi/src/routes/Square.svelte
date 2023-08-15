@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Emoji } from '../emojis'
-	import { send } from '../transitions'
+	import type { Emoji } from './emojis'
+	import { send } from './transitions'
 	export let emoji: Emoji
 	export let flipped: boolean
 	export let found: boolean
@@ -9,6 +9,7 @@
 
 <div class="square" class:flipped={flipped || found}>
 	<button on:click disabled={flipped || found} />
+
 	<div class="background" class:found />
 
 	{#if !found}
@@ -42,7 +43,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background: #eee;
+		background: var(--bg-2);
 		border-radius: 1em;
 		transform: rotateY(180deg);
 	}
@@ -60,15 +61,15 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: white;
-		border: 0.5em solid #eee;
+		background: var(--bg-1);
+		border: 0.5em solid var(--accent);
 		border-radius: 1em;
 		transition: border 0.2s;
 		pointer-events: none;
 	}
 
 	.background.found {
-		border: 2px solid #eee;
+		border: 2px solid var(--bg-2);
 	}
 
 	img {

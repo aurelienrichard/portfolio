@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { Emoji } from '../emojis'
+	import type { Emoji } from './emojis'
 	import { flip } from 'svelte/animate'
 	import { fade } from 'svelte/transition'
-	import { receive } from '../transitions'
+	import { receive } from './transitions'
+
 	export let found: Emoji[]
 </script>
 
@@ -18,28 +19,31 @@
 <style>
 	.found {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
 		gap: 1em;
-		height: 100%;
-		filter: drop-shadow(0.2em 0.2em 0.5em rgba(0, 0, 0, 0.2));
+		z-index: 3;
+		filter: drop-shadow(0.2em 0.4em 0.6em rgba(0, 0, 0, 0.1));
 	}
 
 	.pair {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 5em;
-		height: 5em;
-		background: white;
-		padding: 1em;
+		font-size: max(2.5em, calc(80em / (var(--size) * var(--size))));
+		width: 1.5em;
+		aspect-ratio: 1;
+		background: var(--bg-1);
 		border-radius: 50%;
 	}
 
 	img {
+		display: block;
 		position: absolute;
-		width: 3em;
-		height: 3em;
-		pointer-events: none;
+		width: 1em;
+		height: 1em;
+		line-height: 1;
+		/* pointer-events: none; */
 	}
 </style>

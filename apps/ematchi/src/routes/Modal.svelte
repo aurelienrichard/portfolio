@@ -20,5 +20,6 @@
 		display: grid;
 		place-items: center;
 		z-index: 999;
+		transition: all 0.2s;
 	}
 </style>

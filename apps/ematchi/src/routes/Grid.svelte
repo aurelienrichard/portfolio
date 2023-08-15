@@ -1,11 +1,13 @@
 <script lang="ts">
-	import type { Emoji } from '../emojis'
+	import type { Emoji } from './emojis'
 	import { createEventDispatcher } from 'svelte'
 	import Square from './Square.svelte'
+
 	export let grid: Emoji[]
 	export let found: Emoji[]
 
 	const dispatch = createEventDispatcher()
+
 	let a = -1
 	let b = -1
 	let timeoutId: number
@@ -16,7 +18,6 @@
 		<Square
 			{emoji}
 			on:click={() => {
-				// if (found.some((e) => e.alt === emoji.alt)) return
 				clearTimeout(timeoutId)
 				if (a === -1 && b === -1) {
 					a = i
@@ -49,7 +50,9 @@
 		grid-template-columns: repeat(var(--size), 1fr);
 		grid-template-rows: repeat(var(--size), 1fr);
 		height: 100%;
-		grid-gap: 0.5em;
+		grid-gap: 1em;
 		perspective: 100vw;
+		aspect-ratio: 1;
+		z-index: 2;
 	}
 </style>

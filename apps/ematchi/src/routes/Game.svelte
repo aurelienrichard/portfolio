@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
+	import { emojis } from './emojis'
+	import type { Emoji } from './emojis'
+	import type { Level } from './levels'
+	import { shuffle } from './utils'
 	import Grid from './Grid.svelte'
-	import { emojis } from '../emojis'
-	import type { Emoji } from '../emojis'
-	import type { Level } from '../levels'
-	import { shuffle } from '../utils'
 	import Found from './Found.svelte'
 	import Countdown from './Countdown.svelte'
 
@@ -13,7 +13,7 @@
 	let size: number
 	let duration: number
 	let remaining: number
-	let playing = false
+	let playing: boolean
 	let grid: Emoji[] = []
 	let found: Emoji[] = []
 
@@ -79,20 +79,22 @@
 	</div>
 
 	<div class="grid-container">
-		<Grid
-			{grid}
-			on:found={(e) => {
-				found = [...found, e.detail.emoji]
+		{#key grid}
+			<Grid
+				{grid}
+				{found}
+				on:found={(e) => {
+					found = [...found, e.detail.emoji]
 
-				if (found.length === size ** 2 / 2) {
-					playing = false
-					window.setTimeout(() => {
-						dispatch('win')
-					}, 1000)
-				}
-			}}
-			{found}
-		/>
+					if (found.length === size ** 2 / 2) {
+						playing = false
+						window.setTimeout(() => {
+							dispatch('win')
+						}, 1000)
+					}
+				}}
+			/>
+		{/key}
 	</div>
 
 	<div class="info">
@@ -107,6 +109,7 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
+		gap: 2em;
 		font-size: min(1vmin, 0.5rem);
 	}
 
@@ -117,6 +120,5 @@
 
 	.grid-container {
 		width: 80em;
-		height: 80em;
 	}
 </style>
