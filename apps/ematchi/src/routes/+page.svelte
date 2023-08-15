@@ -123,6 +123,7 @@
 		border: none;
 		padding: 1em;
 		border-radius: 0.5em;
+		cursor: pointer;
 	}
 
 	.buttons {
