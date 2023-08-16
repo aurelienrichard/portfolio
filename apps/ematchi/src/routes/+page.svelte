@@ -95,6 +95,7 @@
 		color: var(--accent-2);
 		font-size: min(5vw, 2rem);
 		font-family: poppins;
+		user-select: none;
 	}
 
 	h1 {

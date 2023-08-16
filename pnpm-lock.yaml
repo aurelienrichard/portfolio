@@ -71,6 +71,10 @@ importers:
         version: 4.4.9(@types/node@20.5.0)
 
   apps/rock-paper-scissors-lizard-spock:
+    dependencies:
+      '@fontsource/barlow-semi-condensed':
+        specifier: ^5.0.9
+        version: 5.0.9
     devDependencies:
       '@sveltejs/adapter-static':
         specifier: ^2.0.3
@@ -378,6 +382,10 @@ packages:
   /@eslint/js@8.47.0:
     resolution: {integrity: sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  /@fontsource/barlow-semi-condensed@5.0.9:
+    resolution: {integrity: sha512-oVbfYLykbUhHzSG0hfCe46Y4k4HOXwTzT34OW+m2msFGxAMD138F9eqxZ5pOF3T54CHuMcJ6rKMdDGpRp0Rnow==}
+    dev: false
 
   /@fontsource/poppins@5.0.8:
     resolution: {integrity: sha512-P8owfYWluoUY5Nyzk4gT/L6LmLmseP6ezFWhj6VBUa5pRIdnCvNJpoQ6i/vhekjtJOfqX6nKlB+LCttoUl2GQQ==}
