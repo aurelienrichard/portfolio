@@ -1,6 +1,17 @@
 <script lang="ts">
-	import Header from './Header.svelte'
 	import '../styles.css'
+	import Game from './Game.svelte'
 </script>
 
-<Header />
+<main>
+	<Game />
+</main>
+
+<style>
+	main {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+</style>

@@ -15,8 +15,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 50%;
-		margin: 0 auto;
+		width: inherit;
+		padding: 1.25em 2em;
 		background: red;
+	}
+
+	img {
+		font-size: 7em;
+		height: 1em;
+		width: 1em;
+		pointer-events: none;
 	}
 </style>

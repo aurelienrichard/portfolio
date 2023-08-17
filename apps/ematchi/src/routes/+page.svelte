@@ -122,7 +122,7 @@
 		font-size: inherit;
 		font-family: inherit;
 		border: none;
-		padding: 1em;
+		padding: min(2vmin, 1em);
 		border-radius: 0.5em;
 		cursor: pointer;
 	}
