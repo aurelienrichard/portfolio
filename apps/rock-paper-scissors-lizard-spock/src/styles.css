@@ -1,4 +1,5 @@
-@import '@fontsource/barlow-semi-condensed';
+@import '@fontsource/barlow-semi-condensed/600.css';
+@import '@fontsource/barlow-semi-condensed/700.css';
 
 * {
 	position: relative;
@@ -7,18 +8,19 @@
 
 :root {
 	/* primary */
-	--scissors-gradient-1: hsl(39, 89%, 49%);
-	--scissors-gradient-2: hsl(40, 84%, 53%);
-	--paper-gradient-1: hsl(230, 89%, 62%);
-	--paper-gradient-2: hsl(230, 89%, 65%);
-	--rock-gradient-1: hsl(349, 71%, 52%);
-	--rock-gradient-2: hsl(349, 70%, 56%);
-	--lizard-gradient-1: hsl(261, 73%, 60%);
-	--lizard-gradient-2: hsl(261, 72%, 63%);
-	--spock-gradient-1: hsl(189, 59%, 53%);
-	--spock-gradient-1: hsl(189, 58%, 57%);
+	--scissors-gradient-top: hsl(40, 84%, 53%);
+	--scissors-gradient-bottom: hsl(39, 89%, 49%);
+	--paper-gradient-top: hsl(230, 89%, 65%);
+	--paper-gradient-bottom: hsl(230, 89%, 62%);
+	--rock-gradient-top: hsl(349, 70%, 56%);
+	--rock-gradient-bottom: hsl(349, 71%, 52%);
+	--lizard-gradient-top: hsl(261, 72%, 63%);
+	--lizard-gradient-bottom: hsl(261, 73%, 60%);
+	--spock-gradient-top: hsl(189, 58%, 57%);
+	--spock-gradient-bottom: hsl(189, 59%, 53%);
 
 	/* neutral */
+	--white-text: #fff;
 	--dark-text: hsl(229, 25%, 31%);
 	--score-text: hsl(229, 64%, 46%);
 	--header-outline: hsl(217, 16%, 45%);
@@ -31,9 +33,9 @@
 html,
 body {
 	height: 100%;
-	color: #fff;
+	color: var(--white-text);
 	margin: 0;
-	font-family: barlow-semi-condensed;
+	font-family: 'Barlow Semi Condensed';
 }
 
 html {
