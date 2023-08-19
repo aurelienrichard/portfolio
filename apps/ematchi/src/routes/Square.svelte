@@ -46,7 +46,6 @@
 		background: var(--bg-2);
 		border-radius: 1em;
 		transform: rotateY(180deg);
-		cursor: pointer;
 	}
 
 	button:disabled {

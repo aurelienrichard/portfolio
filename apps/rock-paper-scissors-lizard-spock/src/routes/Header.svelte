@@ -20,12 +20,12 @@
 		border: 3px solid var(--header-outline);
 		border-radius: 1em;
 		box-shadow:
-			inset 0 0 0 0.15em rgba(0, 0, 0, 0.05),
-			0 0 0 0.15em rgba(0, 0, 0, 0.05);
+			inset 0 0 0 1.5px rgba(0, 0, 0, 0.05),
+			0 0 0 1.5px rgba(0, 0, 0, 0.05);
 	}
 
 	img {
-		font-size: 7em;
+		font-size: 7.5em;
 		height: 1em;
 		width: 1em;
 		pointer-events: none;
@@ -48,7 +48,7 @@
 	.score-label {
 		color: var(--score-text);
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 1.5px;
 		text-align: center;
 		font-weight: 600;
 		margin: 0;

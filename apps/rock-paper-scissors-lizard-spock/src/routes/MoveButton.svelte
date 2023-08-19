@@ -14,7 +14,7 @@
 <style>
 	button {
 		position: absolute;
-		font-size: 9.5em;
+		font-size: min(12em, 10rem);
 		height: 1em;
 		width: 1em;
 		border-radius: 100%;
