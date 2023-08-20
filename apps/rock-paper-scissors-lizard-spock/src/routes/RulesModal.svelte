@@ -16,6 +16,7 @@
 		<button on:click={handleClose}>
 			<img src="icon-close.svg" alt="close button" />
 		</button>
+		<div class="flex-break" />
 		<img class="rules" src="image-rules.svg" alt="rules of rock paper scissors lizard spock" />
 	</div>
 </div>
@@ -32,7 +33,7 @@
 	}
 
 	h2 {
-		font-size: 2em;
+		font-size: min(2em, 1.5rem);
 		color: var(--dark-text);
 		margin: 0;
 		text-transform: uppercase;
@@ -51,7 +52,6 @@
 		align-items: center;
 		z-index: 999;
 		transition: all 0.2s;
-		user-select: none;
 	}
 
 	.background {
@@ -60,19 +60,25 @@
 		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: baseline;
-		width: 25em;
-		height: min(150vmin, 30em);
+		width: 28em;
+		height: min(150vmin, 34em);
 		padding: 2em 1.8em;
 		border-radius: 0.5em;
 	}
 
 	.rules {
-		font-size: min(90vmin, 22em);
+		font-size: min(80vmin, 25em);
 		width: 1em;
 		height: 1em;
 	}
 
-	@media screen and (max-width: 400px) {
+	.flex-break {
+		height: 0;
+		width: 0;
+		flex-basis: 100%;
+	}
+
+	@media screen and (max-width: 640px) {
 		h2 {
 			margin: 0 auto;
 		}
@@ -84,8 +90,16 @@
 
 		.background {
 			height: 100%;
+			width: 100%;
 			align-items: center;
-			justify-content: center;
+			justify-content: space-around;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			padding: 0;
+		}
+
+		.flex-break {
+			display: none;
 		}
 	}
 </style>

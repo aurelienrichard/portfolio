@@ -3,39 +3,13 @@
 	export let move: Move
 </script>
 
-<button on:click class={`${move}-button`}>
-	<div class={`border border-${move}`}>
-		<div class="icon-background">
-			<img src={`icon-${move}.svg`} alt={move} />
-		</div>
+<div class={`border border-${move}`}>
+	<div class="icon-background">
+		<img src={`icon-${move}.svg`} alt={move} />
 	</div>
-</button>
+</div>
 
 <style>
-	button {
-		position: absolute;
-		font-size: min(12em, 10rem);
-		height: 1em;
-		width: 1em;
-		border-radius: 100%;
-		background: transparent;
-		border: 0;
-		transition: box-shadow 0.1s ease-in;
-	}
-
-	button:active {
-		box-shadow: 0 0 0.1em rgba(0, 0, 0, 0.1);
-	}
-
-	button:active .border {
-		transform: scale(0.95);
-		box-shadow: none;
-	}
-
-	button:active .icon-background {
-		box-shadow: none;
-	}
-
 	img {
 		height: 50%;
 		position: absolute;
@@ -50,9 +24,9 @@
 	}
 
 	.border {
-		transition: all 0.1s ease-in;
-		height: 100%;
-		width: 100%;
+		font-size: min(16em, 18rem);
+		height: 1em;
+		width: 1em;
 		border-radius: 100%;
 		box-shadow: inset 0 -0.05em 0 -0.01em rgba(0, 0, 0, 0.3);
 	}
@@ -78,7 +52,6 @@
 	}
 
 	.icon-background {
-		transition: box-shadow 0.1s ease-in;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -88,35 +61,5 @@
 		background: var(--white-text);
 		border-radius: 100%;
 		box-shadow: inset 0 0.05em 0 -0.01em rgba(0, 0, 0, 0.15);
-	}
-
-	.rock-button {
-		top: 50%;
-		left: 50%;
-		transform: translate(15%, 60%);
-	}
-
-	.paper-button {
-		top: 50%;
-		left: 50%;
-		transform: translate(60%, -65%);
-	}
-
-	.scissors-button {
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -150%);
-	}
-
-	.lizard-button {
-		top: 50%;
-		left: 50%;
-		transform: translate(-115%, 60%);
-	}
-
-	.spock-button {
-		top: 50%;
-		left: 50%;
-		transform: translate(-160%, -65%);
 	}
 </style>

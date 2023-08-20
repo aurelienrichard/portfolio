@@ -6,7 +6,7 @@
 	<img src="/logo.svg" alt="rock paper scissors lizard spock" />
 	<div class="score-container">
 		<p class="score-label">score</p>
-		<h2 class="score-value">{score}</h2>
+		<h1 class="score-value">{score}</h1>
 	</div>
 </header>
 
@@ -17,7 +17,7 @@
 		justify-content: space-between;
 		width: inherit;
 		padding: 1em 1.3em;
-		border: 3px solid var(--header-outline);
+		border: 0.2em solid var(--header-outline);
 		border-radius: 1em;
 		box-shadow:
 			inset 0 0 0 1.5px rgba(0, 0, 0, 0.05),
@@ -42,13 +42,12 @@
 		padding: 1em 3.3em;
 		border-radius: 0.5em;
 		right: 1.3em;
-		user-select: none;
 	}
 
 	.score-label {
 		color: var(--score-text);
 		text-transform: uppercase;
-		letter-spacing: 1.5px;
+		letter-spacing: 0.12em;
 		text-align: center;
 		font-weight: 600;
 		margin: 0;
