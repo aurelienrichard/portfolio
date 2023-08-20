@@ -4,11 +4,20 @@
 	import MoveSelection from './MoveSelection.svelte'
 	import Round from './Round.svelte'
 	import RulesModal from './RulesModal.svelte'
+	import { getResult } from './getResult'
+	import { getComputerMove } from './getComputerMove'
 
 	let state: 'selection' | 'round' = 'selection'
 	let showModal = false
 	let playerMove: MoveKey
 	let computerMove: MoveKey
+
+	const handleMoveSelection = (e: CustomEvent<MoveKey>) => {
+		state = 'round'
+		const key = e.detail
+		playerMove = key
+		computerMove = getComputerMove(key)
+	}
 </script>
 
 <svelte:window
@@ -27,13 +36,7 @@
 	<Header />
 	<div class="container">
 		{#if state === 'selection'}
-			<MoveSelection
-				on:click|once={() => {
-					state = 'round'
-					playerMove = 'R'
-					computerMove = 'R'
-				}}
-			/>
+			<MoveSelection on:selected|once={handleMoveSelection} />
 		{:else if state === 'round'}
 			<Round
 				on:restart={() => {
@@ -41,7 +44,7 @@
 				}}
 				{playerMove}
 				{computerMove}
-				result="you win"
+				result={getResult(playerMove, computerMove)}
 			/>
 		{/if}
 	</div>

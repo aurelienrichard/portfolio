@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { Move } from './moves'
+	import type { Move, MoveKey } from './moves'
 	export let move: Move
+	export let key: MoveKey
 </script>
 
-<button on:click class={`${move}-button`}>
+<button id={key} on:click class={`${move}-button`}>
 	<div class={`border border-${move}`}>
 		<div class="icon-background">
 			<img src={`icon-${move}.svg`} alt={move} />

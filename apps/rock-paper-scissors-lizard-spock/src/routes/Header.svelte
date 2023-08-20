@@ -1,12 +1,13 @@
 <script lang="ts">
-	let score = 12
+	import { blur } from 'svelte/transition'
+	import { score } from './stores'
 </script>
 
 <header>
 	<img src="/logo.svg" alt="rock paper scissors lizard spock" />
 	<div class="score-container">
 		<p class="score-label">score</p>
-		<h1 class="score-value">{score}</h1>
+		<h1 transition:blur class="score-value">{$score}</h1>
 	</div>
 </header>
 

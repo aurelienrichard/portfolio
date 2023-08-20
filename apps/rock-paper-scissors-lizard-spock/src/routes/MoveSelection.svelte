@@ -3,6 +3,11 @@
 	import { cubicIn, cubicOut } from 'svelte/easing'
 	import { moves } from './moves'
 	import MoveButton from './MoveButton.svelte'
+	import type { MoveKey } from './moves'
+	import { createEventDispatcher } from 'svelte'
+
+	const dispatch = createEventDispatcher()
+	const keys = Object.keys(moves) as MoveKey[]
 </script>
 
 <div
@@ -10,8 +15,14 @@
 	out:fade={{ delay: 100, easing: cubicOut }}
 	class="move-selection"
 >
-	{#each Object.values(moves) as move}
-		<MoveButton {move} on:click />
+	{#each keys as key (key)}
+		<MoveButton
+			{key}
+			move={moves[key]}
+			on:click={() => {
+				dispatch('selected', key)
+			}}
+		/>
 	{/each}
 </div>
 

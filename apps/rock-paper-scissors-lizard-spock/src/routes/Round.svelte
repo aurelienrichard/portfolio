@@ -1,16 +1,26 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
+	import { score } from './stores'
 	import { createEventDispatcher } from 'svelte'
-	import { fade } from 'svelte/transition'
+	import { fade, scale, blur } from 'svelte/transition'
 	import { cubicIn, cubicOut } from 'svelte/easing'
 	import MoveIcon from './MoveIcon.svelte'
 	import { moves } from './moves'
 	import type { MoveKey } from './moves'
+	import type { Result } from './getResult'
 
 	export let playerMove: MoveKey
 	export let computerMove: MoveKey
-	export let result: 'you win' | 'you lose' | 'draw'
+	export let result: Result
 
 	const dispatch = createEventDispatcher()
+
+	onMount(() => {
+		setTimeout(() => {
+			if (result === 'you win') score.increment()
+			else if (result === 'you lose') score.decrement()
+		}, 1800)
+	})
 </script>
 
 <div in:fade={{ delay: 400, easing: cubicIn }} out:fade={{ easing: cubicOut }} class="round">
@@ -20,11 +30,16 @@
 	</div>
 	<div class="computer">
 		<h2>the house picked</h2>
-		<MoveIcon move={moves[computerMove]} />
+		<div class="container">
+			<div in:scale={{ delay: 1000, duration: 800, easing: cubicOut }}>
+				<MoveIcon move={moves[computerMove]} />
+			</div>
+			<div class="background" />
+		</div>
 	</div>
 	<div class="flex-break" />
-	<div class="result">
-		<h1>{result}</h1>
+	<div class="result" in:fade={{ delay: 1200, duration: 600, easing: cubicIn }}>
+		<h1 in:blur={{ delay: 1200, duration: 600, easing: cubicIn }}>{result}</h1>
 		<button on:click={() => dispatch('restart')}>play again</button>
 	</div>
 </div>
@@ -93,6 +108,18 @@
 		left: 0;
 		height: 100%;
 		width: 100%;
+	}
+
+	.background {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 75%;
+		width: 75%;
+		border-radius: 100%;
+		background: rgba(0, 0, 0, 0.1);
+		transform: translate(-50%, -50%);
+		z-index: -999;
 	}
 
 	@media screen and (max-width: 640px) {
