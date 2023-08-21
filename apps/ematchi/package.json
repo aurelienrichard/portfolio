@@ -24,6 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"ui": "workspace:*",
 		"@fontsource/poppins": "^5.0.8",
 		"@neoconfetti/svelte": "^1.0.0"
 	}

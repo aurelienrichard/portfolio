@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Attribution } from 'ui'
 	import { confetti } from '@neoconfetti/svelte'
 	import Game from './Game.svelte'
 	import Modal from './Modal.svelte'
@@ -15,6 +16,7 @@
 </svelte:head>
 
 <main>
+	<Attribution fill="#744eaa" />
 	<Game
 		bind:this={game}
 		on:play={() => {

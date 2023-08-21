@@ -22,6 +22,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"ui": "workspace:*",
 		"@fontsource/barlow-semi-condensed": "^5.0.9"
 	}
 }

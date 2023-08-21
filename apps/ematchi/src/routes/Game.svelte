@@ -78,7 +78,7 @@
 
 <svelte:window
 	on:keydown|preventDefault={(e) => {
-		if (e.key === 'Escape') {
+		if (e.key === 'Escape' && playing) {
 			playing = false
 			dispatch('pause')
 		}
