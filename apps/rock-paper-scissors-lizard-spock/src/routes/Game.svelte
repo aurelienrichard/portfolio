@@ -14,9 +14,9 @@
 
 	const handleMoveSelection = (e: CustomEvent<MoveKey>) => {
 		state = 'round'
+		computerMove = getComputerMove()
 		const key = e.detail
 		playerMove = key
-		computerMove = getComputerMove(key)
 	}
 </script>
 

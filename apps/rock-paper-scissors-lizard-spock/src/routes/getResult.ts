@@ -1,8 +1,9 @@
 import type { MoveKey } from './moves'
 
 export type Result = 'you win' | 'you lose' | 'draw'
+export type Pair = [MoveKey, MoveKey]
 
-const rules: Record<MoveKey, MoveKey[]> = {
+export const rules: Record<MoveKey, Pair> = {
 	R: ['S', 'L'],
 	P: ['R', 'K'],
 	S: ['P', 'L'],

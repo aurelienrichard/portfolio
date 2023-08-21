@@ -1,5 +1,10 @@
 import type { MoveKey } from './moves'
+import { moves } from './moves'
 
-export const getComputerMove = (playerMove: MoveKey): MoveKey => {
-	return 'R'
+const moveKeys = Object.keys(moves) as MoveKey[]
+
+export const getComputerMove = () => {
+	const randomMove = Math.floor(Math.random() * moveKeys.length)
+
+	return moveKeys[randomMove] as MoveKey
 }
