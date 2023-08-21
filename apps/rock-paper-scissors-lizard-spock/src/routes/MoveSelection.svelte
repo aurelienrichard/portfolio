@@ -33,6 +33,6 @@
 		left: 0;
 		height: 100%;
 		width: 100%;
-		background: no-repeat center/min(70%, 22rem) url('bg-pentagon.svg');
+		background: no-repeat center/min(70%, 22rem) url('/bg-pentagon.svg');
 	}
 </style>
