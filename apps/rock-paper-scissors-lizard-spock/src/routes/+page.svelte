@@ -3,6 +3,11 @@
 	import Game from './Game.svelte'
 </script>
 
+<svelte:head>
+	<title>rock paper scissors lizard spock</title>
+	<meta name="description" content="rock paper scissors lizard spock" />
+</svelte:head>
+
 <main>
 	<Game />
 </main>
