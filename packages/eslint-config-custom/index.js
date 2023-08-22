@@ -3,9 +3,10 @@ module.exports = {
 		'airbnb-base',
 		'airbnb-typescript/base',
 		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended-type-checked',
+		'plugin:@typescript-eslint/strict-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:svelte/recommended',
+		'plugin:import/recommended',
 		'turbo',
 		'prettier'
 	],
@@ -39,11 +40,33 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'import/no-default-export': 'error',
 		'no-unused-vars': 'off',
-		'@typescript-eslint/no-unused-vars': [
-			'error',
-			{ varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
-		],
+		'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }],
 		'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
+		'@typescript-eslint/naming-convention': [
+			'error',
+			{
+				selector: 'default',
+				format: ['camelCase']
+			},
+			{
+				selector: 'variable',
+				format: ['camelCase', 'UPPER_CASE']
+			},
+			{
+				selector: 'parameter',
+				format: ['camelCase'],
+				leadingUnderscore: 'allow'
+			},
+			{
+				selector: 'typeLike',
+				format: ['PascalCase']
+			},
+			{
+				selector: 'objectLiteralProperty',
+				format: ['camelCase', 'UPPER_CASE']
+			}
+		],
+		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 		'no-param-reassign': ['error', { props: false }],
 		eqeqeq: ['error', 'smart']
 	}

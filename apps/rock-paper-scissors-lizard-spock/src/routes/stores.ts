@@ -5,8 +5,12 @@ const createScore = () => {
 
 	return {
 		subscribe,
-		increment: () => update((n) => n + 1),
-		decrement: () => update((n) => n - 1)
+		increment: () => {
+			update((n) => n + 1)
+		},
+		decrement: () => {
+			update((n) => n - 1)
+		}
 	}
 }
 
