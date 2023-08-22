@@ -77,8 +77,8 @@
 		<div
 			class="confetti"
 			use:confetti={{
-				stageWidth: innerWidth,
-				stageHeight: innerHeight
+				stageWidth: window.innerWidth,
+				stageHeight: window.innerHeight
 			}}
 		/>
 	{/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Move, MoveKey } from './moves'
+
 	export let move: Move
 	export let key: MoveKey
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Emoji } from './emojis'
 	import { flip } from 'svelte/animate'
 	import { fade } from 'svelte/transition'
+	import type { Emoji } from './emojis'
 	import { receive } from './transitions'
 
 	export let found: Emoji[]

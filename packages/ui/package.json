@@ -4,7 +4,9 @@
 	"private": true,
 	"main": "index.ts",
 	"type": "module",
-	"scripts": {},
+	"scripts": {
+		"lint": "prettier . --check . && eslint . --report-unused-disable-directives"
+	},
 	"devDependencies": {
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",

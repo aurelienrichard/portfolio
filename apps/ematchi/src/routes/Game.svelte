@@ -17,35 +17,15 @@
 	let grid: Emoji[] = []
 	let found: Emoji[] = []
 
-	export function start(level: Level) {
-		size = level.size
-		remaining = duration = level.duration
-
-		const emojisCopy = [...emojis]
-		const pairs: Emoji[] = []
-
-		for (let i = 0; i < level.size ** 2 / 2; i += 1) {
-			const randomIndex = Math.floor(Math.random() * emojisCopy.length)
-			const [emoji] = emojisCopy.splice(randomIndex, 1) as [Emoji]
-
-			pairs.push(emoji)
-		}
-
-		grid = shuffle([...pairs, ...pairs])
-		found = []
-
-		resume()
-	}
-
 	const countdown = () => {
-		const start = Date.now()
+		const beginning = Date.now()
 		const remainingAtStart = remaining
 
 		const loop = () => {
 			if (!playing) return
 
 			requestAnimationFrame(loop)
-			remaining = remainingAtStart - (Date.now() - start)
+			remaining = remainingAtStart - (Date.now() - beginning)
 
 			if (remaining <= 0) {
 				playing = false
@@ -61,6 +41,27 @@
 		countdown()
 
 		dispatch('play')
+	}
+
+	export const start = (level: Level) => {
+		size = level.size
+		remaining = level.duration
+		duration = level.duration
+
+		const emojisCopy = [...emojis]
+		const pairs: Emoji[] = []
+
+		for (let i = 0; i < level.size ** 2 / 2; i += 1) {
+			const randomIndex = Math.floor(Math.random() * emojisCopy.length)
+			const [emoji] = emojisCopy.splice(randomIndex, 1) as [Emoji]
+
+			pairs.push(emoji)
+		}
+
+		grid = shuffle([...pairs, ...pairs])
+		found = []
+
+		resume()
 	}
 
 	const handleFound = (e: CustomEvent<Emoji>) => {

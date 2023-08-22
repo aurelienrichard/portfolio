@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../styles.css'
-	import Game from './Game.svelte'
 	import { Attribution } from 'ui'
+	import Game from './Game.svelte'
 </script>
 
 <svelte:head>

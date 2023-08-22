@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Emoji } from './emojis'
 	import { send } from './transitions'
+
 	export let emoji: Emoji
 	export let flipped: boolean
 	export let found: boolean

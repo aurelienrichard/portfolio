@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Move } from './moves'
+
 	export let move: Move
 </script>
 

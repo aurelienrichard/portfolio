@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Emoji } from './emojis'
 	import { createEventDispatcher } from 'svelte'
+	import type { Emoji } from './emojis'
 	import Square from './Square.svelte'
 
 	export let grid: Emoji[]

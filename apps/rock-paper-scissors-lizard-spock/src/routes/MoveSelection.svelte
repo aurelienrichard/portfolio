@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 	import { cubicIn, cubicOut } from 'svelte/easing'
+	import { createEventDispatcher } from 'svelte'
 	import { moves } from './moves'
 	import MoveButton from './MoveButton.svelte'
 	import type { MoveKey } from './moves'
-	import { createEventDispatcher } from 'svelte'
 
 	const dispatch = createEventDispatcher()
 	const keys = Object.keys(moves) as MoveKey[]

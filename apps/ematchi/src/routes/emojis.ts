@@ -8,9 +8,8 @@ const emojisArr =
 		' '
 	)
 
-const getEmojiCode = (emoji: string) => {
-	return [...emoji].map((char) => char.codePointAt(0)?.toString(16)).join('-')
-}
+const getEmojiCode = (emoji: string) =>
+	[...emoji].map((char) => char.codePointAt(0)?.toString(16)).join('-')
 
 export const emojis: Emoji[] = emojisArr.map((emoji) => {
 	const code = getEmojiCode(emoji)

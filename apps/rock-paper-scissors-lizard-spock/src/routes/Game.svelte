@@ -29,7 +29,11 @@
 />
 
 {#if showModal}
-	<RulesModal on:close={() => (showModal = false)} />
+	<RulesModal
+		on:close={() => {
+			showModal = false
+		}}
+	/>
 {/if}
 
 <div class="game">
@@ -48,7 +52,11 @@
 			/>
 		{/if}
 	</div>
-	<button on:click={() => (showModal = true)}>rules</button>
+	<button
+		on:click={() => {
+			showModal = true
+		}}>rules</button
+	>
 </div>
 
 <style>

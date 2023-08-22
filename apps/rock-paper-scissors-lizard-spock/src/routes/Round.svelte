@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { score } from './stores'
-	import { createEventDispatcher } from 'svelte'
+	import { onMount, createEventDispatcher } from 'svelte'
 	import { fade, scale, blur } from 'svelte/transition'
 	import { cubicIn, cubicOut } from 'svelte/easing'
+	import { score } from './stores'
 	import MoveIcon from './MoveIcon.svelte'
 	import { moves } from './moves'
 	import type { MoveKey } from './moves'
