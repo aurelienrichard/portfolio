@@ -1,7 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"display": "Default",
+	"display": "Svelte",
 	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
 		"target": "es6",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
@@ -13,7 +15,8 @@
 		"noUncheckedIndexedAccess": true,
 		"strict": true,
 		"sourceMap": true,
-		"incremental": true
+		"incremental": true,
+		"noEmit": true
 	},
 	"exclude": ["node_modules", "build"]
 }

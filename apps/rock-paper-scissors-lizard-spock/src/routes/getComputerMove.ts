@@ -6,5 +6,5 @@ const moveKeys = Object.keys(moves) as MoveKey[]
 export const getComputerMove = () => {
 	const randomMove = Math.floor(Math.random() * moveKeys.length)
 
-	return moveKeys[randomMove] as MoveKey
+	return moveKeys[randomMove]!
 }

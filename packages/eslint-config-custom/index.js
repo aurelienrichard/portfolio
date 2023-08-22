@@ -6,6 +6,7 @@ module.exports = {
 		'plugin:import/recommended',
 		'plugin:import/typescript',
 		'plugin:@typescript-eslint/recommended-type-checked',
+		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:svelte/recommended',
 		'turbo',
 		'prettier'
@@ -41,13 +42,21 @@ module.exports = {
 	settings: {
 		'import/parsers': {
 			'svelte-eslint-parser': ['.svelte'],
-			'@typescript-eslint/parser': ['js', 'ts']
+			'@typescript-eslint/parser': ['ts'],
+			espree: ['js']
 		},
 		'import/resolver': {
 			typescript: {
 				alwaysTryTypes: true
 			},
-			node: true
+			node: true,
+			'eslint-import-resolver-custom-alias': {
+				alias: {
+					$lib: 'src/lib',
+					$app: 'node_modules/@sveltejs/kit/src/runtime/app',
+					'@sveltejs/kit': 'node_modules/@sveltejs/kit/src/exports/index.js'
+				}
+			}
 		}
 	},
 	rules: {
