@@ -9,5 +9,8 @@
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",
 		"svelte": "^4.2.0"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

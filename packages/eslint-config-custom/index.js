@@ -17,7 +17,7 @@ module.exports = {
 		node: true,
 		browser: true
 	},
-	ignorePatterns: ['node_modules', '*.cjs', 'svelte.config.js'],
+	ignorePatterns: ['node_modules', 'build', '*.cjs', 'svelte.config.js'],
 	overrides: [
 		{
 			files: ['*.svelte'],
@@ -30,7 +30,7 @@ module.exports = {
 	rules: {
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
-			'off',
+			'error',
 			{ varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
 		]
 	}
