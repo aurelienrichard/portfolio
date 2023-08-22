@@ -1,4 +1,4 @@
-export type Emoji = {
+export interface Emoji {
 	alt: string
 	url: string
 }
