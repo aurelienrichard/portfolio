@@ -6,6 +6,7 @@
 	"tabWidth": 4,
 	"trailingComma": "none",
 	"useTabs": true,
-	"plugins": ["prettier-plugin-svelte"],
+	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"tailwindConfig": "tailwind.config.cjs",
 	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../styles.css'
-	import { Attribution } from 'ui'
 	import Game from './Game.svelte'
 </script>
 
@@ -10,7 +9,6 @@
 </svelte:head>
 
 <main>
-	<Attribution fill="#fff" />
 	<Game />
 </main>
 
