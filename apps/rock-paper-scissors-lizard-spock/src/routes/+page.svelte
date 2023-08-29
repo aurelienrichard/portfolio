@@ -4,8 +4,8 @@
 </script>
 
 <svelte:head>
-	<title>rock paper scissors lizard spock</title>
-	<meta name="description" content="rock paper scissors lizard spock" />
+	<title>Rock, Paper, Scissors, Lizard, Spock</title>
+	<meta name="description" content="play rounds against the computer" />
 </svelte:head>
 
 <main>
