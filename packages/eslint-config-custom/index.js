@@ -3,7 +3,7 @@ module.exports = {
 		'airbnb-base',
 		'airbnb-typescript/base',
 		'eslint:recommended',
-		'plugin:@typescript-eslint/strict-type-checked',
+		'plugin:@typescript-eslint/recommended-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:svelte/recommended',
 		'plugin:import/recommended',

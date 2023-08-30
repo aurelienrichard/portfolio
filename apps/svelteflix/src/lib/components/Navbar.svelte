@@ -1,4 +1,4 @@
-<nav class="text-accent flex h-12 w-full max-w-7xl items-center justify-between px-4 font-semibold">
+<nav class="text-accent flex h-12 w-full max-w-7xl items-center justify-between px-4">
 	<a href="/">SvelteFlix</a>
 	<div>
 		<a href="/search">Search</a>
