@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/svelte'
+import { render } from '@testing-library/svelte'
 import { test, expect } from 'vitest'
 import Navbar from './Navbar.svelte'
 
 test('should render', () => {
-	render(Navbar)
+	const { getAllByRole } = render(Navbar)
 
-	expect(screen.getAllByRole('link')).toHaveLength(4)
+	expect(getAllByRole('link')).toHaveLength(4)
 })

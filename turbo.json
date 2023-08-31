@@ -10,10 +10,18 @@
 			"cache": false,
 			"persistent": true
 		},
-		"test": {},
-		"check": {},
+		"test": {
+			"dependsOn": ["lint", "build"]
+		},
+		"test:watch": {
+			"cache": false
+		},
 		"lint": {
-			"outputs": []
+			"dependsOn": ["check"]
+		},
+		"check": {},
+		"clean": {
+			"cache": false
 		}
 	}
 }
