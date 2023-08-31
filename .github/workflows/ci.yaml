@@ -1,40 +1,43 @@
 name: CI
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
- 
+    push:
+        branches: ['main']
+    pull_request:
+        branches: ['main']
+
 jobs:
-  build:
-    name: Build and Test
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    # To use Turborepo Remote Caching, set the following environment variables for the job.
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    build:
+        name: Build and Test
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        # To use Turborepo Remote Caching, set the following environment variables for the job.
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'pnpm'
- 
-      - name: Install dependencies
-        run: pnpm install
- 
-      - name: Build
-        run: pnpm build
- 
-      - name: Test
-        run: pnpm test
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Install Playwright Browsers
+              run: pnpx playwright install --with-deps
+
+            - name: Build
+              run: pnpm build
+
+            - name: Test
+              run: pnpm test
