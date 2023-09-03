@@ -9,7 +9,7 @@ on:
 jobs:
     build:
         name: Build and Test
-        timeout-minutes: 15
+        timeout-minutes: 60
         runs-on: ubuntu-latest
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:

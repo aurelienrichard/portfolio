@@ -1,15 +1,26 @@
-import { writable } from 'svelte/store'
+import { spring } from 'svelte/motion'
+
+const delay = () =>
+	new Promise((resolve) => {
+		setTimeout(resolve, 1800)
+	})
 
 const createScore = () => {
-	const { subscribe, update } = writable(0)
+	const { subscribe, update } = spring(0, {
+		stiffness: 0.2,
+		damping: 0.8,
+		precision: 0.5
+	})
 
 	return {
 		subscribe,
-		increment: () => {
-			update((n) => n + 1)
+		increment: async () => {
+			await delay()
+			await update((n) => n + 1)
 		},
-		decrement: () => {
-			update((n) => n - 1)
+		decrement: async () => {
+			await delay()
+			await update((n) => n - 1)
 		}
 	}
 }

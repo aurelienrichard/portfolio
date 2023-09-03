@@ -14,11 +14,13 @@
 
 	const dispatch = createEventDispatcher()
 
-	onMount(() => {
-		setTimeout(() => {
-			if (result === 'you win') score.increment()
-			else if (result === 'you lose') score.decrement()
-		}, 1800)
+	const handleScore = async () => {
+		if (result === 'you win') await score.increment()
+		else if (result === 'you lose') await score.decrement()
+	}
+
+	onMount(async () => {
+		await handleScore()
 	})
 </script>
 
