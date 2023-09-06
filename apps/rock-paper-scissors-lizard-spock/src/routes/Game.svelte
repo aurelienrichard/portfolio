@@ -105,11 +105,12 @@
 	@media screen and (max-width: 640px) {
 		.game {
 			justify-content: center;
+			gap: 4em;
 		}
 
 		button {
 			position: relative;
-			bottom: 5em;
+			bottom: 4em;
 			right: 0;
 		}
 	}

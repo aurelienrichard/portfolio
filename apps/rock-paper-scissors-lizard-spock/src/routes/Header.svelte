@@ -20,6 +20,7 @@
 		align-items: center;
 		justify-content: space-between;
 		width: inherit;
+		margin-bottom: 1em;
 		padding: 1em 1.3em;
 		border: 0.2em solid var(--header-outline);
 		border-radius: 1em;

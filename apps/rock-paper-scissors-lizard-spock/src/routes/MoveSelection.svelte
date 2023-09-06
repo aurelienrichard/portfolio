@@ -35,4 +35,10 @@
 		width: 100%;
 		background: no-repeat center/min(70%, 22rem) url('/bg-pentagon.svg');
 	}
+
+	@media screen and (max-width: 640px) {
+		.move-selection {
+			top: -4em;
+		}
+	}
 </style>
