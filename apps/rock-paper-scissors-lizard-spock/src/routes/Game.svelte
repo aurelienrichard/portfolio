@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { MoveKey } from './moves'
+	import { score } from './stores'
 	import Header from './Header.svelte'
 	import MoveSelection from './MoveSelection.svelte'
 	import Round from './Round.svelte'
@@ -37,12 +38,18 @@
 {/if}
 
 <div class="game">
-	<Header />
+	<Header score={$score} />
 	<div class="container">
 		{#if state === 'selection'}
 			<MoveSelection on:selected|once={handleMoveSelection} />
 		{:else if state === 'round'}
 			<Round
+				on:win={() => {
+					score.increment()
+				}}
+				on:lose={() => {
+					score.decrement()
+				}}
 				on:restart={() => {
 					state = 'selection'
 				}}
@@ -102,7 +109,7 @@
 
 		button {
 			position: relative;
-			bottom: 0;
+			bottom: 5em;
 			right: 0;
 		}
 	}

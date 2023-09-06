@@ -1,24 +1,15 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition'
-	import { score } from './stores'
 
-	const modulo = (n: number, m: number) =>
-		// handle negative numbers
-		((n % m) + m) % m
-
-	$: angle = modulo($score, 1)
+	export let score: number
 </script>
 
 <header>
 	<img src="/logo.svg" alt="rock paper scissors lizard spock" />
 	<div class="score-container">
 		<p class="score-label">score</p>
-		<h1
-			transition:blur
-			class="score-value"
-			style="transform: rotate3d(0, 1, 0, {100 * angle}deg)"
-		>
-			{Math.floor($score)}
+		<h1 transition:blur class="score-value">
+			{Math.floor(score)}
 		</h1>
 	</div>
 </header>

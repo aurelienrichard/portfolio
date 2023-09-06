@@ -2,7 +2,7 @@
 	import { onMount, createEventDispatcher } from 'svelte'
 	import { fade, scale, blur } from 'svelte/transition'
 	import { cubicIn, cubicOut } from 'svelte/easing'
-	import { score } from './stores'
+	import WinnerBackground from './WinnerBackground.svelte'
 	import MoveIcon from './MoveIcon.svelte'
 	import { moves } from './moves'
 	import type { MoveKey } from './moves'
@@ -14,26 +14,32 @@
 
 	const dispatch = createEventDispatcher()
 
-	const handleScore = async () => {
-		if (result === 'you win') await score.increment()
-		else if (result === 'you lose') await score.decrement()
-	}
-
-	onMount(async () => {
-		await handleScore()
+	onMount(() => {
+		setTimeout(() => {
+			if (result === 'you win') dispatch('win')
+			else if (result === 'you lose') dispatch('lose')
+		}, 1700)
 	})
 </script>
 
 <div in:fade={{ delay: 400, easing: cubicIn }} out:fade={{ easing: cubicOut }} class="round">
 	<div class="player">
 		<h2>you picked</h2>
-		<MoveIcon move={moves[playerMove]} />
+		<div>
+			<MoveIcon move={moves[playerMove]} />
+			{#if result === 'you win'}
+				<WinnerBackground />
+			{/if}
+		</div>
 	</div>
 	<div class="computer">
 		<h2>the house picked</h2>
 		<div class="container">
 			<div in:scale={{ delay: 1000, duration: 800, easing: cubicOut }}>
 				<MoveIcon move={moves[computerMove]} />
+				{#if result === 'you lose'}
+					<WinnerBackground />
+				{/if}
 			</div>
 			<div class="background" />
 		</div>
@@ -123,14 +129,16 @@
 		z-index: -999;
 	}
 
+	@media screen and (max-width: 900px) {
+		.flex-break {
+			display: none;
+		}
+	}
+
 	@media screen and (max-width: 640px) {
 		.player,
 		.computer {
 			flex-direction: column-reverse;
-		}
-
-		.flex-break {
-			display: none;
 		}
 
 		.round {

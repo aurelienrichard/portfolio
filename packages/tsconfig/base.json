@@ -16,6 +16,7 @@
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
+		"noImplicitThis": true,
 		"strict": true
 	},
 	"exclude": ["node_modules", "build"]
