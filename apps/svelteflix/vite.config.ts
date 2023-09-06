@@ -5,6 +5,6 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.test.ts'],
-		environment: 'happy-dom'
+		environmentMatchGlobs: [['**/[A-Z]*.test.ts', 'happy-dom']]
 	}
 })
