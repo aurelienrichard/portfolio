@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { confetti } from '@neoconfetti/svelte'
+	import Attribution from './Attribution.svelte'
 	import Game from './Game.svelte'
 	import Modal from './Modal.svelte'
 	import { levels } from './levels'
@@ -13,6 +14,8 @@
 	<title>ematchi</title>
 	<meta name="description" content="the emoji matching game" />
 </svelte:head>
+
+<Attribution fill="var(--accent)" />
 
 <main>
 	<Game

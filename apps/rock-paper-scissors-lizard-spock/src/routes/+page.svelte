@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../styles.css'
+	import Attribution from './Attribution.svelte'
 	import Game from './Game.svelte'
 </script>
 
@@ -7,6 +8,8 @@
 	<title>Rock, Paper, Scissors, Lizard, Spock</title>
 	<meta name="description" content="play rounds against the computer" />
 </svelte:head>
+
+<Attribution fill="#fff" />
 
 <main>
 	<Game />
