@@ -35,8 +35,12 @@ module.exports = {
 		browser: true
 	},
 	rules: {
+		// https://github.com/iamturns/eslint-config-airbnb-typescript#why-is-importno-unresolved-disabled
 		'import/no-unresolved': 'off',
+		// unreliable for monorepos
 		'import/no-extraneous-dependencies': 'off',
+		// yells on import of env variables
+		'import/extensions': 'off',
 		'import/prefer-default-export': 'off',
 		'import/no-default-export': 'error',
 		'no-unused-vars': 'off',
@@ -63,7 +67,11 @@ module.exports = {
 			},
 			{
 				selector: 'objectLiteralProperty',
-				format: ['camelCase', 'UPPER_CASE']
+				format: null
+			},
+			{
+				selector: 'typeProperty',
+				format: null
 			}
 		],
 		'@typescript-eslint/non-nullable-type-assertion-style': 'off',

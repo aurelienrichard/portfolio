@@ -9,7 +9,7 @@
 	<meta name="description" content="play rounds against the computer" />
 </svelte:head>
 
-<Attribution fill="#fff" />
+<Attribution fill="var(--white-text)" />
 
 <main>
 	<Game />
