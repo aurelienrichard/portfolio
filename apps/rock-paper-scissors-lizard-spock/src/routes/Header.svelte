@@ -30,7 +30,7 @@
 	}
 
 	img {
-		font-size: 8em;
+		font-size: 7.5em;
 		height: 1em;
 		width: 1em;
 		pointer-events: none;
