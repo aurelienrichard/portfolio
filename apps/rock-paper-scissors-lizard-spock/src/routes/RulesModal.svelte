@@ -33,7 +33,7 @@
 	}
 
 	h2 {
-		font-size: min(2em, 1.5rem);
+		font-size: min(4em, 1.8rem);
 		color: var(--dark-text);
 		margin: 0;
 		text-transform: uppercase;

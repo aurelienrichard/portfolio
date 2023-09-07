@@ -30,7 +30,7 @@
 	}
 
 	img {
-		font-size: 7.5em;
+		font-size: 8em;
 		height: 1em;
 		width: 1em;
 		pointer-events: none;
@@ -50,6 +50,7 @@
 	}
 
 	.score-label {
+		font-size: min(1.5em, 1.2rem);
 		color: var(--score-text);
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
@@ -60,7 +61,7 @@
 
 	.score-value {
 		color: var(--dark-text);
-		font-size: 4em;
+		font-size: 4.5em;
 		font-weight: 700;
 		margin: 0;
 		line-height: 1;

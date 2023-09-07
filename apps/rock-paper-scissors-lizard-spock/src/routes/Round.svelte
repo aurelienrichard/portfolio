@@ -53,7 +53,7 @@
 
 <style>
 	h1 {
-		font-size: 3.5em;
+		font-size: 4em;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
@@ -61,7 +61,7 @@
 	}
 
 	h2 {
-		font-size: 1.4em;
+		font-size: min(1.5em, 1.4rem);
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.12em;
@@ -75,9 +75,9 @@
 		border: none;
 		letter-spacing: 0.12em;
 		font-weight: 600;
-		height: 3.5em;
+		height: 3em;
 		width: 100%;
-		font-size: 0.8em;
+		font-size: 1.2em;
 		border-radius: 0.5em;
 	}
 
@@ -102,7 +102,7 @@
 
 	.result {
 		flex-direction: column;
-		gap: 1em;
+		gap: 0.5em;
 	}
 
 	.round {

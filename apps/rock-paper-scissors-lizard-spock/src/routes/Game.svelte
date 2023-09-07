@@ -85,7 +85,7 @@
 	}
 
 	button {
-		font-size: min(1em, 1rem);
+		font-size: min(1.5em, 1.2rem);
 		position: fixed;
 		bottom: 2em;
 		right: 2em;
