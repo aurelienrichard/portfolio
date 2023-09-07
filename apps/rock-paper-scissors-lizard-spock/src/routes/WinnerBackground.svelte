@@ -1,4 +1,4 @@
-<div class="winner-layer container">
+<div class="container">
 	<div class="winner-1 winner-layer" />
 	<div class="winner-2 winner-layer" />
 	<div class="winner-3 winner-layer" />
@@ -7,10 +7,13 @@
 
 <style>
 	.container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		z-index: -3000;
 		height: 250%;
 		width: 250%;
-		opacity: 1;
 	}
 
 	.winner-layer {
@@ -19,37 +22,24 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		border-radius: 100%;
-	}
-
-	.winner-1 {
 		background: rgba(255, 255, 255, 0.075);
 		height: 40%;
 		width: 40%;
-		z-index: -2997;
+	}
+
+	.winner-1 {
 		animation: scale 6s linear 1.7s infinite;
 	}
 
 	.winner-2 {
-		background: rgba(255, 255, 255, 0.075);
-		height: 40%;
-		width: 40%;
-		z-index: -2998;
 		animation: scale 6s linear 3.2s infinite;
 	}
 
 	.winner-3 {
-		background: rgba(255, 255, 255, 0.075);
-		height: 40%;
-		width: 40%;
-		z-index: -2999;
 		animation: scale 6s linear 4.7s infinite;
 	}
 
 	.winner-4 {
-		background: rgba(255, 255, 255, 0.075);
-		height: 40%;
-		width: 40%;
-		z-index: -2999;
 		animation: scale 6s linear 6.2s infinite;
 	}
 
