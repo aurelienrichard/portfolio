@@ -5,10 +5,10 @@
 <div class="attribution">
 	<a
 		href="http://github.com/aurelienrichard"
-		aria-label="Link to the developer's profile on Github"
+		aria-label="Link to the developer's profile on GitHub"
 	>
 		<svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
-			<title>Link to aurelienrichard's profile on Github</title>
+			<title>Link to aurelienrichard's profile on GitHub</title>
 			<path
 				fill-rule="evenodd"
 				clip-rule="evenodd"

@@ -75,6 +75,7 @@ module.exports = {
 			}
 		],
 		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
+		'no-restricted-imports': ['error', { paths: ['$env/static/private'] }],
 		'no-param-reassign': ['error', { props: false }],
 		eqeqeq: ['error', 'smart']
 	}
