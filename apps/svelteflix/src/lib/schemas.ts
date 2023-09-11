@@ -52,8 +52,8 @@ export type MovieList = z.infer<typeof movieListSchema>
 export const imageSchema = z.object({
 	aspect_ratio: z.number(),
 	file_path: z.string(),
-	height: z.string(),
-	iso_639_1: z.string().optional(),
+	height: z.number(),
+	iso_639_1: z.string().nullable(),
 	vote_average: z.number(),
 	vote_count: z.number(),
 	width: z.number()
@@ -91,11 +91,11 @@ export const movieDetailsSchema = z.object({
 	genres: z.array(genreSchema),
 	homepage: z.string().optional(),
 	id: z.number(),
-	// images: z.object({
-	// 	backdrops: z.array(imageSchema),
-	// 	logos: z.array(imageSchema),
-	// 	poster: z.array(imageSchema)
-	// }),
+	images: z.object({
+		backdrops: z.array(imageSchema),
+		logos: z.array(imageSchema),
+		posters: z.array(imageSchema)
+	}),
 	imdb_id: z.string().optional(),
 	original_language: z.string(),
 	original_title: z.string(),
@@ -132,3 +132,17 @@ export const movieDetailsSchema = z.object({
 })
 
 export type MovieDetails = z.infer<typeof movieDetailsSchema>
+
+export const featuredMovieSchema = movieDetailsSchema
+	.pick({ id: true, title: true, images: true })
+	.transform((schema) => ({
+		...schema,
+		backdrop:
+			schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
+			schema.images.backdrops[0]!,
+		logo:
+			schema.images.logos.find(({ iso_639_1 }) => iso_639_1 === 'en') ??
+			schema.images.logos[0]!
+	}))
+
+export type FeaturedMovie = z.infer<typeof featuredMovieSchema>

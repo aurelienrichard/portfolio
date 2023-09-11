@@ -41,41 +41,14 @@ module.exports = {
 		'import/no-extraneous-dependencies': 'off',
 		// yells on import of env variables
 		'import/extensions': 'off',
+		// default export is awful
 		'import/prefer-default-export': 'off',
 		'import/no-default-export': 'error',
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }],
 		'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
-		'@typescript-eslint/naming-convention': [
-			'error',
-			{
-				selector: 'default',
-				format: ['camelCase']
-			},
-			{
-				selector: 'variable',
-				format: ['camelCase', 'UPPER_CASE']
-			},
-			{
-				selector: 'parameter',
-				format: ['camelCase'],
-				leadingUnderscore: 'allow'
-			},
-			{
-				selector: 'typeLike',
-				format: ['PascalCase']
-			},
-			{
-				selector: 'objectLiteralProperty',
-				format: null
-			},
-			{
-				selector: 'typeProperty',
-				format: null
-			}
-		],
-		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
-		'no-restricted-imports': ['error', { paths: ['$env/static/private'] }],
+		// getting data from 3rd party apis which naming conventions I don't control makes this rule insufferable
+		'@typescript-eslint/naming-convention': 'off',
 		'no-param-reassign': ['error', { props: false }],
 		eqeqeq: ['error', 'smart']
 	}
