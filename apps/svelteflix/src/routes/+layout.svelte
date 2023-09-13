@@ -4,24 +4,22 @@
 	import logo from '$lib/images/logo.svg'
 </script>
 
-<nav class="text-accent flex h-12 w-full max-w-7xl items-center justify-between px-12">
+<nav class="text-accent flex h-14 w-full items-center justify-between">
 	<a href="/">
-		<img class="h-4" src={logo} alt="SvelteFlix" />
+		<img class="h-5" src={logo} alt="SvelteFlix" />
 	</a>
-	<div class="flex gap-4 font-semibold">
+	<div class="flex gap-3 font-semibold">
 		<a href="/search">Search</a>
 		<a href="/watchlist">Watchlist</a>
 		<a href="/login">Log in</a>
 	</div>
 </nav>
 
-<main class="w-full max-w-7xl px-12">
+<main class="flex w-full flex-col gap-10 sm:gap-16">
 	<slot />
 </main>
 
-<footer
-	class="align-center flex w-full max-w-7xl flex-col justify-center px-12 py-8 text-center text-xs"
->
+<footer class="align-center flex w-full flex-col justify-center pb-4 pt-16 text-center text-sm">
 	<p>This product uses the</p>
 	<a class="m-auto w-fit" href="https://www.themoviedb.org/">
 		<img class="h-3" src={tmdb} alt="The Movie Database (TMDB)" />

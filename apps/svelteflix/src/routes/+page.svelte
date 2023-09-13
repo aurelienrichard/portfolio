@@ -9,16 +9,20 @@
 	}
 </script>
 
-<h1 class="pb-8 pt-16 text-5xl font-bold">Today's top movies</h1>
+<div class="pt-8">
+	<h1 class="pb-4 text-4xl font-bold sm:text-5xl lg:text-6xl">Today's top movies</h1>
+	<Hero movie={data.featured} />
+</div>
 
-<Hero movie={data.featured} />
-
-<h2 class="pb-8 pt-16 text-4xl font-bold">
-	Trending <a class="text-accent text-2xl font-normal underline" href="/movies/trending"
-		>see more...</a
-	>
-</h2>
-<Carousel movies={data.trending.results} />
+<div>
+	<h2 class="pb-4 text-3xl font-bold sm:text-4xl lg:text-5xl">
+		Trending <a
+			class="text-accent text-xl font-normal underline sm:text-2xl lg:text-3xl"
+			href="/movies/trending">see all</a
+		>
+	</h2>
+	<Carousel movies={data.trending.results} />
+</div>
 
 <svelte:head>
 	<title>SvelteFlix</title>

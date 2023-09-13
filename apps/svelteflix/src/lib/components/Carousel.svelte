@@ -5,17 +5,14 @@
 	export let movies: MovieListResult[]
 </script>
 
-<div class="carousel flex snap-x scroll-pl-2 gap-2 overflow-x-scroll pl-2">
+<div class="carousel flex snap-x gap-2 overflow-x-scroll">
 	{#each movies as movie}
-		<a
-			class="flex-shrink-0 snap-start"
-			href="/movie/{movie.id}"
-			style="max-width: 13rem; width: 16vw"
-		>
+		<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
 			<img
 				class="w-full rounded-md"
 				src={getMediaURL(movie.poster_path, 500)}
 				alt={movie.title}
+				style="max-width: 13rem; width: 16vw"
 			/>
 		</a>
 	{/each}
