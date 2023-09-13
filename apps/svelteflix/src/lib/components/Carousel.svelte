@@ -1,21 +1,31 @@
 <script lang="ts">
 	import type { MovieListResult } from '$lib/schemas'
+	import type { View } from '$lib/views'
 	import { getMediaURL } from '$lib/utils'
 
+	export let view: View
 	export let movies: MovieListResult[]
 </script>
 
-<div class="carousel flex snap-x gap-2 overflow-x-scroll">
-	{#each movies as movie}
-		<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
-			<img
-				class="w-full rounded-md"
-				src={getMediaURL(movie.poster_path, 500)}
-				alt={movie.title}
-				style="max-width: 13rem; width: 16vw"
-			/>
-		</a>
-	{/each}
+<div>
+	<h2 class="pb-4 text-3xl font-bold sm:pb-6 sm:text-4xl lg:pb-8 lg:text-5xl">
+		{view.title}
+		<a
+			class="text-accent text-xl font-normal underline sm:text-2xl lg:text-3xl"
+			href={view.href}>see all</a
+		>
+	</h2>
+	<div class="carousel flex snap-x snap-mandatory scroll-pl-2 gap-2 overflow-x-scroll pl-2">
+		{#each movies as movie}
+			<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
+				<img
+					class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
+					src={getMediaURL(movie.poster_path, 500)}
+					alt={movie.title}
+				/>
+			</a>
+		{/each}
+	</div>
 </div>
 
 <style lang="postcss">

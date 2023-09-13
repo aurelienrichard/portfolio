@@ -5,3 +5,9 @@ export const getMediaURL = (path: string, width: number) => {
 
 	return url
 }
+
+export const getNumberOfColumns = (width: number) => {
+	if (width >= 1024) return 4
+	if (width >= 640) return 3
+	return 2
+}

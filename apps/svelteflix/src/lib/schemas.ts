@@ -23,7 +23,6 @@ export type SpokenLanguage = z.infer<typeof spokenLanguageSchema>
 
 export const movieListResultSchema = z.object({
 	adult: z.boolean(),
-	backdrop_path: z.string(),
 	genre_ids: z.array(z.number()),
 	id: z.number(),
 	original_language: z.string(),
@@ -86,7 +85,6 @@ export type Video = z.infer<typeof videoSchema>
 
 export const movieDetailsSchema = z.object({
 	adult: z.boolean(),
-	backdrop_path: z.string(),
 	budget: z.number(),
 	genres: z.array(genreSchema),
 	homepage: z.string().optional(),
