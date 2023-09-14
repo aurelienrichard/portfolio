@@ -44,7 +44,7 @@
 <div
 	bind:this={viewport}
 	on:scroll={handleScroll}
-	class="flex h-[65vh] snap-y snap-mandatory scroll-pt-2 flex-col overflow-y-auto pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+	class="overflow-y-scroll scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 >
 	<div
 		bind:this={grid}
@@ -53,7 +53,7 @@
 		style:padding-bottom="{paddingBottom}px"
 	>
 		{#each movies.slice(a, b) as movie}
-			<a class="w-full snap-start" href="/movie/{movie.id}">
+			<a class="w-full" href="/movie/{movie.id}">
 				<img
 					class="aspect-[2/3] w-full rounded-md"
 					src={getMediaURL(movie.poster_path, 500)}
@@ -64,7 +64,7 @@
 	</div>
 
 	{#if next}
-		<div class="py-8 text-right">
+		<div class="py-4 text-right">
 			<a class="text-accent text-xl font-normal underline sm:text-2xl lg:text-3xl" href={next}
 				>next page</a
 			>

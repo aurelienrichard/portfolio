@@ -1,5 +1,6 @@
 import { movieListSchema } from '$lib/schemas'
 import { get } from '$lib/server/api'
+import { getNextPage } from '$lib/utils'
 import { views, type ViewsKey } from '$lib/views'
 import type { PageServerLoad } from './$types'
 
@@ -14,6 +15,7 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
 		title,
 		endpoint,
 		movies: data.results,
-		nextPage: data.page < data.total_pages ? data.page + 1 : null
+		nextPage: getNextPage(data),
+		infinite: true
 	}
 }
