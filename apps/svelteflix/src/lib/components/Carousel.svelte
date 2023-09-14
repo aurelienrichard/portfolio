@@ -15,7 +15,9 @@
 			href={view.href}>see all</a
 		>
 	</h2>
-	<div class="carousel flex snap-x snap-mandatory scroll-pl-2 gap-2 overflow-x-scroll pl-2">
+	<div
+		class="flex snap-x snap-mandatory scroll-pl-2 gap-2 overflow-x-scroll pl-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+	>
 		{#each movies as movie}
 			<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
 				<img
@@ -27,13 +29,3 @@
 		{/each}
 	</div>
 </div>
-
-<style lang="postcss">
-	.carousel {
-		scrollbar-width: none;
-	}
-
-	.carousel::-webkit-scrollbar {
-		display: none;
-	}
-</style>

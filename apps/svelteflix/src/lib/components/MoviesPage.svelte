@@ -44,7 +44,7 @@
 <div
 	bind:this={viewport}
 	on:scroll={handleScroll}
-	class="viewport flex h-[65vh] snap-y snap-mandatory scroll-pt-2 flex-col overflow-y-auto pt-2"
+	class="flex h-[65vh] snap-y snap-mandatory scroll-pt-2 flex-col overflow-y-auto pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 >
 	<div
 		bind:this={grid}
@@ -71,13 +71,3 @@
 		</div>
 	{/if}
 </div>
-
-<style lang="postcss">
-	.viewport {
-		scrollbar-width: none;
-	}
-
-	.viewport::-webkit-scrollbar {
-		display: none;
-	}
-</style>
