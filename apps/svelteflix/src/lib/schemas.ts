@@ -29,7 +29,7 @@ export const movieListResultSchema = z.object({
 	original_title: z.string(),
 	overview: z.string(),
 	popularity: z.number(),
-	poster_path: z.string(),
+	poster_path: z.string().nullable(),
 	release_date: z.string(),
 	title: z.string(),
 	video: z.boolean(),
@@ -86,6 +86,7 @@ export type Video = z.infer<typeof videoSchema>
 export const movieDetailsSchema = z.object({
 	adult: z.boolean(),
 	budget: z.number(),
+	backdrop_path: z.string().nullable(),
 	genres: z.array(genreSchema),
 	homepage: z.string().optional(),
 	id: z.number(),
@@ -99,7 +100,7 @@ export const movieDetailsSchema = z.object({
 	original_title: z.string(),
 	overview: z.string(),
 	popularity: z.number(),
-	poster_path: z.string(),
+	poster_path: z.string().nullable(),
 	production_countries: z.array(productionCountrySchema),
 	// recommendations: z.object({
 	// 	page: z.number(),

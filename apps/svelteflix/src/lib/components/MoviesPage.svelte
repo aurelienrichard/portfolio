@@ -54,11 +54,21 @@
 	>
 		{#each movies.slice(a, b) as movie}
 			<a class="w-full" href="/movie/{movie.id}">
-				<img
-					class="aspect-[2/3] w-full rounded-md"
-					src={getMediaURL(movie.poster_path, 500)}
-					alt={movie.title}
-				/>
+				{#if movie.poster_path}
+					<img
+						class="aspect-[2/3] w-full rounded-md"
+						src={getMediaURL(movie.poster_path, 500)}
+						alt={movie.title}
+					/>
+				{:else}
+					<div
+						class="flex h-full items-center justify-center rounded-md [background:rgba(0,0,0,0.8)]"
+					>
+						<div class="text-accent text-center text-lg font-semibold">
+							{movie.title}
+						</div>
+					</div>
+				{/if}
 			</a>
 		{/each}
 	</div>

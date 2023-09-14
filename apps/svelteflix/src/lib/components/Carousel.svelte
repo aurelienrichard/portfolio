@@ -20,11 +20,21 @@
 	>
 		{#each movies as movie}
 			<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
-				<img
-					class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
-					src={getMediaURL(movie.poster_path, 500)}
-					alt={movie.title}
-				/>
+				{#if movie.poster_path}
+					<img
+						class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
+						src={getMediaURL(movie.poster_path, 500)}
+						alt={movie.title}
+					/>
+				{:else}
+					<div
+						class="flex h-full items-center justify-center rounded-md [background:rgba(0,0,0,0.8)]"
+					>
+						<div class="text-accent text- text-center font-semibold">
+							{movie.title}
+						</div>
+					</div>
+				{/if}
 			</a>
 		{/each}
 	</div>
