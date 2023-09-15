@@ -13,7 +13,6 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
 	return {
 		view,
 		title,
-		endpoint,
 		movies: data.results,
 		nextPage: getNextPage(data),
 		infinite: true

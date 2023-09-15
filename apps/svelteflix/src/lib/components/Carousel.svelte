@@ -2,6 +2,7 @@
 	import type { MovieListResult } from '$lib/schemas'
 	import type { View } from '$lib/views'
 	import { getMediaURL } from '$lib/utils'
+	import logo from '$lib/images/logo.svg'
 
 	export let view: View
 	export let movies: MovieListResult[]
@@ -19,22 +20,16 @@
 		class="flex snap-x snap-mandatory scroll-pl-2 gap-2 overflow-x-scroll pl-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 	>
 		{#each movies as movie}
-			<a class="flex-shrink-0 snap-start" href="/movie/{movie.id}">
-				{#if movie.poster_path}
-					<img
-						class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
-						src={getMediaURL(movie.poster_path, 500)}
-						alt={movie.title}
-					/>
-				{:else}
-					<div
-						class="flex h-full items-center justify-center rounded-md [background:rgba(0,0,0,0.8)]"
-					>
-						<div class="text-accent text- text-center font-semibold">
-							{movie.title}
-						</div>
-					</div>
-				{/if}
+			<a
+				class="flex-shrink-0 snap-start rounded-md bg-[rgba(0,0,0,0.8)]"
+				href="/movie/{movie.id}"
+			>
+				<img
+					class:px-4={!movie.poster_path}
+					class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
+					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}
+					alt={movie.title}
+				/>
 			</a>
 		{/each}
 	</div>

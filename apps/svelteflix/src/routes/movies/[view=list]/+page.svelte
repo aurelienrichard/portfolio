@@ -3,13 +3,12 @@
 	import MoviesPage from '$lib/components/MoviesPage.svelte'
 	import type { MovieList, MovieListResult } from '$lib/schemas'
 	import { getNextPage } from '$lib/utils'
-	import type { Endpoint, Title, ViewsKey } from '$lib/views'
+	import type { Title, ViewsKey } from '$lib/views'
 
 	export let data: {
 		view: ViewsKey
 		title: Title
 		movies: MovieListResult[]
-		endpoint: Endpoint
 		nextPage: number | null
 	}
 

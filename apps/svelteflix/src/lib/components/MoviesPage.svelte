@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onMount } from 'svelte'
 	import type { MovieListResult } from '$lib/schemas'
 	import { getMediaURL, getNumberOfColumns } from '$lib/utils'
+	import logo from '$lib/images/logo.svg'
 
 	export let movies: MovieListResult[]
 	export let next: string | null
@@ -31,6 +32,7 @@
 
 	const handleResize = () => {
 		const first = grid.firstChild as HTMLAnchorElement
+		if (!first) return
 		itemHeight = first.offsetHeight
 		columns = getNumberOfColumns(window.innerWidth)
 		handleScroll()
@@ -53,22 +55,13 @@
 		style:padding-bottom="{paddingBottom}px"
 	>
 		{#each movies.slice(a, b) as movie}
-			<a class="w-full" href="/movie/{movie.id}">
-				{#if movie.poster_path}
-					<img
-						class="aspect-[2/3] w-full rounded-md"
-						src={getMediaURL(movie.poster_path, 500)}
-						alt={movie.title}
-					/>
-				{:else}
-					<div
-						class="flex h-full items-center justify-center rounded-md [background:rgba(0,0,0,0.8)]"
-					>
-						<div class="text-accent text-center text-lg font-semibold">
-							{movie.title}
-						</div>
-					</div>
-				{/if}
+			<a class="w-full rounded-md bg-[rgba(0,0,0,0.8)]" href="/movie/{movie.id}">
+				<img
+					class:px-4={!movie.poster_path}
+					class="aspect-[2/3] w-full rounded-md"
+					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}
+					alt={movie.title}
+				/>
 			</a>
 		{/each}
 	</div>

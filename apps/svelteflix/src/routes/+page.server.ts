@@ -11,9 +11,9 @@ import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const [trending, playing, upcoming] = await Promise.all([
-		get(fetch, views.trending.endpoint, movieListSchema),
-		get(fetch, views.playing.endpoint, movieListSchema),
-		get(fetch, views.upcoming.endpoint, movieListSchema)
+		get(fetch, views.trending.endpoint, movieListSchema, { page: '1' }),
+		get(fetch, views.playing.endpoint, movieListSchema, { page: '1' }),
+		get(fetch, views.upcoming.endpoint, movieListSchema, { page: '1' })
 	])
 	const { id } = trending.results[0]!
 	const featuredMovieDetails: MovieDetails = await get(fetch, `movie/${id}`, movieDetailsSchema, {
