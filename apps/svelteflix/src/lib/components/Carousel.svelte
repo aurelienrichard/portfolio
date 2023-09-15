@@ -20,7 +20,7 @@
 		{#each movies as movie}
 			<a
 				class="flex-shrink-0 snap-start rounded-md bg-[rgba(0,0,0,0.8)]"
-				href="/movie/{movie.id}"
+				href="/movies/{movie.id}"
 			>
 				<img
 					class:px-4={!movie.poster_path}

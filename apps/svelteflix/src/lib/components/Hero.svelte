@@ -5,7 +5,7 @@
 	export let movie: FeaturedMovie
 </script>
 
-<a class="relative flex" href="/movie/{movie.id}">
+<a class="relative flex" href="/movies/{movie.id}">
 	<img
 		class="rounded-md"
 		src={getMediaURL(movie.backdrop.file_path, 1280)}

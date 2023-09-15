@@ -55,7 +55,7 @@
 		style:padding-bottom="{paddingBottom}px"
 	>
 		{#each movies.slice(a, b) as movie}
-			<a class="w-full rounded-md bg-[rgba(0,0,0,0.8)]" href="/movie/{movie.id}">
+			<a class="w-full rounded-md bg-[rgba(0,0,0,0.8)]" href="/movies/{movie.id}">
 				<img
 					class:px-4={!movie.poster_path}
 					class="aspect-[2/3] w-full rounded-md"

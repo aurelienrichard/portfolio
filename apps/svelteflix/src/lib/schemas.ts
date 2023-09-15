@@ -102,12 +102,12 @@ export const movieDetailsSchema = z.object({
 	popularity: z.number(),
 	poster_path: z.string().nullable(),
 	production_countries: z.array(productionCountrySchema),
-	// recommendations: z.object({
-	// 	page: z.number(),
-	// 	results: z.array(movieListResultSchema),
-	// 	total_pages: z.number(),
-	// 	total_results: z.number()
-	// }),
+	recommendations: z.object({
+		page: z.number(),
+		results: z.array(movieListResultSchema),
+		total_pages: z.number(),
+		total_results: z.number()
+	}),
 	release_date: z.string(),
 	revenue: z.number(),
 	runtime: z.number(),
@@ -123,9 +123,9 @@ export const movieDetailsSchema = z.object({
 	tagline: z.string(),
 	title: z.string(),
 	video: z.boolean(),
-	// videos: z.object({
-	// 	results: z.array(videoSchema)
-	// }),
+	videos: z.object({
+		results: z.array(videoSchema)
+	}),
 	vote_average: z.number(),
 	vote_count: z.number()
 })
@@ -145,3 +145,22 @@ export const featuredMovieSchema = movieDetailsSchema
 	}))
 
 export type FeaturedMovie = z.infer<typeof featuredMovieSchema>
+
+export const movieInfoSchema = movieDetailsSchema
+	.pick({ id: true, title: true, videos: true, images: true, overview: true })
+	.transform((schema) => ({
+		...schema,
+		trailer:
+			schema.videos.results.find(
+				({ iso_639_1, official, site, type }) =>
+					official &&
+					iso_639_1 === 'en' &&
+					(type === 'Trailer' || type === 'Teaser') &&
+					site === 'YouTube'
+			) ?? schema.videos.results[0]!,
+		backdrop:
+			schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
+			schema.images.backdrops[0]!
+	}))
+
+export type MovieInfo = z.infer<typeof movieInfoSchema>

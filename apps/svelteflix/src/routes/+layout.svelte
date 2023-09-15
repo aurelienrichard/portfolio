@@ -7,7 +7,7 @@
 
 <nav class="text-accent flex h-14 w-full items-center justify-between py-4">
 	<a href="/">
-		<img class="h-5" src={logo} alt="SvelteFlix" />
+		<img class="h-6" src={logo} alt="SvelteFlix" />
 	</a>
 	<div class="flex gap-3 font-semibold">
 		<a href="/search">Search</a>
