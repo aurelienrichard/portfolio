@@ -9,7 +9,7 @@
 	<a href="/">
 		<img class="h-6" src={logo} alt="SvelteFlix" />
 	</a>
-	<div class="flex gap-3 font-semibold">
+	<div class="wrap flex gap-3 whitespace-nowrap font-semibold">
 		<a href="/search">Search</a>
 		<a href="/watchlist">Watchlist</a>
 		<a href="/login">Log in</a>
