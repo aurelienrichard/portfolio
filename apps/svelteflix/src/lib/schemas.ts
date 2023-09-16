@@ -138,10 +138,12 @@ export const featuredMovieSchema = movieDetailsSchema
 		...schema,
 		backdrop:
 			schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
-			schema.images.backdrops[0]!,
+			schema.images.backdrops[0] ??
+			null,
 		logo:
 			schema.images.logos.find(({ iso_639_1 }) => iso_639_1 === 'en') ??
-			schema.images.logos[0]!
+			schema.images.logos[0] ??
+			null
 	}))
 
 export type FeaturedMovie = z.infer<typeof featuredMovieSchema>
@@ -157,10 +159,13 @@ export const movieInfoSchema = movieDetailsSchema
 					iso_639_1 === 'en' &&
 					(type === 'Trailer' || type === 'Teaser') &&
 					site === 'YouTube'
-			) ?? schema.videos.results[0]!,
+			) ??
+			schema.videos.results[0] ??
+			null,
 		backdrop:
 			schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
-			schema.images.backdrops[0]!
+			schema.images.backdrops[0] ??
+			null
 	}))
 
 export type MovieInfo = z.infer<typeof movieInfoSchema>
