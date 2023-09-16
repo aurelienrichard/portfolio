@@ -22,7 +22,7 @@
 	const handleScroll = () => {
 		const remaining = viewport.scrollHeight - (viewport.scrollTop + viewport.clientHeight)
 
-		if (remaining < 400) dispatch('requestMoreData')
+		if (remaining < 500) dispatch('requestMoreData')
 
 		a = Math.floor(viewport.scrollTop / itemHeight) * columns
 		b = Math.ceil((viewport.scrollTop + viewport.clientHeight) / itemHeight) * columns

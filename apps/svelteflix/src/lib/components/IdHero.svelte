@@ -4,6 +4,7 @@
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'
+	import Stars from './Stars.svelte'
 
 	export let movie: MovieInfo
 
@@ -43,13 +44,19 @@
 		<div class="b-8 absolute h-16 w-full rounded-b-md bg-black sm:h-28 lg:h-40" />
 	</div>
 	<div
-		class="absolute bottom-0 w-4/5 translate-x-4 translate-y-12 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-24 md:w-2/3 lg:translate-x-12 lg:translate-y-36"
+		class="absolute bottom-0 w-11/12 translate-x-4 translate-y-12 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-24 md:w-2/3 lg:translate-x-12 lg:translate-y-36"
 	>
 		<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 			{movie.title}
+			<span>
+				<Stars average={movie.vote_average} total={movie.vote_count} />
+			</span>
 		</h1>
-		<div bind:this={overview} class="max-h-16 overflow-y-clip pl-2 sm:max-h-28 lg:max-h-44">
+
+		<div bind:this={overview} class="max-h-12 overflow-y-clip pl-2 sm:max-h-24 lg:max-h-40">
 			<p
+				class:lg:animate-[scrolling-lg_linear_infinite]={scrollable}
+				class:sm:animate-[scrolling-sm_linear_infinite]={scrollable}
 				class:animate-[scrolling_linear_infinite]={scrollable}
 				class="text-sm sm:text-base lg:text-lg"
 				style={`animation-duration: ${duration}s`}

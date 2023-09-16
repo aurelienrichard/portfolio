@@ -21,3 +21,8 @@ export const dollarFormatter = new Intl.NumberFormat('en-US', {
 	currency: 'USD',
 	notation: 'compact'
 })
+
+export const countFormatter = new Intl.NumberFormat('en-US', {
+	style: 'decimal',
+	notation: 'compact'
+})

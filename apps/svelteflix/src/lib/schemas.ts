@@ -153,10 +153,11 @@ export const movieInfoSchema = movieDetailsSchema.transform((schema) => ({
 	trailer:
 		schema.videos.results.find(
 			({ iso_639_1, official, site, type }) =>
-				official &&
-				iso_639_1 === 'en' &&
-				(type === 'Trailer' || type === 'Teaser') &&
-				site === 'YouTube'
+				official && iso_639_1 === 'en' && type === 'Trailer' && site === 'YouTube'
+		) ??
+		schema.videos.results.find(
+			({ iso_639_1, official, site, type }) =>
+				official && iso_639_1 === 'en' && type === 'Teaser' && site === 'YouTube'
 		) ??
 		schema.videos.results[0] ??
 		null,
