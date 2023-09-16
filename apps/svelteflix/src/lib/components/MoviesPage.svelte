@@ -3,6 +3,7 @@
 	import type { MovieListResult } from '$lib/schemas'
 	import { getMediaURL, getNumberOfColumns } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
+	import { lazyLoad } from '$lib/actions'
 
 	export let movies: MovieListResult[]
 	export let next: string | null
@@ -57,6 +58,7 @@
 		{#each movies.slice(a, b) as movie}
 			<a class="w-full rounded-md bg-[rgba(0,0,0,0.8)]" href="/movies/{movie.id}">
 				<img
+					use:lazyLoad
 					class:px-4={!movie.poster_path}
 					class="aspect-[2/3] w-full rounded-md"
 					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}

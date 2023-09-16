@@ -30,10 +30,10 @@
 	<slot />
 </main>
 
-<footer class="align-center flex w-full flex-col justify-center pb-4 pt-16 text-center text-sm">
+<footer class="align-center flex w-full flex-col justify-center pb-4 pt-16 text-center text-xs">
 	<p>This product uses the</p>
 	<a class="m-auto w-fit" href="https://www.themoviedb.org/">
-		<img class="my-1 h-3" src={tmdb} alt="The Movie Database (TMDB)" />
+		<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
 	</a>
 	<p>API but is not endorsed or certified by TMDB.</p>
 </footer>

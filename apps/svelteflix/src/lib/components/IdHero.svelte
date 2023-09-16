@@ -3,6 +3,7 @@
 	import type { MovieInfo } from '$lib/schemas'
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
+	import { lazyLoad } from '$lib/actions'
 
 	export let movie: MovieInfo
 
@@ -27,9 +28,10 @@
 
 <div bind:this={container} class="relative pt-10">
 	<div
-		class="relative from-black to-transparent after:absolute after:bottom-0 after:h-3/4 after:w-full after:rounded-sm after:bg-gradient-to-t"
+		class="relative from-black to-transparent after:absolute after:bottom-0 after:h-2/3 after:w-full after:rounded-sm after:bg-gradient-to-t"
 	>
 		<img
+			use:lazyLoad
 			class:px-4={!movie.backdrop}
 			class="rounded-md"
 			src={movie.backdrop ? getMediaURL(movie.backdrop.file_path, 1280) : logo}
@@ -38,14 +40,15 @@
 				? movie.backdrop.aspect_ratio
 				: 1778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
 		/>
+		<div class="b-8 absolute h-16 w-full rounded-b-md bg-black sm:h-28 lg:h-40" />
 	</div>
 	<div
-		class="absolute bottom-0 w-4/5 translate-x-4 translate-y-4 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-8 md:w-2/3 lg:translate-x-12 lg:translate-y-12"
+		class="absolute bottom-0 w-4/5 translate-x-4 translate-y-12 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-24 md:w-2/3 lg:translate-x-12 lg:translate-y-36"
 	>
-		<h1 class="pb-4 text-3xl font-bold sm:pb-6 sm:text-4xl lg:pb-8 lg:text-5xl">
+		<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 			{movie.title}
 		</h1>
-		<div bind:this={overview} class="max-h-12 overflow-y-clip pl-2 sm:max-h-24 lg:max-h-40">
+		<div bind:this={overview} class="max-h-16 overflow-y-clip pl-2 sm:max-h-28 lg:max-h-44">
 			<p
 				class:animate-[scrolling_linear_infinite]={scrollable}
 				class="text-sm sm:text-base lg:text-lg"

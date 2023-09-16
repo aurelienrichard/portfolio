@@ -148,24 +148,22 @@ export const featuredMovieSchema = movieDetailsSchema
 
 export type FeaturedMovie = z.infer<typeof featuredMovieSchema>
 
-export const movieInfoSchema = movieDetailsSchema
-	.pick({ id: true, title: true, videos: true, images: true, overview: true })
-	.transform((schema) => ({
-		...schema,
-		trailer:
-			schema.videos.results.find(
-				({ iso_639_1, official, site, type }) =>
-					official &&
-					iso_639_1 === 'en' &&
-					(type === 'Trailer' || type === 'Teaser') &&
-					site === 'YouTube'
-			) ??
-			schema.videos.results[0] ??
-			null,
-		backdrop:
-			schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
-			schema.images.backdrops[0] ??
-			null
-	}))
+export const movieInfoSchema = movieDetailsSchema.transform((schema) => ({
+	...schema,
+	trailer:
+		schema.videos.results.find(
+			({ iso_639_1, official, site, type }) =>
+				official &&
+				iso_639_1 === 'en' &&
+				(type === 'Trailer' || type === 'Teaser') &&
+				site === 'YouTube'
+		) ??
+		schema.videos.results[0] ??
+		null,
+	backdrop:
+		schema.images.backdrops.find(({ iso_639_1 }) => !iso_639_1) ??
+		schema.images.backdrops[0] ??
+		null
+}))
 
 export type MovieInfo = z.infer<typeof movieInfoSchema>

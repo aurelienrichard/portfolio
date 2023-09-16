@@ -15,3 +15,9 @@ export const getNumberOfColumns = (width: number) => {
 
 export const getNextPage = (movies: MovieList) =>
 	movies.page < movies.total_pages ? movies.page + 1 : null
+
+export const dollarFormatter = new Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+	notation: 'compact'
+})
