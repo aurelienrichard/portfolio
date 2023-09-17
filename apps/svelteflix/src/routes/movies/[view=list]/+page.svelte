@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte'
 	import { page } from '$app/stores'
-	import MoviesPage from '$lib/components/MoviesPage.svelte'
+	import MovieListGrid from '$lib/components/MovieListGrid.svelte'
 	import type { MovieList, MovieListResult } from '$lib/schemas'
 	import { getNextPage } from '$lib/utils'
 	import type { Title, ViewsKey } from '$lib/views'
@@ -56,7 +56,7 @@
 		{data.title}
 	</h1>
 
-	<MoviesPage
+	<MovieListGrid
 		movies={data.movies}
 		next={data.nextPage ? `/movies/${data.view}?page=${data.nextPage}` : null}
 		on:requestMoreData={handleRequestMoreData}

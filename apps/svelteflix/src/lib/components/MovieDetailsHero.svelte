@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { MovieInfo } from '$lib/schemas'
+	import type { MovieDetails } from '$lib/schemas'
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'
 	import Stars from './Stars.svelte'
 
-	export let movie: MovieInfo
+	export let movie: MovieDetails
 
 	let overviewContainer: HTMLDivElement
 	let overview: HTMLParagraphElement
@@ -50,9 +50,7 @@
 	>
 		<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 			{movie.title}
-			<span>
-				<Stars average={movie.vote_average} total={movie.vote_count} />
-			</span>
+			<Stars average={movie.vote_average} total={movie.vote_count} />
 		</h1>
 
 		<div

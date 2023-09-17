@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { FeaturedMovie } from '$lib/schemas'
+	import type { MovieDetails } from '$lib/schemas'
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'
 
-	export let movie: FeaturedMovie
+	export let movie: MovieDetails
 
 	let container: HTMLAnchorElement
 	let imgHeight: number

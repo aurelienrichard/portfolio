@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'
 
 	let progress = 0
-	let visible = false
+	let visible = true
 
 	onMount(() => {
 		const next = () => {
@@ -18,9 +18,9 @@
 </script>
 
 {#if visible}
-	<div class="absolute left-0 top-0 z-50 h-1 w-full">
+	<div class="fixed left-0 top-0 z-50 h-1 w-full">
 		<div
-			class="bg-accent absolute left-0 top-0 h-full transition-all"
+			class="bg-accent absolute left-0 top-0 h-full transition-[width] duration-200"
 			style="width: {progress * 100}%"
 		/>
 	</div>

@@ -1,6 +1,6 @@
 import { get } from '$lib/server/api'
 import { views } from '$lib/views'
-import { movieListSchema, featuredMovieSchema, type FeaturedMovie } from '$lib/schemas'
+import { movieListSchema, movieDetailsSchema } from '$lib/schemas'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch }) => {
@@ -10,8 +10,8 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		get(fetch, views.upcoming.endpoint, movieListSchema, { page: '1' })
 	])
 	const { id } = trending.results[0]!
-	const featured: FeaturedMovie = await get(fetch, `movie/${id}`, featuredMovieSchema, {
-		append_to_response: 'images'
+	const featured = await get(fetch, `movie/${id}`, movieDetailsSchema, {
+		append_to_response: 'images,videos,recommendations'
 	})
 
 	return {
