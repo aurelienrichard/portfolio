@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy, onMount } from 'svelte'
 	import { page } from '$app/stores'
 	import MoviesPage from '$lib/components/MoviesPage.svelte'
 	import type { MovieList, MovieListResult } from '$lib/schemas'
@@ -13,6 +14,7 @@
 	}
 
 	let loading = false
+	const ids = new Set()
 
 	const handleRequestMoreData = async () => {
 		if (!data.nextPage) return
@@ -23,12 +25,30 @@
 			const response = await fetch(`${$page.url.pathname}?page=${data.nextPage ?? 2}`)
 			const newMovies = (await response.json()) as MovieList
 
-			data.movies = [...data.movies, ...newMovies.results]
+			data.movies = [
+				...data.movies,
+				...newMovies.results.filter((movie) => !ids.has(movie.id))
+			]
+
+			newMovies.results.forEach((movie) => {
+				ids.add(movie.id)
+			})
+
 			data.nextPage = getNextPage(newMovies)
 		} finally {
 			loading = false
 		}
 	}
+
+	onMount(() => {
+		data.movies.forEach((movie) => {
+			ids.add(movie.id)
+		})
+	})
+
+	onDestroy(() => {
+		ids.clear()
+	})
 </script>
 
 <svelte:head>

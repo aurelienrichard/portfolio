@@ -3,7 +3,7 @@ export const lazyLoad = (node: HTMLImageElement) => {
 		if (node.naturalWidth) return // already loaded
 
 		node.style.opacity = '0'
-		node.style.transition = 'opacity 2s ease'
+		node.style.transition = 'opacity 1s ease'
 
 		node.addEventListener(
 			'load',

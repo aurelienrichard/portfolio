@@ -40,6 +40,7 @@
 			style="aspect-ratio: {movie.backdrop
 				? movie.backdrop.aspect_ratio
 				: 1778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
+			loading="lazy"
 		/>
 		<div class="b-8 absolute h-16 w-full rounded-b-md bg-black sm:h-28 lg:h-40" />
 	</div>
@@ -58,7 +59,7 @@
 				class:lg:animate-[scrolling-lg_linear_infinite]={scrollable}
 				class:sm:animate-[scrolling-sm_linear_infinite]={scrollable}
 				class:animate-[scrolling_linear_infinite]={scrollable}
-				class="text-sm sm:text-base lg:text-lg"
+				class="text-sm hover:[animation-play-state:paused] sm:text-base lg:text-lg"
 				style={`animation-duration: ${duration}s`}
 			>
 				{movie.overview}

@@ -21,7 +21,7 @@
 	<div
 		class="flex snap-x snap-mandatory scroll-pl-2 gap-2 overflow-x-scroll pl-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 	>
-		{#each movies as movie}
+		{#each movies as movie (movie.id)}
 			<a
 				class="flex-shrink-0 snap-start rounded-md bg-[rgba(0,0,0,0.8)]"
 				href="/movies/{movie.id}"
@@ -32,6 +32,7 @@
 					class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
 					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}
 					alt={movie.title}
+					loading="lazy"
 				/>
 			</a>
 		{/each}
