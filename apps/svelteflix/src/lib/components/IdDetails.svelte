@@ -24,7 +24,7 @@
 	{/if}
 	<div>
 		<h2 class="py-4 text-3xl font-bold sm:py-6 sm:text-4xl lg:py-8 lg:text-5xl">Details</h2>
-		<dl class="grid grid-cols-[max-content_1fr] items-baseline gap-4">
+		<dl class="grid grid-cols-[max-content_1fr] items-baseline gap-2 sm:gap-3 lg:gap-4">
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">release</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">{movie.release_date}</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">status</dt>

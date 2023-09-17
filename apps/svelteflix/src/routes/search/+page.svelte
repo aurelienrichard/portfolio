@@ -10,7 +10,7 @@
 </script>
 
 <div class="pt-10">
-	<h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">{data.title}</h1>
+	<h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">Search</h1>
 
 	<form class="py-4 sm:py-6 lg:py-8">
 		<input

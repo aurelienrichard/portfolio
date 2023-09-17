@@ -15,6 +15,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	})
 
 	return {
+		title: 'SvelteFlix',
 		trending,
 		playing,
 		upcoming,
