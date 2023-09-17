@@ -5,13 +5,10 @@
 	import IdDetails from '$lib/components/IdDetails.svelte'
 
 	export let data: {
+		title: string
 		movie: MovieInfo
 	}
 </script>
-
-<svelte:head>
-	<title>{data.movie.title}</title>
-</svelte:head>
 
 <IdHero movie={data.movie} />
 

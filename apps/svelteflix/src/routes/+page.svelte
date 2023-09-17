@@ -12,10 +12,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>SvelteFlix</title>
-</svelte:head>
-
 <div class="pt-10">
 	<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 		Today's top movies

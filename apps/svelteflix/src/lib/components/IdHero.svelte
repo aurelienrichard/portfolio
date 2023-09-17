@@ -8,7 +8,8 @@
 
 	export let movie: MovieInfo
 
-	let overview: HTMLDivElement
+	let overviewContainer: HTMLDivElement
+	let overview: HTMLParagraphElement
 	let container: HTMLDivElement
 	let imgHeight: number
 	let scrollable: boolean
@@ -16,8 +17,8 @@
 
 	const handleResize = () => {
 		if (!overview) return
-		scrollable = overview.scrollHeight > overview.clientHeight
-		duration = (movie.overview.length * 60) / 1000
+		scrollable = overviewContainer.scrollHeight > overviewContainer.clientHeight
+		duration = overview.clientHeight * 120
 		if (!container) return
 		imgHeight = container.clientWidth / 1.778
 	}
@@ -54,16 +55,26 @@
 			</span>
 		</h1>
 
-		<div bind:this={overview} class="max-h-12 overflow-y-clip pl-2 sm:max-h-24 lg:max-h-40">
+		<div
+			bind:this={overviewContainer}
+			class="overview max-h-12 overflow-y-clip pl-2 [scrollbar-width:none] sm:max-h-24 lg:max-h-40 [&::-webkit-scrollbar]:hidden"
+		>
 			<p
-				class:lg:animate-[scrolling-lg_linear_infinite]={scrollable}
-				class:sm:animate-[scrolling-sm_linear_infinite]={scrollable}
+				bind:this={overview}
 				class:animate-[scrolling_linear_infinite]={scrollable}
-				class="text-sm hover:[animation-play-state:paused] sm:text-base lg:text-lg"
-				style={`animation-duration: ${duration}s`}
+				class="text-sm sm:text-base lg:text-lg"
+				style={`animation-duration: ${duration}ms`}
 			>
 				{movie.overview}
 			</p>
 		</div>
 	</div>
 </div>
+
+<noscript>
+	<style lang="postcss">
+		.overview {
+			overflow-y: scroll;
+		}
+	</style>
+</noscript>

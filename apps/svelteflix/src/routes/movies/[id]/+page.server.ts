@@ -8,6 +8,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 	})
 
 	return {
+		title: movie.title,
 		movie
 	}
 }

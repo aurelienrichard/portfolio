@@ -14,16 +14,8 @@ module.exports = {
 				'radial-gradient': 'radial-gradient(circle at 50% 0%, var(--tw-gradient-stops))'
 			},
 			keyframes: {
-				'scrolling-lg': {
-					'0%': { transform: 'translateY(100%)' },
-					'100%': { transform: 'translateY(-100%)' }
-				},
-				'scrolling-sm': {
-					'0%': { transform: 'translateY(85%)' },
-					'100%': { transform: 'translateY(-100%)' }
-				},
 				scrolling: {
-					'0%': { transform: 'translateY(70%)' },
+					'0%': { transform: 'translateY(15vw)' },
 					'100%': { transform: 'translateY(-100%)' }
 				}
 			}

@@ -51,10 +51,6 @@
 	})
 </script>
 
-<svelte:head>
-	<title>{data.title}</title>
-</svelte:head>
-
 <div class="flex h-full flex-col pt-10">
 	<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 		{data.title}

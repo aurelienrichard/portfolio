@@ -6,6 +6,11 @@
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
 </script>
 
+<svelte:head>
+	<title>{$page.data.title ?? 'SvelteFlix'}</title>
+	<meta name="description" content="Discover today's most popular movies" />
+</svelte:head>
+
 <nav class="text-accent flex h-14 w-full items-center justify-between py-4">
 	<a href="/">
 		<img class="h-6" src={logo} alt="SvelteFlix" />
