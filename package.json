@@ -12,7 +12,7 @@
 		"clean": "turbo daemon clean && turbo run clean"
 	},
 	"devDependencies": {
-		"@turbo/gen": "^1.10.13",
+		"@turbo/gen": "^1.10.14",
 		"eslint": "^8.49.0",
 		"eslint-config-custom": "workspace:*",
 		"husky": "^8.0.3",
