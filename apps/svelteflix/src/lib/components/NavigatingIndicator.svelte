@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'
 
 	let progress = 0
-	let visible = true
+	let visible = false
 
 	onMount(() => {
 		const next = () => {

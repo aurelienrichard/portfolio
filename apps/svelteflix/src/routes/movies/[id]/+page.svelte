@@ -1,18 +1,15 @@
 <script lang="ts">
-	import type { MovieDetails } from '$lib/schemas'
-	import MovieDetailsHero from '$lib/components/MovieDetailsHero.svelte'
+	import MovieDetails from '$lib/components/MovieDetails.svelte'
+	import type { MovieDetails as MovieDetailsType } from '$lib/schemas'
 	import Carousel from '$lib/components/Carousel.svelte'
-	import MovieDetailsGrid from '$lib/components/MovieDetailsGrid.svelte'
 
 	export let data: {
 		title: string
-		movie: MovieDetails
+		movie: MovieDetailsType
 	}
 </script>
 
-<MovieDetailsHero movie={data.movie} />
-
-<MovieDetailsGrid movie={data.movie} />
+<MovieDetails movie={data.movie} />
 
 {#if data.movie.recommendations.length > 0}
 	<div>

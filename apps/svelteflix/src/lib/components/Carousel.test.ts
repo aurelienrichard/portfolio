@@ -1,52 +1,42 @@
-import { test, expect, afterEach } from 'vitest'
-import { render, cleanup, screen } from '@testing-library/svelte'
+import { test, expect } from 'vitest'
+import { render } from '@testing-library/svelte'
+import { movieListResultExample } from 'tests/data'
 import Carousel from './Carousel.svelte'
-import type { View } from '$lib/views'
-import type { MovieListResult } from '$lib/schemas'
+import { views } from '$lib/views'
 
-const view: View = {
-	title: 'Trending',
-	endpoint: 'trending/movie/day',
-	href: '/movies/trending'
-}
-
-const movie: MovieListResult = {
-	id: 76600,
-	title: 'Avatar: The Way of Water',
-	poster_path: '/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'
-}
-
-afterEach(() => {
-	cleanup()
-})
+const props = { view: views.trending, movies: [movieListResultExample] }
 
 test('should render', () => {
-	render(Carousel, { view: null, movies: [] })
+	render(Carousel, props)
 })
 
 test('should show correct heading based on props', () => {
-	render(Carousel, {
-		view,
-		movies: []
-	})
+	const { getByRole } = render(Carousel, props)
 
-	expect(screen.getByRole('heading', { level: 2, name: /trending/i })).toBeInTheDocument()
+	expect(getByRole('heading', { level: 2, name: RegExp(props.view.title) })).toBeVisible()
 })
 
 test('should show link when provided to props', () => {
-	render(Carousel, {
-		view,
-		movies: []
-	})
+	const { getByRole } = render(Carousel, props)
 
-	expect(screen.getByRole('link', { name: 'see all' })).toBeInTheDocument()
+	expect(getByRole('link', { name: 'see all' })).toBeVisible()
 })
 
 test('should show movie posters when passed to props', () => {
-	render(Carousel, {
+	const { getByAltText } = render(Carousel, props)
+
+	expect(getByAltText(movieListResultExample.title)).toBeInTheDocument()
+})
+
+test('should show as many movie posters as passed to props', () => {
+	const { getAllByRole } = render(Carousel, {
 		view: null,
-		movies: [movie]
+		movies: [
+			{ id: 1, title: 'one', poster_path: null },
+			{ id: 2, title: 'two', poster_path: null },
+			{ id: 3, title: 'third', poster_path: null }
+		]
 	})
 
-	expect(screen.getByAltText(movie.title)).toBeInTheDocument()
+	expect(getAllByRole('img')).toHaveLength(3)
 })
