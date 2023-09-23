@@ -15,6 +15,8 @@
 	let scrollable: boolean
 	let duration: number
 
+	const placeholder = 'Unknown'
+
 	const handleResize = () => {
 		if (!overview) return
 		scrollable = overviewContainer.scrollHeight > overviewContainer.clientHeight
@@ -63,7 +65,7 @@
 				class="text-sm sm:text-base lg:text-lg"
 				style={`animation-duration: ${duration}ms`}
 			>
-				{movie.overview}
+				{movie.overview || 'No overview yet'}
 			</p>
 		</div>
 	</div>
@@ -90,24 +92,24 @@
 		<h2 class="py-4 text-3xl font-bold sm:py-6 sm:text-4xl lg:py-8 lg:text-5xl">Details</h2>
 		<dl class="grid grid-cols-[max-content_1fr] items-baseline gap-2 sm:gap-3 lg:gap-4">
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">release</dt>
-			<dd class="text-base sm:text-lg lg:text-xl">{movie.release_date}</dd>
+			<dd class="text-base sm:text-lg lg:text-xl">{movie.release_date || placeholder}</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">status</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">{movie.status}</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">runtime</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">
-				{movie.runtime > 0 ? `${movie.runtime} minutes` : 'Unknown'}
+				{movie.runtime > 0 ? `${movie.runtime} minutes` : placeholder}
 			</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">budget</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">
-				{movie.budget > 0 ? dollarFormatter.format(movie.budget) : 'Unknown'}
+				{movie.budget > 0 ? dollarFormatter.format(movie.budget) : placeholder}
 			</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">revenue</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">
-				{movie.revenue > 0 ? dollarFormatter.format(movie.revenue) : 'Unknown'}
+				{movie.revenue > 0 ? dollarFormatter.format(movie.revenue) : placeholder}
 			</dd>
 			<dt class="text-sm uppercase opacity-80 sm:text-base lg:text-lg">genre</dt>
 			<dd class="text-base sm:text-lg lg:text-xl">
-				{movie.genres.length > 0 ? movie.genres.join(', ') : 'Unknown'}
+				{movie.genres.length > 0 ? movie.genres : placeholder}
 			</dd>
 		</dl>
 	</div>

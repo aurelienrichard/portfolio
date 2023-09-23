@@ -54,7 +54,7 @@ export const movieDetailsSchema = z
 	.object({
 		id: z.number(),
 		budget: z.number(),
-		genres: z.array(genreSchema),
+		genres: z.array(genreSchema).transform((genres) => genres.join(', ')),
 		images: z.object({
 			backdrops: z.array(imageSchema),
 			logos: z.array(imageSchema)
@@ -103,7 +103,9 @@ export const movieDetailsSchema = z
 					official && iso_639_1 === 'en' && type === 'Teaser' && site === 'YouTube'
 			) ??
 			schema.videos.results[0] ??
-			null
+			null,
+		images: null,
+		videos: null
 	}))
 
 export type MovieDetails = z.infer<typeof movieDetailsSchema>
