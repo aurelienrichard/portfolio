@@ -1,9 +1,30 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
+	import type { Session, SupabaseClient } from '@supabase/supabase-js'
+	import { invalidate } from '$app/navigation'
 	import { page, navigating } from '$app/stores'
 	import tmdb from '$lib/images/tmdb.svg'
 	import '../app.css'
 	import logo from '$lib/images/logo.svg'
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
+
+	export let data: {
+		supabase: SupabaseClient
+		session: Session | null
+	}
+
+	let { supabase, session } = data
+	$: ({ supabase, session } = data)
+
+	onMount(() => {
+		const auth = supabase.auth.onAuthStateChange(async (event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				await invalidate('supabase:auth')
+			}
+		})
+
+		return () => auth.data.subscription.unsubscribe()
+	})
 </script>
 
 <svelte:head>
