@@ -1,6 +1,6 @@
 import { get } from '$lib/server/api'
 import { views } from '$lib/views'
-import { movieListSchema, movieDetailsSchema } from '$lib/schemas'
+import { movieListSchema, movieDetailsSchema } from '$lib/apiSchemas'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch }) => {

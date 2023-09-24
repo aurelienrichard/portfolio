@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte'
-	import type { MovieListResult } from '$lib/schemas'
+	import type { MovieListResult } from '$lib/apiSchemas'
 	import { getMediaURL, getNumberOfColumns } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'

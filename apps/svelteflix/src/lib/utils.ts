@@ -1,5 +1,5 @@
 import { PUBLIC_MEDIA_BASE_API_URL } from '$env/static/public'
-import type { MovieList } from './schemas'
+import type { MovieList } from './apiSchemas'
 
 export const getMediaURL = (path: string, width: number) => {
 	const url = `${PUBLIC_MEDIA_BASE_API_URL}/w${width}${path}`

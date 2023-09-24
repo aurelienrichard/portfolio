@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { MovieListResult } from '$lib/schemas'
+	import type { MovieListResult } from '$lib/apiSchemas'
 	import type { View } from '$lib/views'
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'

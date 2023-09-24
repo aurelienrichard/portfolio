@@ -1,4 +1,4 @@
-import { movieDetailsSchema } from '$lib/schemas'
+import { movieDetailsSchema } from '$lib/apiSchemas'
 import { get } from '$lib/server/api'
 import type { PageServerLoad } from './$types'
 

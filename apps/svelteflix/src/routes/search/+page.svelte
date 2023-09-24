@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MovieListGrid from '$lib/components/MovieListGrid.svelte'
-	import type { MovieListResult } from '$lib/schemas'
+	import type { MovieListResult } from '$lib/apiSchemas'
 
 	export let data: {
 		title: string

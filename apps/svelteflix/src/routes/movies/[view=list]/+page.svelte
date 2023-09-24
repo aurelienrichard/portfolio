@@ -2,7 +2,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { page } from '$app/stores'
 	import MovieListGrid from '$lib/components/MovieListGrid.svelte'
-	import type { MovieList, MovieListResult } from '$lib/schemas'
+	import type { MovieList, MovieListResult } from '$lib/apiSchemas'
 	import { getNextPage } from '$lib/utils'
 	import type { Title, ViewsKey } from '$lib/views'
 

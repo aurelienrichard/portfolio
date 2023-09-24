@@ -1,4 +1,4 @@
-import type { MovieDetails, MovieListResult } from '$lib/schemas'
+import type { MovieDetails, MovieListResult } from '$lib/apiSchemas'
 
 export const movieDetailsExample: MovieDetails = {
 	id: 76600,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MovieDetails from '$lib/components/MovieDetails.svelte'
-	import type { MovieDetails as MovieDetailsType } from '$lib/schemas'
+	import type { MovieDetails as MovieDetailsType } from '$lib/apiSchemas'
 	import Carousel from '$lib/components/Carousel.svelte'
 
 	export let data: {

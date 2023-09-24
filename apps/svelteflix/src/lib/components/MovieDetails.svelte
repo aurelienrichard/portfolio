@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { MovieDetails } from '$lib/schemas'
+	import type { MovieDetails } from '$lib/apiSchemas'
 	import { getMediaURL, dollarFormatter } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'

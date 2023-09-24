@@ -2,7 +2,7 @@
 	import Hero from '$lib/components/Hero.svelte'
 	import Carousel from '$lib/components/Carousel.svelte'
 	import { views } from '$lib/views'
-	import type { MovieDetails, MovieList } from '$lib/schemas'
+	import type { MovieDetails, MovieList } from '$lib/apiSchemas'
 
 	export let data: {
 		trending: MovieList

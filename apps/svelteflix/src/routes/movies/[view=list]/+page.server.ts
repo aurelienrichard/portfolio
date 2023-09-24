@@ -1,4 +1,4 @@
-import { movieListSchema } from '$lib/schemas'
+import { movieListSchema } from '$lib/apiSchemas'
 import { get } from '$lib/server/api'
 import { getNextPage } from '$lib/utils'
 import { views, type ViewsKey } from '$lib/views'
