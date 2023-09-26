@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Session } from '@supabase/supabase-js'
 	import MovieDetails from '$lib/components/MovieDetails.svelte'
 	import type { MovieDetails as MovieDetailsType } from '$lib/apiSchemas'
 	import Carousel from '$lib/components/Carousel.svelte'
@@ -6,10 +7,12 @@
 	export let data: {
 		title: string
 		movie: MovieDetailsType
+		session: Session
+		inWatchlist: boolean
 	}
 </script>
 
-<MovieDetails movie={data.movie} />
+<MovieDetails movie={data.movie} session={data.session} inWatchlist={data.inWatchlist} />
 
 {#if data.movie.recommendations.length > 0}
 	<div>

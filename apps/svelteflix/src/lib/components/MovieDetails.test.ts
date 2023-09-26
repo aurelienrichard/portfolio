@@ -13,7 +13,7 @@ test('should render', () => {
 test('should show movie title as heading', () => {
 	const { getByRole } = render(MovieDetails, props)
 
-	expect(getByRole('heading', { level: 1, name: RegExp(props.movie.title) })).toBeVisible()
+	expect(getByRole('heading', { level: 1, name: props.movie.title })).toBeVisible()
 })
 
 test('should show movie backdrop', () => {

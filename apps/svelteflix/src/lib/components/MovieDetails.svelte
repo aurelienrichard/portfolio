@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import type { Session } from '@supabase/supabase-js'
 	import type { MovieDetails } from '$lib/apiSchemas'
 	import { getMediaURL, dollarFormatter } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
@@ -7,6 +8,8 @@
 	import Stars from './Stars.svelte'
 
 	export let movie: MovieDetails
+	export let session: Session | null
+	export let inWatchlist: boolean
 
 	let overviewContainer: HTMLDivElement
 	let overview: HTMLParagraphElement
@@ -45,24 +48,42 @@
 				: 1778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
 			loading="lazy"
 		/>
-		<div class="b-8 absolute h-16 w-full rounded-b-md bg-black sm:h-28 lg:h-40" />
+		<div class="absolute h-32 w-full rounded-b-md bg-black sm:h-44 lg:h-56" />
 	</div>
 	<div
-		class="absolute bottom-0 w-11/12 translate-x-4 translate-y-12 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-24 md:w-2/3 lg:translate-x-12 lg:translate-y-36"
+		class="absolute bottom-0 w-11/12 translate-x-4 translate-y-28 drop-shadow-md [text-wrap:balance] sm:translate-x-8 sm:translate-y-40 md:w-2/3 lg:translate-x-12 lg:translate-y-52"
 	>
-		<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
-			{movie.title}
+		<div class="pb-6 sm:pb-8 lg:pb-12">
+			<h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">
+				{movie.title}
+			</h1>
 			<Stars average={movie.vote_average} total={movie.vote_count} />
-		</h1>
-
+			<div class="pl-1 text-sm sm:text-base lg:text-lg">
+				{#if session}
+					<form method="POST" action="/watchlist?/{inWatchlist ? 'delete' : 'add'}">
+						<input type="hidden" name="movie_id" value={movie.id} />
+						<button class="text-accent" type="submit"
+							>{inWatchlist
+								? 'Remove this from your watchlist'
+								: 'Add this to your watchlist'}</button
+						>
+					</form>
+				{:else}
+					<p>
+						<a class="text-accent underline" href="/login">Log in</a> to add this to your
+						watchlist
+					</p>
+				{/if}
+			</div>
+		</div>
 		<div
 			bind:this={overviewContainer}
-			class="overview max-h-12 overflow-y-clip pl-2 [scrollbar-width:none] sm:max-h-24 lg:max-h-40 [&::-webkit-scrollbar]:hidden"
+			class="overview max-h-20 overflow-y-clip pl-2 [scrollbar-width:none] sm:max-h-32 lg:max-h-48 [&::-webkit-scrollbar]:hidden"
 		>
 			<p
 				bind:this={overview}
 				class:animate-[scrolling_linear_infinite]={scrollable}
-				class="text-sm sm:text-base lg:text-lg"
+				class="text-base sm:text-lg lg:text-xl"
 				style={`animation-duration: ${duration}ms`}
 			>
 				{movie.overview || 'No overview yet'}
@@ -71,7 +92,7 @@
 	</div>
 </div>
 
-<div class="grid gap-4 pt-8 sm:gap-8 sm:pt-16 md:grid-cols-2 lg:gap-12 lg:pt-24">
+<div class="grid gap-4 pt-28 sm:gap-8 sm:pt-36 md:grid-cols-2 lg:gap-12 lg:pt-44">
 	{#if movie.trailer}
 		<div>
 			<h2 class="py-4 text-3xl font-bold sm:py-6 sm:text-4xl lg:py-8 lg:text-5xl">Trailer</h2>
