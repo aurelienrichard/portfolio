@@ -7,6 +7,7 @@
 	import '../app.css'
 	import logo from '$lib/images/logo.svg'
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
+	import { enhance } from '$app/forms'
 
 	export let data: {
 		supabase: SupabaseClient
@@ -39,7 +40,13 @@
 	<div class="wrap flex gap-3 whitespace-nowrap font-semibold">
 		<a href="/search">Search</a>
 		<a href="/watchlist">Watchlist</a>
-		<a href="/login">Log in</a>
+		{#if session}
+			<form method="POST" action="/logout" use:enhance>
+				<button type="submit">Log out</button>
+			</form>
+		{:else}
+			<a href="/login">Log in</a>
+		{/if}
 	</div>
 </nav>
 

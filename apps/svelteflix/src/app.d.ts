@@ -11,7 +11,7 @@ declare global {
 		interface PageData {
 			session: Session | null
 			infinite?: boolean
-			title: string
+			title?: string
 		}
 		// interface Platform {}
 	}

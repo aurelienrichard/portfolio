@@ -21,6 +21,7 @@
 			class="focus-visible:outline-accent w-full rounded-s-md bg-[rgba(255,255,255,0.1)] p-2 text-xl focus-visible:outline focus-visible:outline-2 sm:text-2xl lg:text-3xl"
 			name="query"
 			bind:value={query}
+			placeholder="movie title"
 			required
 		/>
 		<button
