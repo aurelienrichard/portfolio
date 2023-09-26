@@ -4,7 +4,7 @@ import { movieDetailsExample } from 'tests/data'
 import MovieDetails from './MovieDetails.svelte'
 import { dollarFormatter } from '$lib/utils'
 
-const props = { movie: movieDetailsExample }
+const props = { movie: movieDetailsExample, inWatchlist: false, session: null }
 
 test('should render', () => {
 	render(MovieDetails, props)
