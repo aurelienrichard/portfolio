@@ -15,7 +15,7 @@ module.exports = {
 			},
 			keyframes: {
 				scrolling: {
-					'0%': { transform: 'translateY(15vw)' },
+					'0%': { transform: 'translateY(20vw)' },
 					'100%': { transform: 'translateY(-100%)' }
 				}
 			}
