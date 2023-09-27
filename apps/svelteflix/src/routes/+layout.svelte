@@ -8,6 +8,7 @@
 	import logo from '$lib/images/logo.svg'
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
 	import { enhance } from '$app/forms'
+	import Attribution from '$lib/components/Attribution.svelte'
 
 	export let data: {
 		supabase: SupabaseClient
@@ -63,10 +64,13 @@
 	<slot />
 </main>
 
-<footer class="align-center flex w-full flex-col justify-center pb-4 pt-16 text-center text-xs">
-	<p>This product uses the</p>
-	<a class="m-auto w-fit" href="https://www.themoviedb.org/">
-		<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
-	</a>
-	<p>API but is not endorsed or certified by TMDB.</p>
+<footer class="w-full items-center justify-center pb-4 pt-8">
+	<div class="flex flex-col justify-center text-center text-xs">
+		<p>This product uses the</p>
+		<a class="m-auto w-fit" href="https://www.themoviedb.org/">
+			<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
+		</a>
+		<p>API but is not endorsed or certified by TMDB.</p>
+	</div>
+	<Attribution fill={'#cb3734'} />
 </footer>
