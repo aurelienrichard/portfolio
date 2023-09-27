@@ -32,7 +32,6 @@
 					class="aspect-[2/3] w-[16vw] max-w-[13rem] rounded-md"
 					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}
 					alt={movie.title}
-					loading="lazy"
 				/>
 			</a>
 		{/each}
