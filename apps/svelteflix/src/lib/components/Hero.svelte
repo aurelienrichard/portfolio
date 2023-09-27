@@ -30,16 +30,14 @@
 		style="aspect-ratio: {movie.backdrop
 			? movie.backdrop.aspect_ratio
 			: 1.778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
-		loading="lazy"
 	/>
 	{#if movie.logo}
 		<img
 			use:lazyLoad
 			class="absolute left-4 top-2/4 w-1/4 -translate-y-1/2 drop-shadow-md"
-			src={getMediaURL(movie.logo.file_path, 1280)}
+			src={getMediaURL(movie.logo.file_path, 500)}
 			alt={movie.title}
 			style="aspect-ratio: {movie.logo.aspect_ratio}"
-			loading="lazy"
 		/>
 	{/if}
 </a>

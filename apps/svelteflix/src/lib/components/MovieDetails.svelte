@@ -46,7 +46,6 @@
 			style="aspect-ratio: {movie.backdrop
 				? movie.backdrop.aspect_ratio
 				: 1778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
-			loading="lazy"
 		/>
 		<div class="absolute h-32 w-full rounded-b-md bg-black sm:h-44 lg:h-56" />
 	</div>
@@ -104,7 +103,6 @@
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 					allowfullscreen
-					loading="lazy"
 				/>
 			</div>
 		</div>
