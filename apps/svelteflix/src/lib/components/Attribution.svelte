@@ -2,9 +2,9 @@
 	export let fill: string
 </script>
 
-<div class="pt-4 text-sm">
+<div class="pb-2 text-sm">
 	<a
-		class="flex items-center justify-center gap-1 underline"
+		class="flex items-center justify-center"
 		href="http://github.com/aurelienrichard"
 		aria-label="Link to the developer's profile on GitHub"
 	>
@@ -17,8 +17,6 @@
 				{fill}
 			/>
 		</svg>
-
-		<p>aurelienrichard</p>
 	</a>
 </div>
 

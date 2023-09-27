@@ -64,7 +64,8 @@
 	<slot />
 </main>
 
-<footer class="w-full items-center justify-center pb-4 pt-8">
+<footer class="w-full pb-4 pt-8">
+	<Attribution fill={'#cb3734'} />
 	<div class="flex flex-col justify-center text-center text-xs">
 		<p>This product uses the</p>
 		<a class="m-auto w-fit" href="https://www.themoviedb.org/">
@@ -72,5 +73,4 @@
 		</a>
 		<p>API but is not endorsed or certified by TMDB.</p>
 	</div>
-	<Attribution fill={'#cb3734'} />
 </footer>
