@@ -61,8 +61,9 @@
 					use:lazyLoad
 					class:px-4={!movie.poster_path}
 					class="aspect-[2/3] w-full rounded-md"
-					src={movie.poster_path ? getMediaURL(movie.poster_path, 500) : logo}
+					src={movie.poster_path ? getMediaURL(movie.poster_path, 300) : logo}
 					alt={movie.title}
+					loading="lazy"
 				/>
 			</a>
 		{/each}
