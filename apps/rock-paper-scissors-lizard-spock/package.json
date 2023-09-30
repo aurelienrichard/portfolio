@@ -6,24 +6,24 @@
 		"build": "vite build",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"clean": "rm -rf .turbo && rm -rf build",
+		"clean": "rm -rf .turbo && rm -rf .vercel && rm -rf build",
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.22.6",
+		"@sveltejs/kit": "^1.25.1",
 		"eslint-config-custom": "workspace:*",
-		"svelte-check": "^3.5.0",
-		"svelte": "^4.2.0",
+		"svelte": "^4.2.1",
+		"svelte-check": "^3.5.2",
 		"tsconfig": "workspace:*",
 		"tslib": "^2.6.2",
-		"typescript": "^5.1.6",
+		"typescript": "^5.2.2",
 		"vite": "^4.4.9"
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/barlow-semi-condensed": "^5.0.9"
+		"@fontsource/barlow-semi-condensed": "^5.0.12"
 	}
 }
