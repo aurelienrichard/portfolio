@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition'
-	import { cubicOut } from 'svelte/easing'
 	import MovieListGrid from '$lib/components/MovieListGrid.svelte'
 	import type { MovieListResult } from '$lib/apiSchemas'
 
@@ -14,7 +12,7 @@
 	$: disabled = !query
 </script>
 
-<div in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }} out:fade class="pt-10">
+<div class="pt-10">
 	<h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">Search</h1>
 
 	<form class="flex py-4 sm:py-6 lg:py-8">

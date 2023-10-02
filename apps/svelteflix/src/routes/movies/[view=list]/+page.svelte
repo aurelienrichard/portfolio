@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte'
-	import { fly, fade } from 'svelte/transition'
-	import { cubicOut } from 'svelte/easing'
 	import { page } from '$app/stores'
 	import MovieListGrid from '$lib/components/MovieListGrid.svelte'
 	import type { MovieList, MovieListResult } from '$lib/apiSchemas'
@@ -36,8 +34,7 @@
 				ids.add(movie.id)
 			})
 
-			const nextPage = getNextPage(newMovies)
-			data.nextPage = nextPage
+			data.nextPage = getNextPage(newMovies)
 		} finally {
 			loading = false
 		}
@@ -54,11 +51,7 @@
 	})
 </script>
 
-<div
-	in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }}
-	out:fade
-	class="flex h-full flex-col pt-10"
->
+<div class="flex h-full flex-col pt-10">
 	<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 		{data.title}
 	</h1>

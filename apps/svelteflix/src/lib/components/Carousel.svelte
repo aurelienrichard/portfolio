@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fly, fade } from 'svelte/transition'
-	import { cubicOut } from 'svelte/easing'
 	import type { MovieListResult } from '$lib/apiSchemas'
 	import type { View } from '$lib/views'
 	import { getMediaURL } from '$lib/utils'
@@ -11,7 +9,7 @@
 	export let movies: MovieListResult[]
 </script>
 
-<div in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }} out:fade>
+<div>
 	{#if view}
 		<h2 class="pb-4 text-3xl font-bold sm:pb-6 sm:text-4xl lg:pb-8 lg:text-5xl">
 			{view.title}

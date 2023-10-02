@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fly, fade } from 'svelte/transition'
-	import { cubicOut } from 'svelte/easing'
 	import Hero from '$lib/components/Hero.svelte'
 	import Carousel from '$lib/components/Carousel.svelte'
 	import { views } from '$lib/views'
@@ -14,7 +12,7 @@
 	}
 </script>
 
-<div class="pt-10" in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }} out:fade>
+<div class="pt-10">
 	<h1 class="pb-4 text-4xl font-bold sm:pb-6 sm:text-5xl lg:pb-8 lg:text-6xl">
 		Today's top movies
 	</h1>
