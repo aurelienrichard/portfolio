@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { fly, fade } from 'svelte/transition'
-	import { cubicOut } from 'svelte/easing'
 	import type { Session } from '@supabase/supabase-js'
 	import type { MovieDetails } from '$lib/apiSchemas'
 	import { getMediaURL, dollarFormatter } from '$lib/utils'
@@ -35,12 +33,7 @@
 
 <svelte:window on:resize={handleResize} />
 
-<div
-	in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }}
-	out:fade
-	bind:this={container}
-	class="relative pt-10"
->
+<div bind:this={container} class="relative pt-10">
 	<div
 		class="relative from-black to-transparent after:absolute after:bottom-0 after:h-2/3 after:w-full after:rounded-sm after:bg-gradient-to-t"
 	>
@@ -98,11 +91,7 @@
 	</div>
 </div>
 
-<div
-	in:fly={{ y: 40, duration: 600, easing: cubicOut, delay: 400 }}
-	out:fade
-	class="grid gap-4 pt-28 sm:gap-8 sm:pt-36 md:grid-cols-2 lg:gap-12 lg:pt-44"
->
+<div class="grid gap-4 pt-28 sm:gap-8 sm:pt-36 md:grid-cols-2 lg:gap-12 lg:pt-44">
 	{#if movie.trailer}
 		<div>
 			<h2 class="py-4 text-3xl font-bold sm:py-6 sm:text-4xl lg:py-8 lg:text-5xl">Trailer</h2>
