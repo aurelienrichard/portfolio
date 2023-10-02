@@ -2,9 +2,8 @@
 	export let fill: string
 </script>
 
-<div class="pb-2 text-sm">
+<div class="flex justify-center pb-2 text-base">
 	<a
-		class="flex items-center justify-center"
 		href="http://github.com/aurelienrichard"
 		aria-label="Link to the developer's profile on GitHub"
 	>
