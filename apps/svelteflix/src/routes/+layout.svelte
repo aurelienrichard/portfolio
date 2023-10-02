@@ -3,12 +3,11 @@
 	import type { Session, SupabaseClient } from '@supabase/supabase-js'
 	import { invalidate } from '$app/navigation'
 	import { page, navigating } from '$app/stores'
-	import tmdb from '$lib/images/tmdb.svg'
 	import '../app.css'
 	import logo from '$lib/images/logo.svg'
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
 	import { enhance } from '$app/forms'
-	import Attribution from '$lib/components/Attribution.svelte'
+	import Footer from '$lib/components/Footer.svelte'
 
 	export let data: {
 		supabase: SupabaseClient
@@ -64,13 +63,4 @@
 	<slot />
 </main>
 
-<footer class="w-full pb-4 pt-8">
-	<Attribution fill={'#cb3734'} />
-	<div class="flex flex-col justify-center text-center text-xs">
-		<p>This product uses the</p>
-		<a class="m-auto w-fit" href="https://www.themoviedb.org/">
-			<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
-		</a>
-		<p>API but is not endorsed or certified by TMDB.</p>
-	</div>
-</footer>
+<Footer />
