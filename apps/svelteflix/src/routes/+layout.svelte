@@ -66,18 +66,19 @@
 		class:h-0={$page.data.infinite}
 		class:flex-1={$page.data.infinite}
 		class:overflow-clip={$page.data.infinite}
-		class="flex w-full flex-col gap-10 sm:gap-16 lg:gap-20"
+		class="flex w-full flex-grow flex-col gap-10 sm:gap-16 lg:gap-20"
 	>
 		<slot />
-		<footer class="w-full pb-4">
-			<Attribution fill={'#cb3734'} />
-			<div class="flex flex-col justify-center text-center text-xs">
-				<p>This product uses the</p>
-				<a class="m-auto w-fit" href="https://www.themoviedb.org/">
-					<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
-				</a>
-				<p>API but is not endorsed or certified by TMDB.</p>
-			</div>
-		</footer>
 	</main>
 {/key}
+
+<footer class="w-full pb-4 pt-8">
+	<Attribution fill={'#cb3734'} />
+	<div class="flex flex-col justify-center text-center text-xs">
+		<p>This product uses the</p>
+		<a class="m-auto w-fit" href="https://www.themoviedb.org/">
+			<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
+		</a>
+		<p>API but is not endorsed or certified by TMDB.</p>
+	</div>
+</footer>
