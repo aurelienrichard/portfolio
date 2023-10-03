@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import type { Session, SupabaseClient } from '@supabase/supabase-js'
+	import { fade, fly } from 'svelte/transition'
+	import { cubicOut } from 'svelte/easing'
 	import { invalidate } from '$app/navigation'
 	import { page, navigating } from '$app/stores'
 	import tmdb from '$lib/images/tmdb.svg'
@@ -13,10 +15,12 @@
 	export let data: {
 		supabase: SupabaseClient
 		session: Session | null
+		pathname: string
 	}
 
 	let { supabase, session } = data
 	$: ({ supabase, session } = data)
+	$: pathname = data.pathname
 
 	onMount(() => {
 		const auth = supabase.auth.onAuthStateChange(async (event, _session) => {
@@ -55,22 +59,25 @@
 	<NavigatingIndicator />
 {/if}
 
-<main
-	class:h-0={$page.data.infinite}
-	class:flex-1={$page.data.infinite}
-	class:overflow-clip={$page.data.infinite}
-	class="flex w-full flex-col gap-10 sm:gap-16 lg:gap-20"
->
-	<slot />
-</main>
-
-<footer class="w-full pb-4 pt-8">
-	<Attribution fill={'#cb3734'} />
-	<div class="flex flex-col justify-center text-center text-xs">
-		<p>This product uses the</p>
-		<a class="m-auto w-fit" href="https://www.themoviedb.org/">
-			<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
-		</a>
-		<p>API but is not endorsed or certified by TMDB.</p>
-	</div>
-</footer>
+{#key pathname}
+	<main
+		in:fly={{ delay: 500, y: 25, easing: cubicOut }}
+		out:fade
+		class:h-0={$page.data.infinite}
+		class:flex-1={$page.data.infinite}
+		class:overflow-clip={$page.data.infinite}
+		class="flex w-full flex-col gap-10 sm:gap-16 lg:gap-20"
+	>
+		<slot />
+		<footer class="w-full pb-4">
+			<Attribution fill={'#cb3734'} />
+			<div class="flex flex-col justify-center text-center text-xs">
+				<p>This product uses the</p>
+				<a class="m-auto w-fit" href="https://www.themoviedb.org/">
+					<img class="my-1 h-2" src={tmdb} alt="The Movie Database (TMDB)" />
+				</a>
+				<p>API but is not endorsed or certified by TMDB.</p>
+			</div>
+		</footer>
+	</main>
+{/key}

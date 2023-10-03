@@ -10,6 +10,7 @@ declare global {
 		}
 		interface PageData {
 			session: Session | null
+			pathname?: string
 			infinite?: boolean
 			title?: string
 		}
