@@ -5,12 +5,28 @@
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'
 	import Stars from './Stars.svelte'
+	import { enhance } from '$app/forms'
+	import { notifications } from '$lib/stores'
+	import type { SubmitFunction } from '../../routes/watchlist/$types'
 
 	export let movie: MovieDetails
 	export let session: Session | null
 	export let inWatchlist: boolean
 
 	const placeholder = 'Unknown'
+	let loading = false
+
+	const handleSubmit: SubmitFunction = () => {
+		loading = true
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
+		return async ({ update }) => {
+			await update()
+			notifications.addNotification(
+				`${movie.title} ${inWatchlist ? 'added to' : 'removed from'} watchlist`
+			)
+			loading = false
+		}
+	}
 </script>
 
 <div class="relative pt-10">
@@ -37,9 +53,13 @@
 				<Stars average={movie.vote_average} total={movie.vote_count} />
 				<div class="pt-1 text-sm sm:pt-2 sm:text-base lg:pt-4 lg:text-lg">
 					{#if session}
-						<form method="POST" action="/watchlist?/{inWatchlist ? 'delete' : 'add'}">
+						<form
+							method="POST"
+							use:enhance={handleSubmit}
+							action="/watchlist?/{inWatchlist ? 'delete' : 'add'}"
+						>
 							<input type="hidden" name="movie_id" value={movie.id} />
-							<button class="text-accent" type="submit"
+							<button class="text-accent" type="submit" disabled={loading}
 								>{inWatchlist
 									? 'Remove this from your watchlist'
 									: 'Add this to your watchlist'}</button
@@ -74,6 +94,7 @@
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 					allowfullscreen
+					loading="lazy"
 				/>
 			</div>
 		</div>
