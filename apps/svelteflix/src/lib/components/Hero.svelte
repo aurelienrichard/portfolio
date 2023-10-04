@@ -1,35 +1,20 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import type { MovieDetails } from '$lib/apiSchemas'
 	import { getMediaURL } from '$lib/utils'
 	import logo from '$lib/images/logo.svg'
 	import { lazyLoad } from '$lib/actions'
 
 	export let movie: MovieDetails
-
-	let container: HTMLAnchorElement
-	let imgHeight: number
-
-	const handleResize = () => {
-		if (!container) return
-		imgHeight = container.clientWidth / 1.778
-	}
-
-	onMount(handleResize)
 </script>
 
-<svelte:window on:resize={handleResize} />
-
-<a bind:this={container} class="relative flex" href="/movies/{movie.id}">
+<a class="relative flex" href="/movies/{movie.id}">
 	<img
 		use:lazyLoad
 		class:px-4={!movie.backdrop}
 		class="rounded-md"
 		src={movie.backdrop ? getMediaURL(movie.backdrop.file_path, 1280) : logo}
 		alt={movie.title}
-		style="aspect-ratio: {movie.backdrop
-			? movie.backdrop.aspect_ratio
-			: 1.778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
+		style="aspect-ratio: {movie.backdrop ? movie.backdrop.aspect_ratio : 1.778 / 1}}"
 	/>
 	{#if movie.logo}
 		<img
