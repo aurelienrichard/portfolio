@@ -12,12 +12,6 @@ module.exports = {
 			},
 			backgroundImage: {
 				'radial-gradient': 'radial-gradient(circle at 50% 0%, var(--tw-gradient-stops))'
-			},
-			keyframes: {
-				scrolling: {
-					'0%': { transform: 'translateY(20vw)' },
-					'100%': { transform: 'translateY(-100%)' }
-				}
 			}
 		}
 	}
