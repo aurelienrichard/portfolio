@@ -11,6 +11,9 @@
 	import NavigatingIndicator from '$lib/components/NavigatingIndicator.svelte'
 	import { enhance } from '$app/forms'
 	import Attribution from '$lib/components/Attribution.svelte'
+	import Notifications from '$lib/components/Notifications.svelte'
+	import { notifications } from '$lib/stores'
+	import type { SubmitFunction } from './logout/$types'
 
 	export let data: {
 		supabase: SupabaseClient
@@ -21,22 +24,38 @@
 	let { supabase, session } = data
 	$: ({ supabase, session } = data)
 	$: pathname = data.pathname
+	let loading = false
 
 	onMount(() => {
 		const auth = supabase.auth.onAuthStateChange(async (event, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
+				if (event === 'SIGNED_IN') {
+					notifications.addNotification('You are now logged in')
+				}
 				await invalidate('supabase:auth')
 			}
 		})
 
 		return () => auth.data.subscription.unsubscribe()
 	})
+
+	const handleSubmit: SubmitFunction = () => {
+		loading = true
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
+		return async ({ update }) => {
+			await update()
+			notifications.addNotification('You are now logged out')
+			loading = false
+		}
+	}
 </script>
 
 <svelte:head>
 	<title>{$page.data.title ?? 'SvelteFlix'}</title>
 	<meta name="description" content="Discover today's most popular movies" />
 </svelte:head>
+
+<Notifications />
 
 <nav class="text-accent flex h-14 w-full items-center justify-between py-4">
 	<a href="/">
@@ -46,8 +65,8 @@
 		<a href="/search">Search</a>
 		<a href="/watchlist">Watchlist</a>
 		{#if session}
-			<form method="POST" action="/logout" use:enhance>
-				<button type="submit">Log out</button>
+			<form method="POST" action="/logout" use:enhance={handleSubmit}>
+				<button type="submit" disabled={loading}>Log out</button>
 			</form>
 		{:else}
 			<a href="/login">Log in</a>
