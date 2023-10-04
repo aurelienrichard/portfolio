@@ -9,7 +9,6 @@
 	}
 
 	let { query } = data
-	$: disabled = !query
 </script>
 
 <div class="pt-10">
@@ -25,10 +24,8 @@
 			required
 		/>
 		<button
-			class:bg-zinc-700={disabled}
 			class="bg-accent w-40 rounded-e-md text-base transition-colors duration-200 sm:w-44 sm:text-lg lg:w-48 lg:text-xl"
-			type="submit"
-			{disabled}>Find movies</button
+			type="submit">Find movies</button
 		>
 	</form>
 
