@@ -42,9 +42,11 @@
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
 		// eslint-disable-next-line @typescript-eslint/no-misused-promises
-		return async ({ update }) => {
+		return async ({ update, result }) => {
 			await update()
-			notifications.addNotification('You are now logged out')
+			if (result.status !== 500) {
+				notifications.addNotification('You are now logged out')
+			}
 			loading = false
 		}
 	}
