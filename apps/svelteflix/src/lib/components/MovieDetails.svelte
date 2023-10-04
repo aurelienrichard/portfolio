@@ -10,24 +10,22 @@
 	export let session: Session | null
 	export let inWatchlist: boolean
 
-	let imgHeight: number
-
 	const placeholder = 'Unknown'
 </script>
 
 <div class="relative pt-10">
 	<img
 		use:lazyLoad
-		class:px-4={!movie.backdrop}
+		class:lg:p-16={!movie.backdrop}
+		class:sm:p-12={!movie.backdrop}
+		class:p-8={!movie.backdrop}
 		class="rounded-t-md"
 		src={movie.backdrop ? getMediaURL(movie.backdrop.file_path, 1280) : logo}
 		alt={movie.title}
-		style="aspect-ratio: {movie.backdrop
-			? movie.backdrop.aspect_ratio
-			: 1778 / 1}; height: {movie.backdrop ? 'auto' : `${imgHeight}px`}"
+		style="aspect-ratio: {movie.backdrop ? movie.backdrop.aspect_ratio : 'auto'}}"
 	/>
 	<div
-		class="relative w-full rounded-b-md bg-black from-black to-transparent before:absolute before:-top-36 before:h-36 before:w-full before:bg-gradient-to-t before:sm:-top-56 before:sm:h-56 before:lg:-top-72 before:lg:h-72"
+		class="relative w-full rounded-b-md bg-black from-black to-transparent before:absolute before:-top-24 before:h-24 before:w-full before:bg-gradient-to-t before:sm:-top-44 before:sm:h-44 before:lg:-top-60 before:lg:h-60"
 	>
 		<div
 			class="text-shadow-md bottom-0 w-11/12 -translate-y-8 translate-x-4 [text-wrap:balance] sm:-translate-y-16 sm:translate-x-8 md:w-2/3 lg:-translate-y-24 lg:translate-x-12"
