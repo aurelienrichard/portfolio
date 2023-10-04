@@ -64,7 +64,6 @@
 		in:fly={{ delay: 500, y: 25, easing: cubicOut }}
 		out:fade
 		class:h-0={$page.data.infinite}
-		class:flex-1={$page.data.infinite}
 		class:overflow-clip={$page.data.infinite}
 		class="flex w-full flex-grow flex-col gap-10 sm:gap-16 lg:gap-20"
 	>
