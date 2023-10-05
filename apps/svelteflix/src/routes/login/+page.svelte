@@ -15,8 +15,12 @@
 		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		return async ({ update, result }) => {
 			await update()
-			if (result.status !== 500) {
+			if (result.type === 'redirect') {
 				notifications.addNotification('Magic link sent. Check your email!')
+			} else if (result.type === 'failure') {
+				const message = result?.data?.message
+				if (message) notifications.addNotification(message)
+				else notifications.addNotification('An unexpected error happened')
 			}
 			loading = false
 		}

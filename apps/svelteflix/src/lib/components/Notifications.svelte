@@ -5,7 +5,7 @@
 </script>
 
 <div
-	class="pointer-events-none fixed top-32 z-10 flex w-full max-w-7xl flex-col gap-4 bg-transparent px-8 sm:px-16 lg:px-24"
+	class="pointer-events-none fixed top-16 z-10 flex w-full max-w-7xl flex-col gap-4 bg-transparent px-8 sm:px-16 lg:px-24"
 >
 	{#each $notifications as notification (notification.id)}
 		<div
