@@ -44,8 +44,12 @@
 		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		return async ({ update, result }) => {
 			await update()
-			if (result.status !== 500) {
+			if (result.type === 'redirect') {
 				notifications.addNotification('You are now logged out')
+			} else if (result.type === 'failure') {
+				const message = result?.data?.message as string | undefined
+				if (message) notifications.addNotification(message)
+				else notifications.addNotification('An unexpected error happened')
 			}
 			loading = false
 		}

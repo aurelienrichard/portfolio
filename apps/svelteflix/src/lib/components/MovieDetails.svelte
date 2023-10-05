@@ -19,11 +19,14 @@
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
 		// eslint-disable-next-line @typescript-eslint/no-misused-promises
-		return async ({ update }) => {
+		return async ({ update, result }) => {
 			await update()
-			notifications.addNotification(
-				`${movie.title} ${inWatchlist ? 'added to' : 'removed from'} watchlist`
-			)
+			if (result.type === 'success') {
+				notifications.addNotification(
+					`${movie.title} ${inWatchlist ? 'added to' : 'removed from'} watchlist`
+				)
+			}
+
 			loading = false
 		}
 	}
