@@ -28,19 +28,19 @@
 	}
 
 	.winner-1 {
-		animation: scale 6s linear 1.7s infinite;
+		animation: scale 6s linear 2.8s infinite;
 	}
 
 	.winner-2 {
-		animation: scale 6s linear 3.2s infinite;
+		animation: scale 6s linear 4.3s infinite;
 	}
 
 	.winner-3 {
-		animation: scale 6s linear 4.7s infinite;
+		animation: scale 6s linear 5.8s infinite;
 	}
 
 	.winner-4 {
-		animation: scale 6s linear 6.2s infinite;
+		animation: scale 6s linear 7.3s infinite;
 	}
 
 	@keyframes scale {
