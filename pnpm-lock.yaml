@@ -39,7 +39,7 @@ importers:
         specifier: ^3.3.5
         version: 3.3.5
       turbo:
-        specifier: latest
+        specifier: ^1.10.14
         version: 1.10.14
 
   apps/ematchi:
