@@ -7,9 +7,10 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"dev": "vite dev",
-		"format": "prettier --plugin-search-dir . --write .",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"preview": "vite preview",
+		"test:coverage": "vitest --coverage",
+		"test:ui": "vitest --ui",
 		"test:watch": "vitest",
 		"test": "vitest run"
 	},
@@ -24,7 +25,7 @@
 		"svelte": "^4.0.5",
 		"tsconfig": "workspace:*",
 		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
+		"typescript": "^5.2.2",
 		"vite": "^4.4.2",
 		"vitest": "^0.34.6"
 	},
