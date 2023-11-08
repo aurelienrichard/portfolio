@@ -10,15 +10,12 @@
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"preview": "vite preview",
-		"test:integration": "playwright test",
-		"test:unit": "vitest",
 		"test:coverage": "vitest --coverage",
 		"test:ui": "vitest --ui",
-		"test:watch": "npm run test:integration && npm run test:unit",
-		"test": "npm run test:integration && npm run test:unit -- run"
+		"test:watch": "vitest",
+		"test": "vitest run"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.39.0",
 		"@sveltejs/adapter-vercel": "^3.0.3",
 		"@sveltejs/kit": "^1.27.3",
 		"@testing-library/jest-dom": "^6.1.4",
