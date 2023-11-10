@@ -9,20 +9,6 @@ jobs:
         name: Build and Test
         timeout-minutes: 60
         runs-on: ubuntu-latest
-        permissions:
-            contents: read
-            deployments: write
-        strategy:
-            matrix:
-                include:
-                    - projectName: 'ematchi'
-                      directory: 'build'
-                    - projectName: 'rock-paper-scissors-lizard-spock'
-                      directory: 'build'
-                    - projectName: 'svelteflix'
-                      directory: '.svelte-kit/cloudflare'
-                    - projectName: 'privelte'
-                      directory: '.svelte-kit/cloudflare'
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -50,12 +36,3 @@ jobs:
 
             - name: Test
               run: pnpm test
-
-            - name: Publish
-              uses: cloudflare/pages-action@1
-              with:
-                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  projectName: ${{ matrix.projectName }}
-                  directory: ${{ matrix.directory }}
-                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
