@@ -5,9 +5,8 @@ on:
         branches: ['main']
 
 jobs:
-    build:
-        name: Build and Test
-        timeout-minutes: 60
+    deploy:
+        name: Deploy
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -47,9 +46,6 @@ jobs:
 
             - name: Build
               run: pnpm build
-
-            - name: Test
-              run: pnpm test
 
             - name: Publish
               uses: cloudflare/pages-action@1
