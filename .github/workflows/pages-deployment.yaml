@@ -15,13 +15,13 @@ jobs:
             matrix:
                 include:
                     - projectName: 'ematchi'
-                      directory: 'build'
+                      directory: 'apps/ematchi/build'
                     - projectName: 'rock-paper-scissors-lizard-spock'
-                      directory: 'build'
+                      directory: 'apps/rock-paper-scissors-lizard-spock/build'
                     - projectName: 'svelteflix'
-                      directory: '.svelte-kit/cloudflare'
+                      directory: 'apps/svelteflix/.svelte-kit/cloudflare'
                     - projectName: 'privelte'
-                      directory: '.svelte-kit/cloudflare'
+                      directory: 'apps/privelte/.svelte-kit/cloudflare'
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
