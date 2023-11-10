@@ -22,11 +22,6 @@ jobs:
                       directory: 'apps/svelteflix/.svelte-kit/cloudflare'
                     - projectName: 'privelte'
                       directory: 'apps/privelte/.svelte-kit/cloudflare'
-        # To use Turborepo Remote Caching, set the following environment variables for the job.
-        env:
-            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
         steps:
             - name: Checkout
               uses: actions/checkout@v3
