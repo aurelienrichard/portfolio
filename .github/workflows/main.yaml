@@ -1,5 +1,3 @@
-name: CI
-
 on:
     push:
         branches: ['main']
@@ -17,7 +15,7 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
         steps:
-            - name: Check out code
+            - name: Checkout
               uses: actions/checkout@v3
 
             - uses: pnpm/action-setup@v2
