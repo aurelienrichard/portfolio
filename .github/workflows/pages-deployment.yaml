@@ -14,13 +14,9 @@ jobs:
             matrix:
                 include:
                     - projectName: 'ematchi'
-                      directory: 'build'
                     - projectName: 'rock-paper-scissors-lizard-spock'
-                      directory: 'build'
                     - projectName: 'svelteflix'
-                      directory: '.svelte-kit/cloudflare'
                     - projectName: 'privelte'
-                      directory: '.svelte-kit/cloudflare'
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -52,5 +48,5 @@ jobs:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   projectName: ${{ matrix.projectName }}
-                  directory: apps/${{ matrix.projectName }}/${{ matrix.directory }}
+                  directory: apps/${{ matrix.projectName }}/.svelte-kit/cloudflare
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
