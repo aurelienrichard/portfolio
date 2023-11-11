@@ -44,7 +44,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Build
-              run: pnpm build
+              run: pnpm build --filter ${{ matrix.projectName }}
 
             - name: Deploy
               uses: cloudflare/pages-action@1
