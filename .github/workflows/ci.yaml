@@ -1,24 +1,17 @@
 name: CI
 
 on:
-    push:
-        branches: ['main']
     pull_request:
         branches: ['main']
 
 jobs:
     build:
         name: Build and Test
-        timeout-minutes: 60
         runs-on: ubuntu-latest
         strategy:
             matrix:
                 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
                 node-version: [18.x]
-                include:
-                    - app: 'svelteflix'
-                      directory: 'apps/svelteflix/.svelte-kit/cloudflare'
-        environment: ${{ matrix.app }}
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -41,20 +34,8 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Lint
-              run: pnpm run lint --filter ${{ matrix.app }}
-
             - name: Build
-              run: pnpm build --filter ${{ matrix.app }}
+              run: pnpm build
 
             - name: Test
-              run: pnpm test --filter ${{ matrix.app }}
-
-            - name: Deploy
-              uses: cloudflare/pages-action@1
-              with:
-                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  projectName: ${{ matrix.app }}
-                  directory: ${{ matrix.directory }}
-                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+              run: pnpm test
