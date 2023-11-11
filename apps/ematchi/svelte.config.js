@@ -13,7 +13,7 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
 			routes: {
-				exclude: ['/twemoji/*']
+				exclude: ['/_app/*', '/twemoji/*', '/favicon.png', '/pause-circle.svg']
 			}
 		})
 	}
