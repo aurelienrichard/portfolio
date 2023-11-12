@@ -48,9 +48,9 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
     devDependencies:
-      '@sveltejs/adapter-cloudflare':
-        specifier: ^2.3.3
-        version: 2.3.3(@sveltejs/kit@1.27.1)
+      '@sveltejs/adapter-static':
+        specifier: ^2.0.3
+        version: 2.0.3(@sveltejs/kit@1.27.1)
       '@sveltejs/kit':
         specifier: ^1.27.1
         version: 1.27.1(svelte@4.2.2)(vite@4.5.0)
@@ -124,9 +124,9 @@ importers:
         specifier: ^5.0.17
         version: 5.0.17
     devDependencies:
-      '@sveltejs/adapter-cloudflare':
-        specifier: ^2.3.3
-        version: 2.3.3(@sveltejs/kit@1.27.1)
+      '@sveltejs/adapter-static':
+        specifier: ^2.0.3
+        version: 2.0.3(@sveltejs/kit@1.27.1)
       '@sveltejs/kit':
         specifier: ^1.27.1
         version: 1.27.1(svelte@4.2.2)(vite@4.5.0)
@@ -754,17 +754,6 @@ packages:
       - supports-color
     dev: false
 
-  /@sveltejs/adapter-cloudflare@2.3.3(@sveltejs/kit@1.27.1):
-    resolution: {integrity: sha512-bbcm6kq4dEluFtFJZed3KSRG4f5GUElYkVfOmnPruTqZ29nTElPJTomAu5QCp7GLkwA26O3h1Dk7+d9yLTQEXg==}
-    peerDependencies:
-      '@sveltejs/kit': ^1.0.0
-    dependencies:
-      '@cloudflare/workers-types': 4.20231025.0
-      '@sveltejs/kit': 1.27.1(svelte@4.2.2)(vite@4.5.0)
-      esbuild: 0.18.20
-      worktop: 0.8.0-next.15
-    dev: true
-
   /@sveltejs/adapter-cloudflare@2.3.3(@sveltejs/kit@1.27.3):
     resolution: {integrity: sha512-bbcm6kq4dEluFtFJZed3KSRG4f5GUElYkVfOmnPruTqZ29nTElPJTomAu5QCp7GLkwA26O3h1Dk7+d9yLTQEXg==}
     peerDependencies:
@@ -774,6 +763,14 @@ packages:
       '@sveltejs/kit': 1.27.3(svelte@4.2.2)(vite@4.5.0)
       esbuild: 0.18.20
       worktop: 0.8.0-next.15
+    dev: true
+
+  /@sveltejs/adapter-static@2.0.3(@sveltejs/kit@1.27.1):
+    resolution: {integrity: sha512-VUqTfXsxYGugCpMqQv1U0LIdbR3S5nBkMMDmpjGVJyM6Q2jHVMFtdWJCkeHMySc6mZxJ+0eZK3T7IgmUCDrcUQ==}
+    peerDependencies:
+      '@sveltejs/kit': ^1.5.0
+    dependencies:
+      '@sveltejs/kit': 1.27.1(svelte@4.2.2)(vite@4.5.0)
     dev: true
 
   /@sveltejs/kit@1.27.1(svelte@4.2.2)(vite@4.5.0):
