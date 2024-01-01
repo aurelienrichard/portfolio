@@ -12,14 +12,14 @@
 		"clean": "turbo daemon clean && turbo run clean"
 	},
 	"devDependencies": {
-		"@turbo/gen": "^1.10.14",
+		"@turbo/gen": "^1.11.2",
 		"eslint": "^8.56.0",
 		"eslint-config-custom": "workspace:*",
 		"husky": "^8.0.3",
 		"lint-staged": "^15.2.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
-		"prettier-plugin-tailwindcss": "^0.5.9",
+		"prettier-plugin-tailwindcss": "^0.5.10",
 		"tailwind-config": "workspace:*",
 		"turbo": "^1.11.2"
 	},
