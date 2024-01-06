@@ -12,7 +12,7 @@
 		"clean": "turbo daemon clean && turbo run clean"
 	},
 	"devDependencies": {
-		"@turbo/gen": "^1.11.2",
+		"@turbo/gen": "^1.11.3",
 		"eslint": "^8.56.0",
 		"eslint-config-custom": "workspace:*",
 		"husky": "^8.0.3",
@@ -21,7 +21,7 @@
 		"prettier-plugin-svelte": "^3.1.2",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"tailwind-config": "workspace:*",
-		"turbo": "^1.11.2"
+		"turbo": "^1.11.3"
 	},
 	"packageManager": "pnpm@8.6.10",
 	"name": "portfolio",
