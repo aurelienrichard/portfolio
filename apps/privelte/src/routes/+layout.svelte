@@ -8,21 +8,20 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<a href="/" class="text-2xl font-semibold drop-shadow-md">
+				<a href="/" class="text-2xl font-semibold">
 					<span class="text-surface-400">Priv</span><span class="text-[#ff3e00]"
 						>elte</span
 					>
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<div>
-					<LightSwitch />
-				</div>
+				<LightSwitch />
+				<span class="divider-vertical h-6" />
 				<a
 					href="https://github.com/aurelienrichard"
 					aria-label="Link to the developer's profile on GitHub"
 				>
-					<img class="h-5 w-5" src={logo} alt="GitHub logo" />
+					<img class="h-6" src={logo} alt="GitHub logo" />
 				</a>
 			</svelte:fragment>
 		</AppBar>
