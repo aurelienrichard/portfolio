@@ -9,13 +9,17 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href="/" class="text-2xl font-semibold">
-					<span class="text-surface-400">Priv</span><span class="text-[#ff3e00]"
+					<span class="text-surface-400 underline">Priv</span><span
+						class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent"
 						>elte</span
 					>
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<LightSwitch />
+				<LightSwitch
+					bgLight="dark:from-surface-50 dark:to-surface-50 bg-gradient-to-br from-gradient-1-light to-gradient-2-light"
+					bgDark="bg-gradient-to-br from-surface-900 to-surface-900 dark:from-gradient-1-dark dark:to-gradient-2-dark"
+				/>
 				<span class="divider-vertical h-6" />
 				<a
 					href="https://github.com/aurelienrichard"
@@ -26,7 +30,9 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<slot />
+	<div class="h-full px-4 py-12">
+		<slot />
+	</div>
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
 	<svelte:fragment slot="footer">Footer</svelte:fragment>
 </AppShell>
