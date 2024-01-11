@@ -8,5 +8,5 @@ body {
 }
 
 body {
-	@apply mx-auto max-w-5xl;
+	@apply bg-radial-gradient from-surface-300 dark:from-surface-600 mx-auto max-w-7xl to-transparent bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-lg;
 }
