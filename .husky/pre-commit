@@ -3,4 +3,5 @@
 
 pnpx lint-staged
 pnpm build
+pnpm lint
 pnpm test 
