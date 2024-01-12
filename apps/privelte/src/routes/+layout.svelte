@@ -26,7 +26,7 @@
 
 <Modal components={modalRegistry} regionBackdrop="backdrop-blur-sm" />
 
-<AppShell>
+<AppShell regionPage="max-w-7xl mx-auto">
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
