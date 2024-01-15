@@ -1,27 +1,9 @@
 <script lang="ts">
 	import '../app.css'
-	import {
-		Modal,
-		AppShell,
-		AppBar,
-		LightSwitch,
-		initializeStores,
-		getModalStore
-	} from '@skeletonlabs/skeleton'
-	import type { ModalSettings, ModalComponent, ModalStore } from '@skeletonlabs/skeleton'
+	import { AppShell, AppBar, LightSwitch, initializeStores } from '@skeletonlabs/skeleton'
 	import logo from '$lib/images/github-mark.svg'
-	import NewRoomModal from '$lib/components/NewRoomModal.svelte'
 
 	initializeStores()
-
-	const modalStore: ModalStore = getModalStore()
-	const modal: ModalSettings = {
-		type: 'component',
-		component: 'newRoomModal'
-	}
-	const modalRegistry: Record<string, ModalComponent> = {
-		newRoomModal: { ref: NewRoomModal }
-	}
 </script>
 
 <svelte:head>
@@ -29,9 +11,7 @@
 	<meta name="description" content="chat privately and anonymously." />
 </svelte:head>
 
-<Modal components={modalRegistry} regionBackdrop="backdrop-blur-sm" />
-
-<AppShell regionPage="max-w-7xl mx-auto">
+<AppShell regionPage="max-w-6xl mx-auto">
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
@@ -43,10 +23,7 @@
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<button
-					on:click={() => modalStore.trigger(modal)}
-					type="button"
-					class="btn btn-sm variant-filled-surface capitalize"
+				<a href="/new" class="btn btn-sm variant-filled-surface capitalize"
 					><span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +39,7 @@
 								d="M12 4.5v15m7.5-7.5h-15"
 							/>
 						</svg>
-					</span>private room</button
+					</span>room</a
 				>
 				<LightSwitch
 					bgLight="dark:from-surface-50 dark:to-surface-50 bg-gradient-to-br from-gradient-1-light to-gradient-2-light"
