@@ -14,6 +14,12 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'tests/*': 'tests/*'
+		},
+		typescript: {
+			config: (config) => ({
+				...config,
+				include: [...config.include, '../tailwind.config.ts']
+			})
 		}
 	}
 }
