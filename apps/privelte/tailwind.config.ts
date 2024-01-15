@@ -1,9 +1,10 @@
-import tailwindConfig from 'tailwind-config'
-// 1. Import the Skeleton plugin
-import { skeleton } from '@skeletonlabs/tw-plugin'
 import { join } from 'path'
+// 1. Import the Skeleton plugin
+import tailwindConfig from 'tailwind-config'
+import { skeleton } from '@skeletonlabs/tw-plugin'
 import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
+import forms from '@tailwindcss/forms'
 
 const config = {
 	presets: [tailwindConfig],
@@ -32,9 +33,11 @@ const config = {
 		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 	plugins: [
+		forms,
 		// 4. Append the Skeleton plugin (after other plugins)
 		skeleton({ themes: { preset: ['crimson'] } })
 	]
 } satisfies Config
 
+// eslint-disable-next-line import/no-default-export
 export default config

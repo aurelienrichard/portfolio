@@ -24,13 +24,18 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Privelte</title>
+	<meta name="description" content="chat privately and anonymously." />
+</svelte:head>
+
 <Modal components={modalRegistry} regionBackdrop="backdrop-blur-sm" />
 
 <AppShell regionPage="max-w-7xl mx-auto">
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<a href="/" class="text-2xl font-semibold">
+				<a href="/" class="select-none text-2xl font-semibold">
 					<span class="text-surface-400 underline">Priv</span><span
 						class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent"
 						>elte</span
@@ -41,7 +46,7 @@
 				<button
 					on:click={() => modalStore.trigger(modal)}
 					type="button"
-					class="btn btn-sm variant-filled-surface"
+					class="btn btn-sm variant-filled-surface capitalize"
 					><span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +54,7 @@
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="h-5 w-5"
+							class="h-[19px] w-[19px]"
 						>
 							<path
 								stroke-linecap="round"
@@ -57,7 +62,7 @@
 								d="M12 4.5v15m7.5-7.5h-15"
 							/>
 						</svg>
-					</span>New Room</button
+					</span>private room</button
 				>
 				<LightSwitch
 					bgLight="dark:from-surface-50 dark:to-surface-50 bg-gradient-to-br from-gradient-1-light to-gradient-2-light"

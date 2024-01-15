@@ -1,4 +1,4 @@
 <script lang="ts">
 </script>
 
-<h1 class="h1">Hello World</h1>
+<h2 class="h2 capitalize">new private room</h2>

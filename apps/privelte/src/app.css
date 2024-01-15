@@ -8,5 +8,5 @@ body {
 }
 
 body {
-	@apply bg-radial-gradient from-surface-300 dark:from-surface-600 to-transparent bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-lg;
+	@apply bg-radial-gradient from-surface-300 dark:from-surface-600 dark:selection:bg-primary-600/40 to-transparent bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-lg selection:bg-pink-500/40;
 }
