@@ -1,9 +1,7 @@
 <script lang="ts">
 	import '../app.css'
-	import { AppShell, AppBar, LightSwitch, initializeStores } from '@skeletonlabs/skeleton'
+	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton'
 	import logo from '$lib/images/github-mark.svg'
-
-	initializeStores()
 </script>
 
 <svelte:head>
@@ -16,7 +14,7 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href="/" class="select-none text-2xl font-semibold">
-					<span class="text-surface-400 underline">Priv</span><span
+					<span class="text-surface-600-300-token underline">Priv</span><span
 						class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent"
 						>elte</span
 					>
