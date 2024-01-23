@@ -53,7 +53,7 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<div class="h-full px-4 py-12">
+	<div class="h-full px-4 py-8 md:py-12">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
