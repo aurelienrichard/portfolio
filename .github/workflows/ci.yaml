@@ -11,7 +11,12 @@ jobs:
         # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            SVELTEFLIX_API_READ_ACCESS_TOKEN: ${{ secrets.SVELTEFLIX_API_READ_ACCESS_TOKEN }}
+            SVELTEFLIX_BASE_API_URL: ${{ secrets.SVELTEFLIX_BASE_API_URL }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            PUBLIC_SVELTEFLIX_SUPABASE_URL: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_URL }}
+            PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY }}
+            PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL: ${{ vars.PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL }}
 
         steps:
             - name: Checkout

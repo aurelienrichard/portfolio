@@ -1,8 +1,8 @@
-import { PUBLIC_MEDIA_BASE_API_URL } from '$env/static/public'
+import { PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL } from '$env/static/public'
 import type { MovieList } from './apiSchemas'
 
 export const getMediaURL = (path: string, width: number) => {
-	const url = `${PUBLIC_MEDIA_BASE_API_URL}/w${width}${path}`
+	const url = `${PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL}/w${width}${path}`
 
 	return url
 }
