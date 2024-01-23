@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { API_READ_ACCESS_TOKEN, BASE_API_URL } from '$env/static/private'
+import { SVELTEFLIX_API_READ_ACCESS_TOKEN, SVELTEFLIX_BASE_API_URL } from '$env/static/private'
 
 export const get = async <Schema extends z.ZodSchema>(
 	fetch: typeof globalThis.fetch,
@@ -8,10 +8,10 @@ export const get = async <Schema extends z.ZodSchema>(
 	params?: Record<string, string>
 ) => {
 	const q = new URLSearchParams(params)
-	const url = `${BASE_API_URL}/${endpoint}?${q.toString()}`
+	const url = `${SVELTEFLIX_BASE_API_URL}/${endpoint}?${q.toString()}`
 	const response = await fetch(url, {
 		headers: {
-			Authorization: `Bearer ${API_READ_ACCESS_TOKEN}`,
+			Authorization: `Bearer ${SVELTEFLIX_API_READ_ACCESS_TOKEN}`,
 			accept: 'application/json'
 		}
 	})
