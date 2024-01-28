@@ -40,5 +40,9 @@
 		"vite-plugin-tailwind-purgecss": "^0.2.0",
 		"vitest": "^1.2.1"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"unique-names-generator": "^4.7.1",
+		"zod": "^3.22.4"
+	}
 }
