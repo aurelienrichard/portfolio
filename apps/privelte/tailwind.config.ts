@@ -14,11 +14,11 @@ const config = {
 			colors: {
 				'gradient-1': {
 					light: colors.indigo[600],
-					dark: '#e15c77'
+					dark: '#d4163c'
 				},
 				'gradient-2': {
 					light: colors.pink[600],
-					dark: '#d4163c'
+					dark: '#bf1436'
 				}
 			},
 			backgroundImage: {
