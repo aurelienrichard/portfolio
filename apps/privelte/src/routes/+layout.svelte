@@ -56,6 +56,5 @@
 	<div class="h-full px-4 py-8 md:py-12">
 		<slot />
 	</div>
-	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
 	<svelte:fragment slot="footer">Footer</svelte:fragment>
 </AppShell>
