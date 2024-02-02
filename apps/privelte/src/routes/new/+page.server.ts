@@ -2,7 +2,7 @@ import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-
 import { z } from 'zod'
 import { error, redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
-import { supabase } from '$lib/server/supabase'
+import { supabase } from '$lib/server/supabaseServer'
 
 let currentId: string
 

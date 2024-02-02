@@ -1,11 +1,10 @@
 import { error } from '@sveltejs/kit'
 import { z } from 'zod'
 import type { Actions, PageServerLoad } from './$types'
-import { supabase } from '$lib/server/supabase'
+import { supabase } from '$lib/server/supabaseServer'
 
-// set a character limit
 const schema = z.object({
-	message: z.string()
+	message: z.string().min(1).max(1000)
 })
 
 export const load = (async ({ params }) => {
@@ -28,14 +27,25 @@ export const load = (async ({ params }) => {
 }) satisfies PageServerLoad
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, params }) => {
 		const form = await request.formData()
 
 		const { message } = schema.parse({
 			message: form.get('message')
 		})
 
-		console.log(message)
-		// insert message into database
+		await supabase.from('message').insert({ content: message, room_id: params.id })
+
+		const channel = supabase.channel(params.id)
+
+		channel.subscribe((status) => {
+			if (status === 'SUBSCRIBED') {
+				// eslint-disable-next-line @typescript-eslint/no-floating-promises
+				channel.send({
+					type: 'broadcast',
+					event: 'new message'
+				})
+			}
+		})
 	}
 } satisfies Actions

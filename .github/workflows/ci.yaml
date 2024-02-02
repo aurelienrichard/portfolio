@@ -8,16 +8,19 @@ jobs:
     build:
         name: Build and Test
         runs-on: ubuntu-latest
-        # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
+            # turborepo
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            # svelteflix
             SVELTEFLIX_API_READ_ACCESS_TOKEN: ${{ secrets.SVELTEFLIX_API_READ_ACCESS_TOKEN }}
             SVELTEFLIX_BASE_API_URL: ${{ secrets.SVELTEFLIX_BASE_API_URL }}
-            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
             PUBLIC_SVELTEFLIX_SUPABASE_URL: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_URL }}
             PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY }}
             PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL: ${{ vars.PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL }}
+            # privelte
             PUBLIC_PRIVELTE_SUPABASE_URL: ${{ vars.PUBLIC_PRIVELTE_SUPABASE_URL }}
+            PUBLIC_PRIVELTE_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_PRIVELTE_SUPABASE_ANON_KEY }}
             PRIVELTE_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.PRIVELTE_SUPABASE_SERVICE_ROLE_KEY }}
 
         steps:
