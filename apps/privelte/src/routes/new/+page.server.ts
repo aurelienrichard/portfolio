@@ -2,6 +2,7 @@ import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-
 import { z } from 'zod'
 import { error, redirect } from '@sveltejs/kit'
 import type { Actions, PageServerLoad } from './$types'
+import { supabase } from '$lib/server/supabase'
 
 let currentId: string
 
@@ -25,25 +26,26 @@ export const load = (() => {
 	}
 }) satisfies PageServerLoad
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ request }) => {
-		const data = await request.formData()
+		const form = await request.formData()
 		const { id, slots } = schema.parse({
-			id: data.get('id'),
-			slots: data.get('slots')
+			id: form.get('id'),
+			slots: form.get('slots')
 		})
 
-		console.log({ id, slots })
-
 		if (id !== currentId) {
-			error(400, { message: 'Invalid ID' })
+			error(400, { message: 'Invalid ID.' })
 		}
 
-		// check if id already exists
-		// if it does, error 500
+		const { data } = await supabase.from('room').select('id').eq('id', id).single()
 
-		// create room with id and slots
+		if (data) {
+			error(500, { message: 'Internal error.' })
+		}
+
+		await supabase.from('room').insert({ id, slots })
 
 		throw redirect(303, `/room/${id}`)
 	}
-}
+} satisfies Actions

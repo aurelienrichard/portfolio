@@ -5,7 +5,7 @@
 			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
 			>privately</span
 		>
-		<span class="decoration-surface-300-500-token">and</span>
+		and
 		<span
 			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
 			>anonymously</span
