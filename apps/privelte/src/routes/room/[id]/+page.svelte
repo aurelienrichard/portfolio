@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { clipboard } from '@skeletonlabs/skeleton'
+	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
 	import type { PageData } from './$types'
+	import { supabase } from '$lib/supabaseClient'
 
 	export let data: PageData
 	let inputElement: HTMLInputElement
@@ -10,6 +12,19 @@
 	const handleFocus = () => {
 		inputElement.select()
 	}
+
+	onMount(() => {
+		const subscription = supabase
+			.channel(data.room.id)
+			.on('broadcast', { event: 'new message' }, () => {
+				console.log('new message received!')
+			})
+			.subscribe()
+
+		return async () => {
+			await subscription.unsubscribe()
+		}
+	})
 </script>
 
 <div class="flex h-full flex-col">
@@ -61,6 +76,7 @@
 					</svg>
 				</button>
 			</div>
+			<hr class="my-4" />
 			{#each data.messages as message (message.id)}
 				<p class="h1">{message.content}</p>
 			{/each}
@@ -75,7 +91,9 @@
 				on:keydown={(e) => {
 					if (e.key === 'Enter' && !e.shiftKey) {
 						e.preventDefault()
-						e.currentTarget.form?.submit()
+						if (newMessage) {
+							e.currentTarget.form?.submit()
+						}
 					}
 				}}
 				bind:value={newMessage}

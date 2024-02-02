@@ -1,5 +1,6 @@
-/* import type { RequestHandler } from './$types'
+// import type { RequestHandler } from './$types'
+// import { supabase } from '$lib/server/supabaseServer'
 
-export const GET: RequestHandler = async () => {
-	return new Response()
-} */
+// export const GET = (async ({ params, url }) => {
+// fetch new messages
+// }) satisfies RequestHandler
