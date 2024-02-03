@@ -1,15 +1,10 @@
 import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator'
-import { z } from 'zod'
 import { error, redirect } from '@sveltejs/kit'
+import { newRoomSchema } from '$lib/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
 
 let currentId: string
-
-const schema = z.object({
-	id: z.string(),
-	slots: z.coerce.number().min(2).max(10)
-})
 
 export const load = (() => {
 	const id = uniqueNamesGenerator({
@@ -29,7 +24,7 @@ export const load = (() => {
 export const actions = {
 	default: async ({ request }) => {
 		const form = await request.formData()
-		const { id, slots } = schema.parse({
+		const { id, slots } = newRoomSchema.parse({
 			id: form.get('id'),
 			slots: form.get('slots')
 		})
