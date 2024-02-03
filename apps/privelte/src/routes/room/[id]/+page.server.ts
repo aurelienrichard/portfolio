@@ -1,20 +1,20 @@
 import { error } from '@sveltejs/kit'
-import { z } from 'zod'
-import type { Actions, PageServerLoad } from './$types'
+import type { PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
 
-const schema = z.object({
-	message: z.string().min(1).max(1000)
-})
-
-export const load = (async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const room = await supabase.from('room').select('id, slots').eq('id', params.id).single()
 
 	if (room.error) {
 		error(404, { message: 'This room does not exist.' })
 	}
 
-	const messages = await supabase.from('message').select('id, content').eq('room_id', params.id)
+	const messages = await supabase
+		.from('message')
+		.select('id, payload')
+		.eq('room_id', params.id)
+		.order('id', { ascending: false })
+		.limit(10)
 
 	if (messages.error) {
 		error(500, { message: 'Internal error.' })
@@ -24,9 +24,9 @@ export const load = (async ({ params }) => {
 		room: room.data,
 		messages: messages.data
 	}
-}) satisfies PageServerLoad
+}
 
-export const actions = {
+/* export const actions: Actions = {
 	default: async ({ request, params }) => {
 		const form = await request.formData()
 
@@ -34,7 +34,7 @@ export const actions = {
 			message: form.get('message')
 		})
 
-		await supabase.from('message').insert({ content: message, room_id: params.id })
+		await supabase.from('message').insert({ payload: message, room_id: params.id })
 
 		const channel = supabase.channel(params.id)
 
@@ -48,4 +48,5 @@ export const actions = {
 			}
 		})
 	}
-} satisfies Actions
+}
+ */

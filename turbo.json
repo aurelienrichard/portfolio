@@ -22,6 +22,9 @@
 		"check": {},
 		"clean": {
 			"cache": false
+		},
+		"update-types": {
+			"outputs": ["src/lib/supabase.ts"]
 		}
 	}
 }
