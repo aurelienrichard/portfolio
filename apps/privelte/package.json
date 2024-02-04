@@ -14,7 +14,7 @@
 		"test:ui": "vitest --ui",
 		"test:watch": "vitest",
 		"test": "vitest run",
-		"update-types": "pnpx supabase gen types typescript --project-id yipoupsiomqlwjtapqda --schema public > src/lib/supabase.ts"
+		"update-types": "pnpx supabase gen types typescript --project-id yipoupsiomqlwjtapqda --schema public > src/lib/types/supabase.ts"
 	},
 	"devDependencies": {
 		"@skeletonlabs/skeleton": "^2.8.0",
@@ -23,9 +23,9 @@
 		"@sveltejs/kit": "^2.5.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.2",
 		"@tailwindcss/forms": "^0.5.7",
-		"@testing-library/jest-dom": "^6.4.0",
+		"@testing-library/jest-dom": "^6.4.1",
 		"@testing-library/svelte": "^4.1.0",
-		"@types/node": "^20.11.13",
+		"@types/node": "^20.11.16",
 		"autoprefixer": "^10.4.17",
 		"eslint-config-custom": "workspace:*",
 		"happy-dom": "^13.3.8",

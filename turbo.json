@@ -24,7 +24,7 @@
 			"cache": false
 		},
 		"update-types": {
-			"outputs": ["src/lib/supabase.ts"]
+			"outputs": ["src/lib/types/supabase.ts"]
 		}
 	}
 }

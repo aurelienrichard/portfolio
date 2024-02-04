@@ -25,28 +25,3 @@ export const load: PageServerLoad = async ({ params }) => {
 		messages: messages.data
 	}
 }
-
-/* export const actions: Actions = {
-	default: async ({ request, params }) => {
-		const form = await request.formData()
-
-		const { message } = schema.parse({
-			message: form.get('message')
-		})
-
-		await supabase.from('message').insert({ payload: message, room_id: params.id })
-
-		const channel = supabase.channel(params.id)
-
-		channel.subscribe((status) => {
-			if (status === 'SUBSCRIBED') {
-				// eslint-disable-next-line @typescript-eslint/no-floating-promises
-				channel.send({
-					type: 'broadcast',
-					event: 'new message'
-				})
-			}
-		})
-	}
-}
- */
