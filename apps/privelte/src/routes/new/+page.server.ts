@@ -1,6 +1,6 @@
 import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator'
 import { error, redirect } from '@sveltejs/kit'
-import { newRoomSchema } from '$lib/schemas'
+import { newRoomSchema } from '$lib/types/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
 

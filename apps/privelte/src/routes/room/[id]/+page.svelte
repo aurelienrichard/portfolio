@@ -4,7 +4,7 @@
 	import { page } from '$app/stores'
 	import type { PageData } from './$types'
 	import { supabase } from '$lib/supabaseClient'
-	import type { Tables } from '$lib/supabase'
+	import type { Tables } from '$lib/types/supabase'
 
 	export let data: PageData
 	let inputElement: HTMLInputElement
@@ -16,7 +16,10 @@
 	}
 
 	const handleSubmit = async () => {
+		if (loading) return
+
 		loading = true
+
 		const response = await fetch($page.url.pathname, {
 			method: 'POST',
 			headers: {
@@ -24,6 +27,13 @@
 			},
 			body: JSON.stringify({ message: newMessage })
 		})
+
+		if (response.status === 500) {
+			loading = false
+			// display some error message
+			return
+		}
+
 		const { id } = (await response.json()) as Tables<'message'>
 
 		data.messages = [
@@ -33,7 +43,6 @@
 				payload: newMessage
 			}
 		]
-
 		newMessage = ''
 		loading = false
 	}
@@ -42,7 +51,7 @@
 		const subscription = supabase
 			.channel(data.room.id)
 			.on('broadcast', { event: 'new message' }, () => {
-				console.log('new message received!')
+				// fetch new messages
 			})
 			.subscribe()
 
