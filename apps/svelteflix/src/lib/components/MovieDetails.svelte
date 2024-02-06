@@ -18,7 +18,6 @@
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
-		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		return async ({ update, result }) => {
 			await update()
 			if (result.type === 'success') {

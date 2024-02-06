@@ -51,6 +51,12 @@ module.exports = {
 		'@typescript-eslint/naming-convention': 'off',
 		// yells on sveltekit protected routes redirects
 		'@typescript-eslint/no-throw-literal': 'off',
+		'@typescript-eslint/no-misused-promises': [
+			'error',
+			{
+				checksVoidReturn: false
+			}
+		],
 		'no-param-reassign': ['error', { props: false }],
 		eqeqeq: ['error', 'smart']
 	}
