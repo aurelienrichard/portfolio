@@ -33,13 +33,13 @@ export const actions = {
 			error(400, { message: 'Invalid ID.' })
 		}
 
-		const { data } = await supabase.from('room').select('id').eq('id', id).single()
+		const { data } = await supabase.from('rooms').select('id').eq('id', id).single()
 
 		if (data) {
 			error(500, { message: 'Internal error.' })
 		}
 
-		await supabase.from('room').insert({ id, slots })
+		await supabase.from('rooms').insert({ id, slots })
 
 		throw redirect(303, `/room/${id}`)
 	}

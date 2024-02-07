@@ -3,33 +3,33 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
 	public: {
 		Tables: {
-			message: {
+			messages: {
 				Row: {
+					content: string
 					id: number
-					payload: string
 					room_id: string
 				}
 				Insert: {
+					content: string
 					id?: number
-					payload: string
 					room_id: string
 				}
 				Update: {
+					content?: string
 					id?: number
-					payload?: string
 					room_id?: string
 				}
 				Relationships: [
 					{
-						foreignKeyName: 'message_room_id_fkey'
+						foreignKeyName: 'messages_room_id_fkey'
 						columns: ['room_id']
 						isOneToOne: false
-						referencedRelation: 'room'
+						referencedRelation: 'rooms'
 						referencedColumns: ['id']
 					}
 				]
 			}
-			room: {
+			rooms: {
 				Row: {
 					id: string
 					slots: number
@@ -128,7 +128,8 @@ export type TablesUpdate<
 		: never
 
 export type Enums<
-	PublicEnumNameOrOptions extends keyof Database['public']['Enums'],
+	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+	PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
 	EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
 		? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
 		: never = never
