@@ -10,6 +10,14 @@
 	let inputElement: HTMLInputElement
 	let newMessage = ''
 	let loading = false
+	const messageIds = new Set<number>([...data.messages.map((message) => message.id)])
+
+	const getLastMessageId = () => {
+		const lastMessage = data.messages[data.messages.length - 1]
+		return lastMessage?.id ?? 0
+	}
+
+	let lastMessageId = getLastMessageId()
 
 	const handleFocus = () => {
 		inputElement.select()
@@ -34,15 +42,17 @@
 			return
 		}
 
-		const { id } = (await response.json()) as Tables<'message'>
+		const { id } = (await response.json()) as Tables<'messages'>
 
 		data.messages = [
 			...data.messages,
 			{
 				id,
-				payload: newMessage
+				content: newMessage
 			}
 		]
+		messageIds.add(id)
+		lastMessageId = getLastMessageId()
 		newMessage = ''
 		loading = false
 	}
@@ -50,8 +60,25 @@
 	onMount(() => {
 		const subscription = supabase
 			.channel(data.room.id)
-			.on('broadcast', { event: 'new message' }, () => {
-				// fetch new messages
+			.on('broadcast', { event: 'new message' }, async () => {
+				const response = await fetch(
+					`${$page.url.pathname}?newmessages&lastmessageid=${lastMessageId}`
+				)
+
+				if (response.status === 500) {
+					// display some error message
+					return
+				}
+
+				const newMessages = (await response.json()) as Tables<'messages'>[]
+				const newMessagesNoDuplicates = newMessages.filter(
+					(message) => !messageIds.has(message.id)
+				)
+
+				newMessagesNoDuplicates.forEach((message) => messageIds.add(message.id))
+
+				data.messages = [...data.messages, ...newMessagesNoDuplicates]
+				lastMessageId = getLastMessageId()
 			})
 			.subscribe()
 
@@ -112,7 +139,7 @@
 			</div>
 			<hr class="my-4" />
 			{#each data.messages as message (message.id)}
-				<p class="h1">{message.payload}</p>
+				<p class="h1">{message.content}</p>
 			{/each}
 		</div>
 	</div>
