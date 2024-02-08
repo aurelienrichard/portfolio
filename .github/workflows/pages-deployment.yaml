@@ -21,23 +21,35 @@ jobs:
                       directory: '.svelte-kit/cloudflare'
                     - projectName: 'privelte'
                       directory: '.svelte-kit/cloudflare'
-        # To use Turborepo Remote Caching, set the following environment variables for the job.
         env:
+            # turborepo
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            # svelteflix
+            SVELTEFLIX_API_READ_ACCESS_TOKEN: ${{ secrets.SVELTEFLIX_API_READ_ACCESS_TOKEN }}
+            SVELTEFLIX_BASE_API_URL: ${{ secrets.SVELTEFLIX_BASE_API_URL }}
+            PUBLIC_SVELTEFLIX_SUPABASE_URL: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_URL }}
+            PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY }}
+            PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL: ${{ vars.PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL }}
+            # privelte
+            PRIVELTE_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.PRIVELTE_SUPABASE_SERVICE_ROLE_KEY }}
+            PRIVELTE_MESSAGE_BATCH_SIZE: ${{ secrets.PRIVELTE_MESSAGE_BATCH_SIZE }}
+            PUBLIC_PRIVELTE_SUPABASE_URL: ${{ vars.PUBLIC_PRIVELTE_SUPABASE_URL }}
+            PUBLIC_PRIVELTE_SUPABASE_ANON_KEY: ${{ vars.PUBLIC_PRIVELTE_SUPABASE_ANON_KEY }}
 
         steps:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - uses: pnpm/action-setup@v2
+            - name: Install Pnpm
+              uses: pnpm/action-setup@v2
               with:
                   version: 8
 
-            - name: Use Node.js ${{ matrix.node-version }}
+            - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: 18
+                  node-version: 20
                   cache: 'pnpm'
 
             - name: Install dependencies
