@@ -5,6 +5,8 @@
 		"dev": "turbo run dev",
 		"test": "turbo run test",
 		"test:watch": "turbo run test:watch",
+		"test:coverage": "turbo run test:coverage",
+		"test:ui": "turbo run test:ui",
 		"check": "turbo run check",
 		"lint": "turbo run lint",
 		"format": "prettier --write .",
@@ -19,7 +21,7 @@
 		"husky": "^9.0.10",
 		"lint-staged": "^15.2.2",
 		"prettier": "^3.2.5",
-		"prettier-plugin-svelte": "^3.1.2",
+		"prettier-plugin-svelte": "^3.2.0",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"tailwind-config": "workspace:*",
 		"turbo": "^1.12.3"

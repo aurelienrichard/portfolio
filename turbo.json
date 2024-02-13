@@ -16,6 +16,12 @@
 		"test:watch": {
 			"cache": false
 		},
+		"test:coverage": {
+			"cache": false
+		},
+		"test:ui": {
+			"cache": false
+		},
 		"lint": {
 			"dependsOn": ["check"]
 		},

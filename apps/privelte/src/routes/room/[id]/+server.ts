@@ -58,7 +58,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
 		error(500, 'Internal error.')
 	}
 
-	const channel = supabase.channel(params.id)
+	const channel = supabase.channel(params.id, { config: { broadcast: { ack: true } } })
 
 	const subscribeToChannel = new Promise<RealtimeChannel>((resolve, reject) => {
 		channel.subscribe((status) => {
@@ -74,7 +74,7 @@ export const POST: RequestHandler = async ({ params, request }) => {
 		const channelSubscribed = await subscribeToChannel
 		await channelSubscribed.send({
 			type: 'broadcast',
-			event: 'new message'
+			event: 'new-message'
 		})
 	} catch {
 		error(500, 'Internal error.')

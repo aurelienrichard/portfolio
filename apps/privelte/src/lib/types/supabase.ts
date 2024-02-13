@@ -128,8 +128,9 @@ export type TablesUpdate<
 		: never
 
 export type Enums<
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-	PublicEnumNameOrOptions extends keyof Database['public']['Enums'] | { schema: keyof Database },
+	PublicEnumNameOrOptions extends
+		// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+		keyof Database['public']['Enums'] | { schema: keyof Database },
 	EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
 		? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
 		: never = never
