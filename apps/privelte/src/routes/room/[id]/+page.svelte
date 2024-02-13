@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ProgressRadial, clipboard } from '@skeletonlabs/skeleton'
-	import { onMount } from 'svelte'
+	import { onMount, afterUpdate } from 'svelte'
 	import { page } from '$app/stores'
 	import type { PageData } from './$types'
 	import { supabase } from '$lib/supabaseClient'
@@ -10,6 +10,8 @@
 	let inputElement: HTMLInputElement
 	let newMessage = ''
 	let loading = false
+	let bottom: HTMLDivElement
+
 	const messageIds = new Set<number>([...data.messages.map((message) => message.id)])
 
 	const getLastMessageId = () => {
@@ -52,15 +54,15 @@
 			}
 		]
 		messageIds.add(id)
-		lastMessageId = getLastMessageId()
 		newMessage = ''
 		loading = false
 	}
 
 	onMount(() => {
-		const subscription = supabase
-			.channel(data.room.id)
-			.on('broadcast', { event: 'new message' }, async () => {
+		const channel = supabase.channel(data.room.id)
+
+		channel
+			.on('broadcast', { event: 'new-message' }, async () => {
 				const response = await fetch(
 					`${$page.url.pathname}?newmessages&lastmessageid=${lastMessageId}`
 				)
@@ -76,15 +78,25 @@
 				)
 
 				newMessagesNoDuplicates.forEach((message) => messageIds.add(message.id))
-
 				data.messages = [...data.messages, ...newMessagesNoDuplicates]
-				lastMessageId = getLastMessageId()
 			})
-			.subscribe()
+			.subscribe(async (status) => {
+				if (status !== 'SUBSCRIBED') {
+					return
+				}
+
+				await channel.track({})
+			})
 
 		return async () => {
-			await subscription.unsubscribe()
+			await channel.untrack()
+			// await supabase.removeChannel(channel)
 		}
+	})
+
+	afterUpdate(() => {
+		lastMessageId = getLastMessageId()
+		bottom.scrollIntoView({ behavior: 'smooth' })
 	})
 </script>
 
@@ -120,6 +132,7 @@
 					type="button"
 					class="dark:variant-soft-tertiary variant-soft-surface"
 					use:clipboard={{ input: 'url' }}
+					title="Copy to clipboard"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +152,9 @@
 			</div>
 			<hr class="my-4" />
 			{#each data.messages as message (message.id)}
-				<p class="h1">{message.content}</p>
+				<div class="h1">{message.content}</div>
 			{/each}
+			<div bind:this={bottom} />
 		</div>
 	</div>
 	<hr class="my-4" />

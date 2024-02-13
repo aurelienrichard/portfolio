@@ -1,4 +1,8 @@
 module.exports = {
-	root: true,
-	extends: ['custom']
+	ignorePatterns: ['apps/**', 'packages/**'],
+	extends: ['custom'],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		project: true
+	}
 }

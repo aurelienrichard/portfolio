@@ -3,10 +3,11 @@ import { error, redirect } from '@sveltejs/kit'
 import { newRoomSchema } from '$lib/types/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
+import { chattersCount } from '$lib/server/ChattersCount'
 
 let currentId: string
 
-export const load = (() => {
+export const load: PageServerLoad = () => {
 	const id = uniqueNamesGenerator({
 		dictionaries: [adjectives, colors, animals],
 		separator: '-',
@@ -19,9 +20,9 @@ export const load = (() => {
 	return {
 		id
 	}
-}) satisfies PageServerLoad
+}
 
-export const actions = {
+export const actions: Actions = {
 	default: async ({ request }) => {
 		const form = await request.formData()
 		const { id, slots } = newRoomSchema.parse({
@@ -39,8 +40,37 @@ export const actions = {
 			error(500, { message: 'Internal error.' })
 		}
 
-		await supabase.from('rooms').insert({ id, slots })
+		const channel = supabase.channel(id)
+		chattersCount.initialize(id)
+
+		const subscribeToChannel = new Promise<void>((resolve, reject) => {
+			channel
+				.on('presence', { event: 'join' }, () => {
+					chattersCount.increment(id)
+				})
+				.on('presence', { event: 'leave' }, () => {
+					chattersCount.decrement(id)
+					if (chattersCount.current.get(id) === 0) {
+						chattersCount.delete(id)
+					}
+				})
+				.subscribe((status) => {
+					if (status === 'SUBSCRIBED') {
+						resolve()
+					} else {
+						reject(new Error())
+					}
+				})
+		})
+
+		try {
+			await subscribeToChannel
+			await supabase.from('rooms').insert({ id, slots })
+		} catch {
+			await supabase.removeChannel(channel)
+			error(500, 'Internal error.')
+		}
 
 		throw redirect(303, `/room/${id}`)
 	}
-} satisfies Actions
+}
