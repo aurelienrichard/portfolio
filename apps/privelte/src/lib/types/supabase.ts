@@ -3,32 +3,6 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
 	public: {
 		Tables: {
-			messages: {
-				Row: {
-					content: string
-					id: number
-					room_id: string
-				}
-				Insert: {
-					content: string
-					id?: number
-					room_id: string
-				}
-				Update: {
-					content?: string
-					id?: number
-					room_id?: string
-				}
-				Relationships: [
-					{
-						foreignKeyName: 'messages_room_id_fkey'
-						columns: ['room_id']
-						isOneToOne: false
-						referencedRelation: 'rooms'
-						referencedColumns: ['id']
-					}
-				]
-			}
 			rooms: {
 				Row: {
 					id: string

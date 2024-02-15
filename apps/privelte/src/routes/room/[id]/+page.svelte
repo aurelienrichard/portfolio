@@ -4,7 +4,7 @@
 	import { page } from '$app/stores'
 	import type { PageData } from './$types'
 	import { supabase } from '$lib/supabaseClient'
-	import type { Tables } from '$lib/types/supabase'
+	import { invalidateAll } from '$app/navigation'
 
 	export let data: PageData
 	let inputElement: HTMLInputElement
@@ -12,14 +12,13 @@
 	let loading = false
 	let bottom: HTMLDivElement
 
-	const messageIds = new Set<number>([...data.messages.map((message) => message.id)])
-
-	const getLastMessageId = () => {
-		const lastMessage = data.messages[data.messages.length - 1]
-		return lastMessage?.id ?? 0
+	interface Payload {
+		message: string
+		userId: string
+		id: string
 	}
 
-	let lastMessageId = getLastMessageId()
+	let messages: Payload[] = []
 
 	const handleFocus = () => {
 		inputElement.select()
@@ -38,47 +37,36 @@
 			body: JSON.stringify({ message: newMessage })
 		})
 
-		if (response.status === 500) {
+		if (response.status !== 201) {
 			loading = false
-			// display some error message
+
+			if (response.status === 500) {
+				// display some error message
+			}
+
+			if (response.status === 401) {
+				await invalidateAll()
+				await handleSubmit()
+			}
+
 			return
 		}
 
-		const { id } = (await response.json()) as Tables<'messages'>
-
-		data.messages = [
-			...data.messages,
-			{
-				id,
-				content: newMessage
-			}
-		]
-		messageIds.add(id)
 		newMessage = ''
 		loading = false
 	}
 
 	onMount(() => {
-		const channel = supabase.channel(data.room.id)
+		const channel = supabase.channel(data.room.id, {
+			config: { presence: { key: data.userId } }
+		})
 
 		channel
-			.on('broadcast', { event: 'new-message' }, async () => {
-				const response = await fetch(
-					`${$page.url.pathname}?newmessages&lastmessageid=${lastMessageId}`
-				)
-
-				if (response.status === 500) {
-					// display some error message
-					return
-				}
-
-				const newMessages = (await response.json()) as Tables<'messages'>[]
-				const newMessagesNoDuplicates = newMessages.filter(
-					(message) => !messageIds.has(message.id)
-				)
-
-				newMessagesNoDuplicates.forEach((message) => messageIds.add(message.id))
-				data.messages = [...data.messages, ...newMessagesNoDuplicates]
+			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
+				messages = [
+					...messages,
+					{ message: payload.message, userId: payload.userId, id: payload.id }
+				]
 			})
 			.subscribe(async (status) => {
 				if (status !== 'SUBSCRIBED') {
@@ -90,12 +78,11 @@
 
 		return async () => {
 			await channel.untrack()
-			// await supabase.removeChannel(channel)
+			await supabase.removeChannel(channel)
 		}
 	})
 
 	afterUpdate(() => {
-		lastMessageId = getLastMessageId()
 		bottom.scrollIntoView({ behavior: 'smooth' })
 	})
 </script>
@@ -151,8 +138,8 @@
 				</button>
 			</div>
 			<hr class="my-4" />
-			{#each data.messages as message (message.id)}
-				<div class="h1">{message.content}</div>
+			{#each messages as payload (payload.id)}
+				<div class="h1">{payload.message}</div>
 			{/each}
 			<div bind:this={bottom} />
 		</div>

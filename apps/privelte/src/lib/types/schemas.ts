@@ -10,16 +10,3 @@ export const newRoomSchema = z.object({
 	id: z.string(),
 	slots: z.coerce.number().min(2).max(10)
 })
-
-export const fetchMessagesSearchParams = z
-	.object({
-		newmessages: z.nullable(z.literal('')),
-		lastmessageid: z.string()
-	})
-	.transform(({ newmessages, lastmessageid }) => ({
-		newMessages: newmessages === '',
-		lastMessageId: Number(lastmessageid)
-	}))
-	.refine(({ lastMessageId }) => !Number.isNaN(lastMessageId), {
-		message: 'Invalid id'
-	})
