@@ -15,6 +15,7 @@
 	interface Payload {
 		message: string
 		userId: string
+		username: string
 		id: string
 	}
 
@@ -46,7 +47,6 @@
 
 			if (response.status === 401) {
 				await invalidateAll()
-				await handleSubmit()
 			}
 
 			return
@@ -63,10 +63,7 @@
 
 		channel
 			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
-				messages = [
-					...messages,
-					{ message: payload.message, userId: payload.userId, id: payload.id }
-				]
+				messages = [...messages, payload]
 			})
 			.subscribe(async (status) => {
 				if (status !== 'SUBSCRIBED') {
@@ -89,7 +86,7 @@
 
 <div class="flex h-full flex-col">
 	<div class="relative flex-1">
-		<div class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto">
+		<div class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto px-4">
 			<h1 class="h1 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
 				Your
 				<span

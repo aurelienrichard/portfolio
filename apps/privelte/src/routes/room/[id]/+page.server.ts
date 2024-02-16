@@ -1,25 +1,16 @@
-import { error } from '@sveltejs/kit'
-import { randomUUID } from 'crypto'
+import { redirect } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
-import { supabase } from '$lib/server/supabaseServer'
 
-export const load: PageServerLoad = async ({ params, cookies }) => {
-	const room = await supabase.from('rooms').select('id, slots').eq('id', params.id).single()
+export const load: PageServerLoad = ({ params, cookies }) => {
+	const userId = cookies.get('userid')
+	const username = cookies.get('username')
 
-	if (room.error) {
-		error(404, { message: 'This room does not exist.' })
-	}
-
-	const cookieName = `privelte_${params.id}_id`
-	const userId = cookies.get(cookieName)
-
-	if (!userId) {
-		const uuid = randomUUID()
-		cookies.set(cookieName, uuid, { path: '/' })
+	if (!userId || !username) {
+		redirect(302, `/room/${params.id}/user`)
 	}
 
 	return {
-		room: room.data,
-		userId: userId ?? cookies.get(cookieName)!
+		userId,
+		username
 	}
 }

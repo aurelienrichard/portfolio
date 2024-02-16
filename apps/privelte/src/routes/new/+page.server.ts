@@ -59,6 +59,6 @@ export const actions: Actions = {
 			error(500, 'Internal error.')
 		}
 
-		throw redirect(303, `/room/${id}`)
+		redirect(303, `/room/${id}`)
 	}
 }
