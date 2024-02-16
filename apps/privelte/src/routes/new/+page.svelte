@@ -79,7 +79,7 @@
 				Submitting
 				<ProgressRadial class="ml-1" width="md:w-5 w-4" />
 			{:else}
-				Let's chat
+				Next
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

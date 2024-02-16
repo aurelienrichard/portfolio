@@ -4,17 +4,17 @@ import { nanoid } from 'nanoid'
 import { newMessageSchema } from '$lib/types/schemas'
 import type { RequestHandler } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
-import type { NewMessage } from '$lib/types/schemas'
 
 export const POST: RequestHandler = async ({ params, request, cookies }) => {
-	const body = (await request.json()) as NewMessage
-	const { message } = newMessageSchema.parse({
-		message: body.message
+	const body = (await request.json()) as { message: string }
+
+	const { message, userId, username } = newMessageSchema.parse({
+		message: body.message,
+		userId: cookies.get('userid'),
+		username: cookies.get('username')
 	})
 
-	const userId = cookies.get(`privelte_${params.id}_id`)
-
-	if (!userId) {
+	if (!userId || !username) {
 		error(401, 'Unauthorized.')
 	}
 
@@ -40,6 +40,7 @@ export const POST: RequestHandler = async ({ params, request, cookies }) => {
 			payload: {
 				message,
 				userId,
+				username,
 				id
 			}
 		})
