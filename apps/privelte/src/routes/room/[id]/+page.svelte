@@ -1,25 +1,36 @@
 <script lang="ts">
 	import { ProgressRadial, clipboard } from '@skeletonlabs/skeleton'
 	import { onMount, afterUpdate } from 'svelte'
+	import type { RealtimePresenceState } from '@supabase/supabase-js'
+	import { nanoid } from 'nanoid'
 	import { page } from '$app/stores'
 	import type { PageData } from './$types'
 	import { supabase } from '$lib/supabaseClient'
 	import { invalidateAll } from '$app/navigation'
 
-	export let data: PageData
-	let inputElement: HTMLInputElement
-	let newMessage = ''
-	let loading = false
-	let bottom: HTMLDivElement
-
 	interface Payload {
+		type: 'payload'
 		message: string
 		userId: string
 		username: string
 		id: string
 	}
 
-	let messages: Payload[] = []
+	interface Presence {
+		type: 'presence'
+		username: string
+		event: 'joined' | 'left'
+		id: string
+	}
+
+	let presenceState: RealtimePresenceState
+	const leftUserTimers = new Map<string, ReturnType<typeof setTimeout>>()
+	export let data: PageData
+	let inputElement: HTMLInputElement
+	let newMessage = ''
+	let loading = false
+	let bottom: HTMLDivElement
+	let chat: (Payload | Presence)[] = []
 
 	const handleFocus = () => {
 		inputElement.select()
@@ -62,19 +73,68 @@
 		})
 
 		channel
-			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
-				messages = [...messages, payload]
+			.on('presence', { event: 'sync' }, async () => {
+				presenceState = channel.presenceState()
+
+				if (!Object.hasOwnProperty.call(presenceState, data.userId)) {
+					await channel.track({
+						userId: data.userId,
+						username: data.username
+					})
+				}
 			})
-			.subscribe(async (status) => {
-				if (status !== 'SUBSCRIBED') {
+			.on('presence', { event: 'join' }, ({ key, newPresences }) => {
+				if (leftUserTimers.has(key)) {
+					const timer = leftUserTimers.get(key)!
+					clearTimeout(timer)
+					leftUserTimers.delete(key)
 					return
 				}
 
-				await channel.track({})
+				const { username } = newPresences.find(
+					({ userId }) => userId === key
+				) as unknown as { username: string }
+
+				const id = nanoid()
+				const presence: Presence = {
+					type: 'presence',
+					username,
+					event: 'joined',
+					id
+				}
+
+				chat = [...chat, presence]
 			})
+			.on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
+				const { username } = leftPresences.find(
+					({ userId }) => userId === key
+				) as unknown as { username: string }
+
+				const id = nanoid()
+				const presence: Presence = {
+					type: 'presence',
+					username,
+					event: 'left',
+					id
+				}
+
+				leftUserTimers.set(
+					key,
+					setTimeout(() => {
+						chat = [...chat, presence]
+						leftUserTimers.delete(key)
+					}, 15000)
+				)
+			})
+			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
+				chat = [...chat, payload]
+			})
+			.subscribe()
 
 		return async () => {
-			await channel.untrack()
+			if (!Object.hasOwnProperty.call(presenceState, data.userId)) {
+				await channel.untrack()
+			}
 			await supabase.removeChannel(channel)
 		}
 	})
@@ -86,7 +146,9 @@
 
 <div class="flex h-full flex-col">
 	<div class="relative flex-1">
-		<div class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto px-4">
+		<div
+			class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto overflow-x-clip px-4"
+		>
 			<h1 class="h1 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
 				Your
 				<span
@@ -100,9 +162,8 @@
 				>.
 			</h1>
 			<p class="text-center md:text-xl">Share the link below to invite participants.</p>
-
 			<div
-				class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-600"
+				class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-500"
 			>
 				<input
 					bind:this={inputElement}
@@ -135,15 +196,38 @@
 				</button>
 			</div>
 			<hr class="my-4" />
-			{#each messages as payload (payload.id)}
-				<div class="h1">{payload.message}</div>
+			{#each chat as entry (entry.id)}
+				{#if entry.type === 'presence'}
+					<p class="text-surface-600-300-token">
+						<span class="font-semibold">{entry.username}</span> has {entry.event} the room.
+					</p>
+				{:else if entry.userId === data.userId}
+					<div
+						class="card dark:from-gradient-1-dark dark:to-gradient-2-dark ml-auto max-w-prose space-y-2 break-words rounded-tr-none bg-gradient-to-br from-indigo-400 to-pink-400 p-4 shadow-sm"
+					>
+						<header class="text-lg font-semibold">You</header>
+						<section class="">{entry.message}</section>
+					</div>
+				{:else}
+					<div
+						class="card variant-soft-surface dark:variant-soft-tertiary mr-auto max-w-prose space-y-2 break-words rounded-tl-none p-4 shadow-sm"
+					>
+						<header class="text-lg font-semibold">{entry.username}</header>
+						<section class="">{entry.message}</section>
+					</div>
+				{/if}
 			{/each}
 			<div bind:this={bottom} />
 		</div>
 	</div>
-	<hr class="my-4" />
+	<hr class="my-1" />
+	<p class="dark:text-surface-600-300-token mb-1">
+		Joined as <span class="dark:text-primary-500 font-semibold text-indigo-500"
+			>{data.username}</span
+		>
+	</p>
 	<div
-		class="input-group input-group-divider dark:focus-within:border-primary-500 mt-auto grid-cols-[1fr_auto] focus-within:border-indigo-600"
+		class="input-group input-group-divider dark:focus-within:border-primary-500 mt-auto grid-cols-[1fr_auto] focus-within:border-indigo-500"
 	>
 		<textarea
 			on:keydown={async (e) => {
@@ -159,11 +243,12 @@
 			name="message"
 			placeholder={`Message @${data.room.id}`}
 			rows="1"
+			maxlength="1000"
 		/>
 		<button
 			disabled={!newMessage || loading}
 			type="submit"
-			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br transition-opacity disabled:opacity-50 disabled:hover:cursor-not-allowed"
+			class="dark:from-gradient-1-dark dark:to-gradient-2-dark bg-gradient-to-br from-indigo-400 to-pink-400 transition-opacity disabled:opacity-50 disabled:hover:cursor-not-allowed"
 			on:click={handleSubmit}
 		>
 			{#if loading}

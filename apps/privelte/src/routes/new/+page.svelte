@@ -30,7 +30,7 @@
 		<label class="label capitalize">
 			<span>identifier</span>
 			<div
-				class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-600"
+				class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-500"
 			>
 				<input type="text" name="id" value={data.id} readonly />
 				<button
@@ -73,7 +73,7 @@
 		<button
 			disabled={loading}
 			type="submit"
-			class="btn md:btn-lg dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light mx-auto bg-gradient-to-br font-semibold capitalize"
+			class="btn md:btn-lg dark:from-gradient-1-dark dark:to-gradient-2-dark mx-auto bg-gradient-to-br from-indigo-400 to-pink-400 font-semibold capitalize"
 		>
 			{#if loading}
 				Submitting

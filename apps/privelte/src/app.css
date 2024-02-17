@@ -8,5 +8,11 @@ body {
 }
 
 body {
-	@apply bg-radial-gradient from-surface-300 dark:from-surface-600 dark:selection:bg-primary-600/40 to-transparent bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-lg selection:bg-pink-500/40;
+	@apply bg-radial-gradient from-surface-300 dark:from-surface-600 dark:selection:bg-tertiary-600/40 selection:bg-surface-600/40 to-transparent bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-lg;
+}
+
+h1,
+h2,
+h3 {
+	@apply text-balance;
 }

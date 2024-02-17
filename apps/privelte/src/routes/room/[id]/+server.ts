@@ -38,6 +38,7 @@ export const POST: RequestHandler = async ({ params, request, cookies }) => {
 			type: 'broadcast',
 			event: 'new-message',
 			payload: {
+				type: 'payload',
 				message,
 				userId,
 				username,

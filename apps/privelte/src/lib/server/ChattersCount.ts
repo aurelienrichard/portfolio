@@ -5,8 +5,9 @@ export class ChattersCount {
 		this.chattersCount = new Map()
 	}
 
-	get current() {
-		return this.chattersCount
+	current(id: string) {
+		if (!this.isInitialized(id)) return null
+		return this.chattersCount.get(id)!
 	}
 
 	initialize(id: string) {
@@ -15,14 +16,14 @@ export class ChattersCount {
 	}
 
 	increment(id: string) {
-		if (!this.chattersCount.has(id)) return
+		if (!this.isInitialized(id)) return
 		const oldCount = this.chattersCount.get(id)!
 
 		this.chattersCount.set(id, oldCount + 1)
 	}
 
 	decrement(id: string) {
-		if (!this.chattersCount.has(id)) return
+		if (!this.isInitialized(id)) return
 		const oldCount = this.chattersCount.get(id)!
 		if (oldCount === 0) return
 
@@ -31,6 +32,10 @@ export class ChattersCount {
 
 	delete(id: string) {
 		this.chattersCount.delete(id)
+	}
+
+	private isInitialized(id: string) {
+		return this.chattersCount.has(id)
 	}
 }
 
