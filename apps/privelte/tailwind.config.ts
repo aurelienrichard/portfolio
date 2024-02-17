@@ -13,11 +13,11 @@ const config = {
 		extend: {
 			colors: {
 				'gradient-1': {
-					light: colors.indigo[600],
+					light: colors.indigo[500],
 					dark: '#d4163c'
 				},
 				'gradient-2': {
-					light: colors.pink[600],
+					light: colors.pink[500],
 					dark: '#bf1436'
 				}
 			},

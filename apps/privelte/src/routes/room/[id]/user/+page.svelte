@@ -16,7 +16,7 @@
 	<label class="label capitalize">
 		<span>username</span>
 		<div
-			class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-600"
+			class="input-group input-group-divider [&_input]:bg-surface-100-800-token dark:focus-within:border-primary-500 grid-cols-[1fr_auto] focus-within:border-indigo-500"
 		>
 			<input type="text" name="username" minlength="3" maxlength="20" required />
 			<button
