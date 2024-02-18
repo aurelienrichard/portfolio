@@ -3,7 +3,6 @@ import { error, redirect } from '@sveltejs/kit'
 import { newRoomSchema } from '$lib/types/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
-import { chattersCount } from '$lib/server/ChattersCount'
 
 let currentId: string
 
@@ -40,31 +39,9 @@ export const actions: Actions = {
 			error(500, { message: 'Internal error.' })
 		}
 
-		const channel = supabase.channel(id)
-		chattersCount.initialize(id)
-
-		const subscribeToChannel = new Promise<void>((resolve, reject) => {
-			channel
-				.on('presence', { event: 'join' }, () => {
-					chattersCount.increment(id)
-				})
-				.on('presence', { event: 'leave' }, () => {
-					chattersCount.decrement(id)
-				})
-				.subscribe((status) => {
-					if (status === 'SUBSCRIBED') {
-						resolve()
-					} else {
-						reject(new Error())
-					}
-				})
-		})
-
 		try {
-			await subscribeToChannel
 			await supabase.from('rooms').insert({ id, slots })
 		} catch {
-			await supabase.removeChannel(channel)
 			error(500, 'Internal error.')
 		}
 

@@ -1,14 +1,14 @@
 import { error, json } from '@sveltejs/kit'
 import type { RealtimeChannel } from '@supabase/supabase-js'
-import { nanoid } from 'nanoid'
 import { newMessageSchema } from '$lib/types/schemas'
 import type { RequestHandler } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
 
 export const POST: RequestHandler = async ({ params, request, cookies }) => {
-	const body = (await request.json()) as { message: string }
+	const body = (await request.json()) as { message: string; id: string }
 
-	const { message, userId, username } = newMessageSchema.parse({
+	const { id, message, userId, username } = newMessageSchema.parse({
+		id: body.id,
 		message: body.message,
 		userId: cookies.get('userid'),
 		username: cookies.get('username')
@@ -29,8 +29,6 @@ export const POST: RequestHandler = async ({ params, request, cookies }) => {
 			}
 		})
 	})
-
-	const id = nanoid()
 
 	try {
 		const channelSubscribed = await subscribeToChannel

@@ -40,13 +40,14 @@
 		if (loading) return
 
 		loading = true
+		const id = nanoid()
 
 		const response = await fetch($page.url.pathname, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ message: newMessage })
+			body: JSON.stringify({ id, message: newMessage })
 		})
 
 		if (response.status !== 201) {
@@ -152,12 +153,12 @@
 			<h1 class="h1 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
 				Your
 				<span
-					class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
+					class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent drop-shadow"
 					>private</span
 				>
 				conversation starts
 				<span
-					class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
+					class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent drop-shadow"
 					>here</span
 				>.
 			</h1>
@@ -203,14 +204,14 @@
 					</p>
 				{:else if entry.userId === data.userId}
 					<div
-						class="card dark:from-gradient-1-dark dark:to-gradient-2-dark ml-auto max-w-prose space-y-2 break-words rounded-tr-none bg-gradient-to-br from-indigo-400 to-pink-400 p-4 shadow-sm"
+						class="card dark:from-gradient-1-dark dark:to-gradient-2-dark ml-auto max-w-prose space-y-2 break-words rounded-tr-none bg-gradient-to-br from-indigo-400 to-pink-400 p-4 shadow"
 					>
 						<header class="text-lg font-semibold">You</header>
 						<section class="">{entry.message}</section>
 					</div>
 				{:else}
 					<div
-						class="card variant-soft-surface dark:variant-soft-tertiary mr-auto max-w-prose space-y-2 break-words rounded-tl-none p-4 shadow-sm"
+						class="card variant-soft-surface dark:variant-soft-tertiary mr-auto max-w-prose space-y-2 break-words rounded-tl-none p-4 shadow"
 					>
 						<header class="text-lg font-semibold">{entry.username}</header>
 						<section class="">{entry.message}</section>
