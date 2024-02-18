@@ -13,8 +13,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	}
 
 	const channel = supabase.channel(params.id)
-
-	if (!channel.joinedOnce) {
+	const channelSubscribed = new Promise<void>((resolve, reject) => {
 		channel
 			.on('presence', { event: 'sync' }, () => {
 				if (timeout) {
@@ -38,7 +37,20 @@ export const load: LayoutServerLoad = async ({ params }) => {
 					}, 60000)
 				}
 			})
-			.subscribe()
+			.subscribe((status) => {
+				if (status === 'SUBSCRIBED') {
+					resolve()
+				}
+				reject()
+			})
+	})
+
+	try {
+		if (!channel.joinedOnce) {
+			await channelSubscribed
+		}
+	} catch {
+		error(500, { message: 'Internal error.' })
 	}
 
 	if (count === room.data.slots) {
