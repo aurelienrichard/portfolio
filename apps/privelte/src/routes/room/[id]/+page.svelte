@@ -34,6 +34,23 @@
 		config: { presence: { key: data.userId }, broadcast: { ack: true } }
 	})
 
+	const handleRetry = async (event: CustomEvent) => {
+		const { payload } = event.detail as { payload: Payload }
+
+		pendingMessages.setStatus(payload.id, 'loading')
+
+		try {
+			await channel.send({
+				type: 'broadcast',
+				event: 'new-message',
+				payload
+			})
+			pendingMessages.setStatus(payload.id, 'success')
+		} catch {
+			pendingMessages.setStatus(payload.id, 'error')
+		}
+	}
+
 	const handleSubmit = async () => {
 		const id = nanoid()
 
@@ -59,7 +76,7 @@
 			id
 		}
 
-		pendingMessages.setStatus(id, 'loading', payload)
+		pendingMessages.setStatus(id, 'loading')
 		entries = [...entries, payload]
 
 		try {
@@ -68,9 +85,9 @@
 				event: 'new-message',
 				payload
 			})
-			pendingMessages.setStatus(id, 'success', payload)
+			pendingMessages.setStatus(id, 'success')
 		} catch {
-			pendingMessages.setStatus(id, 'error', payload)
+			pendingMessages.setStatus(id, 'error')
 		}
 
 		newMessage = ''
@@ -134,7 +151,7 @@
 
 <div class="flex h-full flex-col">
 	<div class="relative flex-1">
-		<Chat {entries} userId={data.userId} />
+		<Chat {entries} userId={data.userId} on:retry={handleRetry} />
 	</div>
 	<hr class="my-1" />
 	<p class="dark:text-surface-600-300-token mb-1">
