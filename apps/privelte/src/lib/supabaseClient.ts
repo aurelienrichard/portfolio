@@ -3,5 +3,12 @@ import { PUBLIC_PRIVELTE_SUPABASE_URL, PUBLIC_PRIVELTE_SUPABASE_ANON_KEY } from 
 
 export const supabase = createClient(
 	PUBLIC_PRIVELTE_SUPABASE_URL,
-	PUBLIC_PRIVELTE_SUPABASE_ANON_KEY
+	PUBLIC_PRIVELTE_SUPABASE_ANON_KEY,
+	{
+		realtime: {
+			params: {
+				eventsPerSecond: 5
+			}
+		}
+	}
 )

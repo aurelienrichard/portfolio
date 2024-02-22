@@ -1,22 +1,16 @@
 import { writable } from 'svelte/store'
-import type { Payload } from '$lib/types/types'
-
-export interface PendingMessage {
-	status: 'loading' | 'error'
-	payload: Payload
-}
 
 const createPendingMessages = () => {
-	const { subscribe, update } = writable<Map<string, PendingMessage>>(new Map())
+	const { subscribe, update } = writable<Map<string, 'loading' | 'error'>>(new Map())
 
 	return {
 		subscribe,
-		setStatus: (id: string, status: 'loading' | 'error' | 'success', payload: Payload) =>
+		setStatus: (id: string, status: 'loading' | 'error' | 'success') =>
 			update((map) => {
 				if (status === 'success') {
 					map.delete(id)
-				} else {
-					map.set(id, { status, payload })
+				} else if (status === 'error' || status === 'loading') {
+					map.set(id, status)
 				}
 				return map
 			})
