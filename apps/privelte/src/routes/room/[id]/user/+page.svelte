@@ -2,7 +2,7 @@
 	<h1 class="h1 text-surface-600-300-token mb-3 leading-snug md:mb-6">
 		Choose a
 		<span
-			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent drop-shadow"
+			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
 			>username</span
 		>.
 	</h1>

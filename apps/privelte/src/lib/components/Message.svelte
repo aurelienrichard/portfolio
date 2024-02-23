@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class={`card max-w-prose space-y-2 break-words px-4 py-2 ${isOwnMessage ? 'dark:from-primary-700 dark:to-primary-700 ml-auto rounded-tr-none bg-gradient-to-br from-indigo-400 to-pink-400' : 'dark:variant-soft-tertiary variant-soft-surface mr-auto rounded-tl-none'}`}
+	class={`card max-w-prose space-y-2 break-words p-4 ${isOwnMessage ? 'dark:from-primary-700 dark:to-primary-700 ml-auto rounded-tr-none bg-gradient-to-br from-indigo-400 to-pink-400' : 'dark:variant-soft-tertiary variant-soft-surface mr-auto rounded-tl-none'}`}
 >
 	{#if isOwnMessage}
 		<header class="flex items-center justify-center">
