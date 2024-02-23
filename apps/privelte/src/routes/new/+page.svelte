@@ -20,7 +20,7 @@
 <h1 class="h1 text-surface-600-300-token mb-8 text-center leading-snug md:mb-12">
 	Create a new
 	<span
-		class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent drop-shadow"
+		class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
 		>room</span
 	>.
 </h1>
@@ -62,7 +62,7 @@
 		<label class="label capitalize">
 			<span
 				><span
-					class="h2 dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent drop-shadow"
+					class="h2 dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent"
 					>{slots}</span
 				> slots</span
 			>
@@ -73,7 +73,7 @@
 		<button
 			disabled={loading}
 			type="submit"
-			class="btn md:btn-lg dark:from-gradient-1-dark dark:to-gradient-2-dark mx-auto bg-gradient-to-br from-indigo-400 to-pink-400 font-semibold capitalize shadow"
+			class="btn md:btn-lg dark:from-primary-700 dark:to-primary-700 mx-auto bg-gradient-to-br from-indigo-400 to-pink-400 font-semibold capitalize"
 		>
 			{#if loading}
 				Submitting
