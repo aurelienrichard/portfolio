@@ -33,7 +33,7 @@
 
 	const setHeight = () => {
 		if (textarea) {
-			textarea.style.height = 'auto'
+			textarea.style.height = '40px'
 			textarea.style.height = `${textarea.scrollHeight}px`
 		}
 	}
@@ -55,7 +55,7 @@
 			bind:this={textarea}
 			bind:value={newMessage}
 			on:input={setHeight}
-			class="max-h-[88px] min-h-14 grow resize-none border-0 bg-transparent ring-0"
+			class="h-10 max-h-28 grow resize-none border-0 bg-transparent ring-0"
 			name="message"
 			placeholder={`Message @${roomId}`}
 			maxlength="1000"
