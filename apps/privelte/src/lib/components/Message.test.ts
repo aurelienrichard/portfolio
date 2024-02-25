@@ -4,14 +4,11 @@ import userEvent from '@testing-library/user-event'
 import Message from './Message.svelte'
 import type { Payload } from '$lib/types/types'
 
-const username = 'John'
-const message = 'Hello World'
-
 const payload: Payload = {
 	type: 'payload',
-	message,
+	message: 'Hello World',
 	userId: '1',
-	username,
+	username: 'John',
 	id: '2'
 }
 
@@ -19,8 +16,8 @@ describe('Message component', () => {
 	test('should render the message correctly', () => {
 		const { getByText } = render(Message, { payload, status: 'success', isOwnMessage: false })
 
-		expect(getByText(username)).toBeInTheDocument()
-		expect(getByText(message)).toBeInTheDocument()
+		expect(getByText('John')).toBeInTheDocument()
+		expect(getByText('Hello World')).toBeInTheDocument()
 	})
 
 	test('should render the loading state correctly', () => {
