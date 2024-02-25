@@ -1,34 +1,20 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { nanoid } from 'nanoid'
-	import { page } from '$app/stores'
-	import { invalidateAll } from '$app/navigation'
 
 	export let roomId: string
 
 	const dispatch = createEventDispatcher()
 	let textarea: HTMLTextAreaElement
-	let newMessage = ''
+	let message = ''
+	const placeholder = `Message @${roomId}`
 
-	const handleNewMessage = async () => {
+	const handleMessage = () => {
 		const id = nanoid()
 
-		const response = await fetch($page.url.pathname, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ id, message: newMessage })
-		})
+		dispatch('message', { message, id })
 
-		if (response.status !== 201) {
-			await invalidateAll()
-
-			return
-		}
-
-		dispatch('new-message', { newMessage, id })
-		newMessage = ''
+		message = ''
 	}
 
 	const setHeight = () => {
@@ -44,29 +30,30 @@
 >
 	<div class="flex items-start">
 		<textarea
-			on:keydown={async (e) => {
+			on:keydown={(e) => {
 				if (e.key === 'Enter' && !e.shiftKey) {
 					e.preventDefault()
-					if (newMessage) {
-						await handleNewMessage()
+					if (message) {
+						handleMessage()
 					}
 				}
 			}}
 			bind:this={textarea}
-			bind:value={newMessage}
+			bind:value={message}
 			on:input={setHeight}
 			class="h-10 max-h-28 grow resize-none border-0 bg-transparent ring-0"
 			name="message"
-			placeholder={`Message @${roomId}`}
+			{placeholder}
 			maxlength="1000"
 			rows="1"
 		/>
 	</div>
 	<button
-		disabled={!newMessage}
+		disabled={!message}
+		title="Send."
 		type="submit"
 		class="dark:from-primary-700 dark:to-primary-700 bg-gradient-to-br from-indigo-400 to-pink-400 transition-opacity disabled:opacity-50 disabled:hover:cursor-not-allowed"
-		on:click={handleNewMessage}
+		on:click={handleMessage}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

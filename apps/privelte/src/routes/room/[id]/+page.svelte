@@ -126,5 +126,5 @@
 			>{data.username}</span
 		>
 	</p>
-	<NewMessageForm roomId={data.room.id} on:new-message={handleSubmit} />
+	<NewMessageForm roomId={data.room.id} on:message={handleSubmit} />
 </div>
