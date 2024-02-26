@@ -4,16 +4,16 @@
 
 	export let roomId: string
 
-	const dispatch = createEventDispatcher()
 	let textarea: HTMLTextAreaElement
 	let message = ''
+
+	const dispatch = createEventDispatcher()
 	const placeholder = `Message @${roomId}`
 
 	const handleMessage = () => {
 		const id = nanoid()
 
 		dispatch('message', { message, id })
-
 		message = ''
 	}
 

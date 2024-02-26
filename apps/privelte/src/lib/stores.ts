@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-const createPendingMessages = () => {
+export const createPendingMessages = () => {
 	const { subscribe, update } = writable<Map<string, 'loading' | 'error'>>(new Map())
 
 	return {

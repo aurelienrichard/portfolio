@@ -38,8 +38,8 @@
 					on:click={async () => {
 						await invalidateAll()
 					}}
-					class="dark:variant-soft-tertiary variant-soft-surface"
-					title="Generate a new identifier"
+					class="btn dark:variant-soft-tertiary variant-soft-surface rounded-l-none"
+					title="Generate a new identifier."
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

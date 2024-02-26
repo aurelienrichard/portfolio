@@ -4,15 +4,15 @@ import userEvent from '@testing-library/user-event'
 import Message from './Message.svelte'
 import type { Payload } from '$lib/types/types'
 
-const payload: Payload = {
-	type: 'payload',
-	message: 'Hello World',
-	userId: '1',
-	username: 'John',
-	id: '2'
-}
-
 describe('Message component', () => {
+	const payload: Payload = {
+		type: 'payload',
+		message: 'Hello World',
+		userId: '1',
+		username: 'John',
+		id: '2'
+	}
+
 	test('should render the message correctly', () => {
 		const { getByText } = render(Message, { payload, status: 'success', isOwnMessage: false })
 
