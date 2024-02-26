@@ -34,12 +34,12 @@
 		}
 	}
 
-	const handleSubmit = async (event: CustomEvent) => {
-		const { id, newMessage } = event.detail as { id: string; newMessage: string }
+	const handleSubmit = async (event: CustomEvent<{ id: string; message: string }>) => {
+		const { id, message } = event.detail
 
 		const payload: Payload = {
 			type: 'payload',
-			message: newMessage,
+			message,
 			userId: data.userId,
 			username: data.username,
 			id

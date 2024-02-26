@@ -4,9 +4,9 @@ import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/svelte'
 import NewMessageForm from './NewMessageForm.svelte'
 
-const props = { roomId: '1' }
-
 describe('New message form component', () => {
+	const props = { roomId: '1' }
+
 	test('should render the component correctly', () => {
 		const { getByPlaceholderText } = render(NewMessageForm, props)
 
@@ -37,7 +37,10 @@ describe('New message form component', () => {
 	describe('should handle new message submission', () => {
 		const user = userEvent.setup()
 		const event = expect.objectContaining({
-			detail: { id: expect.any(String) as string, message: 'Hello World' }
+			detail: {
+				id: expect.any(String) as string,
+				message: 'Hello World'
+			}
 		}) as CustomEvent
 
 		let onMessage: Mock
