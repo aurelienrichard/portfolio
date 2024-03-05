@@ -10,6 +10,7 @@ export const load: PageServerLoad = ({ params, cookies }) => {
 	}
 
 	return {
+		title: `${params.id} - Privelte`,
 		userId,
 		username
 	}
