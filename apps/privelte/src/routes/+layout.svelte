@@ -2,10 +2,11 @@
 	import '../app.css'
 	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton'
 	import logo from '$lib/images/github-mark.svg'
+	import { page } from '$app/stores'
 </script>
 
 <svelte:head>
-	<title>Privelte</title>
+	<title>{$page.data.title ?? 'Privelte'}</title>
 	<meta name="description" content="chat privately and anonymously." />
 </svelte:head>
 

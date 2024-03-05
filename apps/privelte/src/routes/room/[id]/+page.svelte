@@ -13,9 +13,21 @@
 	let entries: (Payload | Presence)[] = []
 	let presenceState: RealtimePresenceState
 
-	const channel = supabase.channel(data.room.id, {
+	const channel = supabase.channel(data.roomId, {
 		config: { presence: { key: data.userId }, broadcast: { ack: true } }
 	})
+
+	const updatePresence = (username: string, event: 'joined' | 'left') => {
+		const id = nanoid()
+		const presence: Presence = {
+			type: 'presence',
+			username,
+			event,
+			id
+		}
+
+		entries = [...entries, presence]
+	}
 
 	const handleRetry = async (event: CustomEvent) => {
 		const { payload } = event.detail as { payload: Payload }
@@ -77,30 +89,14 @@
 					({ userId }) => userId === key
 				) as unknown as { username: string }
 
-				const id = nanoid()
-				const presence: Presence = {
-					type: 'presence',
-					username,
-					event: 'joined',
-					id
-				}
-
-				entries = [...entries, presence]
+				updatePresence(username, 'joined')
 			})
 			.on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
 				const { username } = leftPresences.find(
 					({ userId }) => userId === key
 				) as unknown as { username: string }
 
-				const id = nanoid()
-				const presence: Presence = {
-					type: 'presence',
-					username,
-					event: 'left',
-					id
-				}
-
-				entries = [...entries, presence]
+				updatePresence(username, 'left')
 			})
 			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
 				entries = [...entries, payload]
@@ -126,5 +122,5 @@
 			>{data.username}</span
 		>
 	</p>
-	<NewMessageForm roomId={data.room.id} on:message={handleSubmit} />
+	<NewMessageForm roomId={data.roomId} on:message={handleSubmit} />
 </div>

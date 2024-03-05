@@ -39,10 +39,10 @@ export const actions: Actions = {
 			error(500, { message: 'Internal error.' })
 		}
 
-		try {
-			await supabase.from('rooms').insert({ id, slots })
-		} catch {
-			error(500, 'Internal error.')
+		const room = await supabase.from('rooms').insert({ id, slots }).select().single()
+
+		if (room.error) {
+			error(500, { message: 'Internal error.' })
 		}
 
 		redirect(303, `/room/${id}`)

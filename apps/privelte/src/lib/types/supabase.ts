@@ -6,17 +6,43 @@ export interface Database {
 			rooms: {
 				Row: {
 					id: string
+					participants: number
 					slots: number
 				}
 				Insert: {
 					id: string
+					participants?: number
 					slots: number
 				}
 				Update: {
 					id?: string
+					participants?: number
 					slots?: number
 				}
 				Relationships: []
+			}
+			users: {
+				Row: {
+					id: string
+					room_id: string
+				}
+				Insert: {
+					id?: string
+					room_id: string
+				}
+				Update: {
+					id?: string
+					room_id?: string
+				}
+				Relationships: [
+					{
+						foreignKeyName: 'public_users_room_id_fkey'
+						columns: ['room_id']
+						isOneToOne: false
+						referencedRelation: 'rooms'
+						referencedColumns: ['id']
+					}
+				]
 			}
 		}
 		Views: {
