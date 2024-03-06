@@ -11,8 +11,9 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 
 	if (room.data.participants === room.data.slots) {
 		const userId = cookies.get('userid')
+		const username = cookies.get('username')
 
-		if (!userId) {
+		if (!userId || !username) {
 			error(403, { message: 'This room is full.' })
 		}
 
