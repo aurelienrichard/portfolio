@@ -37,7 +37,7 @@
 		try {
 			await channel.send({
 				type: 'broadcast',
-				event: 'new-message',
+				event: 'message',
 				payload
 			})
 			pendingMessages.setStatus(payload.id, 'success')
@@ -63,7 +63,7 @@
 		try {
 			await channel.send({
 				type: 'broadcast',
-				event: 'new-message',
+				event: 'message',
 				payload
 			})
 			pendingMessages.setStatus(id, 'success')
@@ -84,24 +84,21 @@
 					})
 				}
 			})
-			.on('presence', { event: 'join' }, ({ key, newPresences }) => {
-				const { username } = newPresences.find(
-					({ userId }) => userId === key
-				) as unknown as { username: string }
-
-				updatePresence(username, 'joined')
-			})
-			.on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
-				const { username } = leftPresences.find(
-					({ userId }) => userId === key
-				) as unknown as { username: string }
-
-				updatePresence(username, 'left')
-			})
-			.on('broadcast', { event: 'new-message' }, ({ payload }: { payload: Payload }) => {
+			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
 				entries = [...entries, payload]
 			})
-			.subscribe()
+			.on(
+				'broadcast',
+				{ event: 'join' },
+				({ payload: { username } }: { payload: { username: string } }) => {
+					updatePresence(username, 'joined')
+				}
+			)
+			.subscribe((status) => {
+				if (status === 'SUBSCRIBED') {
+					updatePresence(data.username, 'joined')
+				}
+			})
 
 		return async () => {
 			if (!Object.hasOwnProperty.call(presenceState, data.userId)) {

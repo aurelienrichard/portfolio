@@ -36,11 +36,38 @@ export const actions: Actions = {
 				error(500, { message: 'Internal error.' })
 			}
 
+			const channel = supabase.channel(room.data.id, { config: { broadcast: { ack: true } } })
+
+			const subscribeToChannel = new Promise<void>((resolve, reject) => {
+				channel.subscribe((status) => {
+					if (status === 'SUBSCRIBED') {
+						resolve()
+					}
+					reject()
+				})
+			})
+
+			try {
+				await subscribeToChannel
+
+				const response = await channel.send({
+					type: 'broadcast',
+					event: 'join',
+					payload: { username }
+				})
+
+				if (response === 'error') {
+					throw Error()
+				}
+			} catch {
+				error(500, { message: 'Internal error.' })
+			}
+
 			cookies.set('userid', user.data.id, {
-				path: `/room/${params.id}`
+				path: `/room/${room.data.id}`
 			})
 			cookies.set('username', username, {
-				path: `/room/${params.id}`
+				path: `/room/${room.data.id}`
 			})
 		}
 
