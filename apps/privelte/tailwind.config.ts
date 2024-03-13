@@ -1,6 +1,6 @@
 import { join } from 'path'
 // 1. Import the Skeleton plugin
-import tailwindConfig from 'tailwind-config'
+import tailwindConfig from '@repo/tailwind-config'
 import { skeleton } from '@skeletonlabs/tw-plugin'
 import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'

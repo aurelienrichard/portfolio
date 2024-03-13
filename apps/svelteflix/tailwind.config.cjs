@@ -1,4 +1,4 @@
-const tailwindConfig = require('tailwind-config')
+const tailwindConfig = require('@repo/tailwind-config')
 
 module.exports = {
 	presets: [tailwindConfig],
