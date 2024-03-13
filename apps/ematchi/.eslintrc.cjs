@@ -1,9 +1,8 @@
 module.exports = {
 	root: true,
-	extends: ['custom'],
+	extends: ['@repo/eslint-config'],
 	parserOptions: {
-		tsconfigRootDir: __dirname,
-		project: 'tsconfig.json'
+		project: true
 	},
 	rules: {
 		'@typescript-eslint/no-unsafe-call': 'off'
