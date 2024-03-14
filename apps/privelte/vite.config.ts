@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
 	},
 	test: {
 		include: ['src/**/*.test.ts'],
-		environment: 'happy-dom',
+		environmentMatchGlobs: [['**/[A-Z]*.test.ts', 'happy-dom']],
 		setupFiles: ['./vitest-setup.ts']
 	}
 }))

@@ -1,9 +1,7 @@
-const config = {
+export default {
 	content: ['src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {}
 	},
 	plugins: []
 }
-
-export default config

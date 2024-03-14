@@ -6,6 +6,6 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.test.ts'],
 		environmentMatchGlobs: [['**/[A-Z]*.test.ts', 'happy-dom']],
-		setupFiles: ['./tests/setup.ts']
+		setupFiles: ['./vitest-setup.ts']
 	}
 })
