@@ -1,6 +1,6 @@
-const tailwindConfig = require('@repo/tailwind-config')
+import tailwindConfig from '@repo/tailwind-config'
 
-module.exports = {
+const config = {
 	presets: [tailwindConfig],
 	theme: {
 		extend: {
@@ -16,3 +16,5 @@ module.exports = {
 		}
 	}
 }
+
+export default config

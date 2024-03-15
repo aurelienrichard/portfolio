@@ -16,7 +16,7 @@ module.exports = {
 		sourceType: 'module',
 		extraFileExtensions: ['.svelte']
 	},
-	ignorePatterns: ['*.cjs', '*.config.js'],
+	ignorePatterns: ['*.cjs', '*.config.js', '*.config.ts'],
 	overrides: [
 		{
 			files: ['*.svelte'],
