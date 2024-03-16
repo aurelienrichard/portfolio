@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { RealtimePresenceState } from '@supabase/supabase-js'
 	import { nanoid } from 'nanoid'
 	import { pendingMessages } from '$lib/stores'
 	import type { Payload, Presence } from '$lib/types/types'
@@ -11,7 +10,7 @@
 
 	export let data: PageData
 	let entries: (Payload | Presence)[] = []
-	let presenceState: RealtimePresenceState
+	let subscribed = false
 
 	const channel = supabase.channel(data.roomId, {
 		config: { presence: { key: data.userId }, broadcast: { ack: true } }
@@ -30,19 +29,22 @@
 	}
 
 	const handleRetry = async (event: CustomEvent) => {
-		const { payload } = event.detail as { payload: Payload }
+		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
 
-		pendingMessages.setStatus(payload.id, 'loading')
+		pendingMessages.setStatus(id, 'loading')
 
-		try {
-			await channel.send({
-				type: 'broadcast',
-				event: 'message',
-				payload
-			})
-			pendingMessages.setStatus(payload.id, 'success')
-		} catch {
-			pendingMessages.setStatus(payload.id, 'error')
+		const response = await fetch(data.roomId, {
+			method: 'POST',
+			body: JSON.stringify({ message, id }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		if (response.ok) {
+			pendingMessages.setStatus(id, 'success')
+		} else {
+			pendingMessages.setStatus(id, 'error')
 		}
 	}
 
@@ -60,32 +62,27 @@
 		pendingMessages.setStatus(id, 'loading')
 		entries = [...entries, payload]
 
-		try {
-			await channel.send({
-				type: 'broadcast',
-				event: 'message',
-				payload
-			})
+		const response = await fetch(data.roomId, {
+			method: 'POST',
+			body: JSON.stringify({ message, id }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		if (response.ok) {
 			pendingMessages.setStatus(id, 'success')
-		} catch {
+		} else {
 			pendingMessages.setStatus(id, 'error')
 		}
 	}
 
 	onMount(() => {
 		channel
-			.on('presence', { event: 'sync' }, async () => {
-				presenceState = channel.presenceState()
-
-				if (!Object.hasOwnProperty.call(presenceState, data.userId)) {
-					await channel.track({
-						userId: data.userId,
-						username: data.username
-					})
-				}
-			})
 			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
-				entries = [...entries, payload]
+				if (payload.userId !== data.userId) {
+					entries = [...entries, payload]
+				}
 			})
 			.on(
 				'broadcast',
@@ -96,14 +93,11 @@
 			)
 			.subscribe((status) => {
 				if (status === 'SUBSCRIBED') {
-					updatePresence(data.username, 'joined')
+					subscribed = true
 				}
 			})
 
 		return async () => {
-			if (!Object.hasOwnProperty.call(presenceState, data.userId)) {
-				await channel.untrack()
-			}
 			await supabase.removeChannel(channel)
 		}
 	})
@@ -111,13 +105,8 @@
 
 <div class="flex h-full flex-col">
 	<div class="relative flex-1">
-		<Chat {entries} userId={data.userId} on:retry={handleRetry} />
+		<Chat {entries} userId={data.userId} {subscribed} on:retry={handleRetry} />
 	</div>
-	<hr class="my-1" />
-	<p class="dark:text-surface-600-300-token mb-1">
-		Joined as <span class="dark:text-primary-500 font-semibold text-indigo-500"
-			>{data.username}</span
-		>
-	</p>
+	<hr class="my-4" />
 	<NewMessageForm roomId={data.roomId} on:message={handleSubmit} />
 </div>

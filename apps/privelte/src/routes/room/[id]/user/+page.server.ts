@@ -3,12 +3,21 @@ import { newUserSchema } from '$lib/types/schemas'
 import { supabase } from '$lib/server/supabaseServer'
 import type { PageServerLoad } from './$types'
 
-export const load: PageServerLoad = ({ params, cookies }) => {
+export const load: PageServerLoad = async ({ params, cookies }) => {
 	const userId = cookies.get('userid')
 	const username = cookies.get('username')
 
 	if (userId && username) {
-		redirect(303, `/room/${params.id}`)
+		const user = await supabase
+			.from('users')
+			.select('*')
+			.eq('id', userId)
+			.eq('room_id', params.id)
+			.single()
+
+		if (user.data) {
+			redirect(303, `/room/${params.id}`)
+		}
 	}
 
 	return {
@@ -34,6 +43,28 @@ export const actions: Actions = {
 
 			if (user.error) {
 				error(500, { message: 'Internal error.' })
+			}
+
+			const channel = supabase.channel(room.data.id, {
+				config: { broadcast: { ack: true } }
+			})
+
+			try {
+				const response = await channel.send({
+					type: 'broadcast',
+					event: 'join',
+					payload: { username }
+				})
+
+				if (response !== 'ok') {
+					throw Error()
+				}
+			} catch {
+				await supabase.from('users').delete().eq('id', user.data.id)
+
+				error(500, { message: 'Internal error.' })
+			} finally {
+				await supabase.removeChannel(channel)
 			}
 
 			cookies.set('userid', user.data.id, {

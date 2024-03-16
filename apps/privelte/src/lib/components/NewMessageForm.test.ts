@@ -7,7 +7,11 @@ import NewMessageForm from './NewMessageForm.svelte'
 describe('New message form component', () => {
 	const props = { roomId: '1' }
 
-	test('should render the component correctly', () => {
+	test('should render', () => {
+		render(NewMessageForm, props)
+	})
+
+	test('should display placeholder text', () => {
 		const { getByPlaceholderText } = render(NewMessageForm, props)
 
 		expect(getByPlaceholderText(`Message @${props.roomId}`)).toBeInTheDocument()
