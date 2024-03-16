@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher()
 
 	const handleRetry = () => {
-		dispatch('retry', { payload })
+		dispatch('retry', { message: payload.message, id: payload.id })
 	}
 </script>
 
@@ -19,7 +19,7 @@
 >
 	{#if isOwnMessage}
 		<header class="flex items-center justify-center">
-			<span class="text-lg font-semibold">You</span>
+			<span class="text-lg font-semibold">{payload.username}</span>
 			{#if status === 'loading'}
 				<ProgressRadial width="ml-auto w-5 h-5 mr-[0.11rem]" />
 			{:else if status === 'error'}

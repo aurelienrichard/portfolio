@@ -15,9 +15,8 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href="/" class="select-none text-2xl font-semibold">
-					<span class="text-surface-600-300-token underline">Priv</span><span
-						class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text text-transparent"
-						>elte</span
+					<span class="text-surface-600-300-token">Priv</span><span
+						class="dark:text-primary-500 text-indigo-500">elte</span
 					>
 				</a>
 			</svelte:fragment>

@@ -15,20 +15,20 @@
 </script>
 
 <div class="mb-8 text-center md:mb-12">
-	<h1 class="h1 text-surface-600-300-token mb-3 leading-snug md:mb-6">
+	<h1 class="h2 text-surface-600-300-token mb-3 leading-snug md:mb-6">
 		Choose a
 		<span
 			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
 			>username</span
 		>.
 	</h1>
-	<p class="md:text-xl">
+	<p class="mx-auto sm:w-4/5 md:text-xl lg:w-3/5">
 		It will be exclusive to this room and serve only as a display name for the messages you
 		send.
 	</p>
 </div>
 
-<form method="POST" use:enhance={handleSubmit}>
+<form class="mx-auto sm:w-4/5 lg:w-3/5" method="POST" use:enhance={handleSubmit}>
 	<label class="label capitalize">
 		<span>username</span>
 		<div

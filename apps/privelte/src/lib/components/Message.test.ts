@@ -13,25 +13,29 @@ describe('Message component', () => {
 		id: '2'
 	}
 
-	test('should render the message correctly', () => {
+	test('should render', () => {
+		render(Message, { payload, status: 'success', isOwnMessage: false })
+	})
+
+	test('should display the message and username', () => {
 		const { getByText } = render(Message, { payload, status: 'success', isOwnMessage: false })
 
 		expect(getByText('John')).toBeInTheDocument()
 		expect(getByText('Hello World')).toBeInTheDocument()
 	})
 
-	test('should render the loading state correctly', () => {
+	test('should render the loading state', () => {
 		const { getByText, getByTestId } = render(Message, {
 			payload,
 			status: 'loading',
 			isOwnMessage: true
 		})
 
-		expect(getByText('You')).toBeInTheDocument()
+		expect(getByText('John')).toBeInTheDocument()
 		expect(getByTestId('progress-radial')).toBeInTheDocument()
 	})
 
-	test('should render the error state correctly', () => {
+	test('should render the error state', () => {
 		const { getByText, getByRole } = render(Message, {
 			payload,
 			status: 'error',
@@ -42,14 +46,14 @@ describe('Message component', () => {
 		expect(getByRole('button', { name: 'Retry.' })).toBeInTheDocument()
 	})
 
-	test('should render the success state correctly', () => {
+	test('should render the success state', () => {
 		const { getByText, getByTestId } = render(Message, {
 			payload,
 			status: 'success',
 			isOwnMessage: true
 		})
 
-		expect(getByText('You')).toBeInTheDocument()
+		expect(getByText('John')).toBeInTheDocument()
 		expect(getByTestId('success-icon')).toBeInTheDocument()
 	})
 

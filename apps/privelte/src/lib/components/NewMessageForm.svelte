@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte'
+	import { createEventDispatcher, afterUpdate } from 'svelte'
 	import { nanoid } from 'nanoid'
 
 	export let roomId: string
@@ -7,21 +7,26 @@
 	let textarea: HTMLTextAreaElement
 	let message = ''
 
+	$: disabled = !message || /^[\s]+$/.test(message)
+
 	const dispatch = createEventDispatcher()
-	const placeholder = `Message @${roomId}`
-
-	const handleMessage = () => {
-		const id = nanoid()
-
-		dispatch('message', { message, id })
-		message = ''
-	}
 
 	const setHeight = () => {
 		if (textarea) {
 			textarea.style.height = '40px'
 			textarea.style.height = `${textarea.scrollHeight}px`
 		}
+	}
+
+	afterUpdate(() => {
+		setHeight()
+	})
+
+	const handleMessage = () => {
+		const id = nanoid()
+
+		dispatch('message', { message, id })
+		message = ''
 	}
 </script>
 
@@ -33,23 +38,22 @@
 			on:keydown={(e) => {
 				if (e.key === 'Enter' && !e.shiftKey) {
 					e.preventDefault()
-					if (message) {
+					if (!disabled) {
 						handleMessage()
 					}
 				}
 			}}
 			bind:this={textarea}
 			bind:value={message}
-			on:input={setHeight}
 			class="h-10 max-h-28 grow resize-none border-0 bg-transparent ring-0"
 			name="message"
-			{placeholder}
+			placeholder={`Message @${roomId}`}
 			maxlength="1000"
 			rows="1"
 		/>
 	</div>
 	<button
-		disabled={!message}
+		{disabled}
 		title="Send."
 		type="submit"
 		class="dark:from-primary-700 dark:to-primary-700 bg-gradient-to-br from-indigo-400 to-pink-400 transition-opacity disabled:opacity-50 disabled:hover:cursor-not-allowed"
