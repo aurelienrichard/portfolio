@@ -43,7 +43,7 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		})
 
 		if (response !== 'ok') {
-			throw Error()
+			throw Error('Broadcast failed.')
 		}
 	} catch (e) {
 		console.error(e)

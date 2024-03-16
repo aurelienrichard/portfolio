@@ -12,9 +12,7 @@
 	let entries: (Payload | Presence)[] = []
 	let subscribed = false
 
-	const channel = supabase.channel(data.roomId, {
-		config: { presence: { key: data.userId }, broadcast: { ack: true } }
-	})
+	const channel = supabase.channel(data.roomId)
 
 	const updatePresence = (username: string, event: 'joined' | 'left') => {
 		const id = nanoid()
