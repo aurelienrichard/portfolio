@@ -45,9 +45,7 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		if (response !== 'ok') {
 			throw Error('Broadcast failed.')
 		}
-	} catch (e) {
-		console.error(e)
-
+	} catch {
 		error(500, { message: 'Internal error.' })
 	} finally {
 		await supabase.removeChannel(channel)

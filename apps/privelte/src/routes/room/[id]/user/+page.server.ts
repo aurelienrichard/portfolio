@@ -59,9 +59,7 @@ export const actions: Actions = {
 				if (response !== 'ok') {
 					throw Error('Broadcast failed.')
 				}
-			} catch (e) {
-				console.error(e)
-
+			} catch {
 				await supabase.from('users').delete().eq('id', user.data.id)
 
 				error(500, { message: 'Internal error.' })
