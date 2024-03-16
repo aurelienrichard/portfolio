@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
 		sentrySvelteKit({
 			sourceMapsUploadOptions: {
 				org: 'aurelienrichard',
-				project: 'javascript-sveltekit',
+				project: 'privelte',
 				authToken: process.env.SENTRY_AUTH_TOKEN,
 				cleanArtifacts: true
 			}
