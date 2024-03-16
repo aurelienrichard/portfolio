@@ -7,6 +7,7 @@ module.exports = {
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:svelte/recommended',
 		'plugin:import/recommended',
+		'plugin:tailwindcss/recommended',
 		'turbo',
 		'prettier'
 	],
