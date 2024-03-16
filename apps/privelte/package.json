@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sentry/sveltekit": "^7.107.0",
 		"@supabase/supabase-js": "^2.39.8",
 		"nanoid": "^5.0.6",
 		"openpgp": "^5.11.1",

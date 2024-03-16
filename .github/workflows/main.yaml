@@ -8,6 +8,8 @@ jobs:
     main:
         runs-on: ubuntu-latest
         env:
+            # sentry
+            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
             # turborepo
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}

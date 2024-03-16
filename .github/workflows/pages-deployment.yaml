@@ -25,6 +25,8 @@ jobs:
             # turborepo
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            # sentry
+            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
             # svelteflix
             SVELTEFLIX_API_READ_ACCESS_TOKEN: ${{ secrets.SVELTEFLIX_API_READ_ACCESS_TOKEN }}
             SVELTEFLIX_BASE_API_URL: ${{ secrets.SVELTEFLIX_BASE_API_URL }}
