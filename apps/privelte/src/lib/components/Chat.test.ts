@@ -55,7 +55,7 @@ describe('Chat component', () => {
 		expect(getByText('has left the room.')).toBeInTheDocument()
 	})
 
-	test.skip('renders Message component when entry type is payload', () => {
+	test('renders Message component when entry type is payload', () => {
 		const payload: Payload = {
 			type: 'payload',
 			userId,
