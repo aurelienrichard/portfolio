@@ -3,5 +3,8 @@ module.exports = {
 	extends: ['@repo/eslint-config'],
 	parserOptions: {
 		project: true
+	},
+	rules: {
+		'no-console': ['warn', { allow: ['info', 'error'] }]
 	}
 }
