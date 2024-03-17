@@ -17,6 +17,9 @@ const config = {
 				...config,
 				include: [...config.include, '../tailwind.config.ts', '../vitest-setup.ts']
 			})
+		},
+		paths: {
+			relative: false
 		}
 	}
 }

@@ -22,13 +22,13 @@
 			>username</span
 		>.
 	</h1>
-	<p class="mx-auto sm:w-4/5 md:text-xl lg:w-3/5">
+	<p class="md:text-xl">
 		It will be exclusive to this room and serve only as a display name for the messages you
 		send.
 	</p>
 </div>
 
-<form class="mx-auto sm:w-4/5 lg:w-3/5" method="POST" use:enhance={handleSubmit}>
+<form method="POST" use:enhance={handleSubmit}>
 	<label class="label capitalize">
 		<span>username</span>
 		<div
