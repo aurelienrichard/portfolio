@@ -1,13 +1,13 @@
 import { H } from '@highlight-run/cloudflare'
-import type { Handle, HandleServerError } from '@sveltejs/kit'
+import type { Handle } from '@sveltejs/kit'
 
-export const handle: Handle = ({ event, resolve }) => {
+export const handle: Handle = async ({ event, resolve }) => {
 	// @ts-expect-error cloudflare types missing
-	H.init(event.request, { HIGHLIGHT_PROJECT_ID: 'memjvzye' }, event.platform?.context)
+	H.init(event.request, { HIGHLIGHT_PROJECT_ID: 'memjvzye' }, event.platform.context)
 
-	return resolve(event)
-}
+	const response = await resolve(event)
 
-export const handleError: HandleServerError = ({ error }) => {
-	H.consumeError(error as Error)
+	H.sendResponse(response)
+
+	return response
 }

@@ -6,15 +6,38 @@
 			"dependsOn": ["^build"],
 			"outputs": [".svelte-kit/**", "build/**"]
 		},
+		"clean": {
+			"cache": false
+		},
+		"check": {},
+		"deploy:dev": {
+			"dependsOn": ["build"],
+			"cache": false,
+			"persistent": true
+		},
+		"deploy:prev": {
+			"dependsOn": ["build"]
+		},
+		"deploy:prod": {
+			"dependsOn": ["build"]
+		},
 		"dev": {
 			"cache": false,
 			"persistent": true
 		},
+		"logs:prev": {
+			"cache": false,
+			"persistent": true
+		},
+		"logs:prod": {
+			"cache": false,
+			"persistent": true
+		},
+		"lint": {
+			"dependsOn": ["check"]
+		},
 		"test": {
 			"dependsOn": ["^build"]
-		},
-		"test:watch": {
-			"cache": false
 		},
 		"test:coverage": {
 			"cache": false
@@ -22,11 +45,7 @@
 		"test:ui": {
 			"cache": false
 		},
-		"lint": {
-			"dependsOn": ["check"]
-		},
-		"check": {},
-		"clean": {
+		"test:watch": {
 			"cache": false
 		},
 		"update-types": {
