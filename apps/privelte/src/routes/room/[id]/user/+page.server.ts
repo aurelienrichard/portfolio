@@ -56,8 +56,6 @@ export const actions: Actions = {
 					payload: { username }
 				})
 
-				console.info(response)
-
 				if (response !== 'ok') {
 					throw Error('Broadcast failed.')
 				}

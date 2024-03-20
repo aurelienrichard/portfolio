@@ -5,6 +5,6 @@ module.exports = {
 		project: true
 	},
 	rules: {
-		'no-console': ['warn', { allow: ['info', 'error'] }]
+		'no-console': ['warn', { allow: ['error'] }]
 	}
 }

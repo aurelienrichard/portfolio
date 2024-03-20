@@ -7,9 +7,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf .wrangler",
-		"deploy:dev": "wrangler pages dev ./.svelte-kit/cloudflare",
-		"deploy:prev": "wrangler pages deploy --project-name privelte --environment preview",
-		"deploy:prod": "wrangler pages deploy --project-name privelte --environment production",
+		"deploy:prev": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name privelte --branch preview",
+		"deploy:prod": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name privelte --branch production",
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"logs:prev": "wrangler pages deployment tail --project-name privelte --environment preview",
@@ -19,10 +18,9 @@
 		"test:ui": "vitest --ui",
 		"test:watch": "vitest",
 		"test": "vitest run",
-		"update-types": "pnpx supabase gen types typescript --project-id yipoupsiomqlwjtapqda --schema public > src/lib/types/supabase.ts"
+		"update-types": "npx supabase gen types typescript --project-id yipoupsiomqlwjtapqda --schema public > src/lib/types/supabase.ts"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20240314.0",
 		"@repo/eslint-config": "workspace:*",
 		"@repo/tailwind-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
@@ -53,9 +51,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@highlight-run/cloudflare": "^2.1.5",
 		"@supabase/supabase-js": "^2.39.8",
-		"highlight.run": "^8.8.0",
 		"nanoid": "^5.0.6",
 		"openpgp": "^5.11.1",
 		"unique-names-generator": "^4.7.1",

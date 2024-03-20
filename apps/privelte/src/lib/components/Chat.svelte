@@ -9,7 +9,7 @@
 
 	export let entries: (Payload | Presence)[] = []
 	export let userId: string
-	export let subscribed: boolean
+	export let subscribed: 'loading' | 'ok' | 'error'
 
 	let bottom: HTMLDivElement
 
@@ -40,8 +40,26 @@
 	<Clipboard url={$page.url} />
 	<hr class="my-4" />
 	<div class="text-surface-600-300-token">
-		{#if subscribed}
+		{#if subscribed === 'ok'}
 			<p class="text-center">Welcome to the room.</p>
+		{:else if subscribed === 'error'}
+			<p class="flex items-center justify-center">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="mr-1 h-5 w-5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+					/>
+				</svg>
+				Could not connect to the room.
+			</p>
 		{:else}
 			<div class="text-surface-600-300-token flex items-center justify-center">
 				<ProgressRadial

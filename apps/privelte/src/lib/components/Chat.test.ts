@@ -7,24 +7,30 @@ describe('Chat component', () => {
 	const userId = '1'
 
 	test('should render', () => {
-		render(Chat, { userId, entries: [], subscribed: true })
+		render(Chat, { userId, entries: [], subscribed: 'ok' })
 	})
 
 	test('should render share link message and clipboard component', () => {
-		const { getByText, getByRole } = render(Chat, { userId, entries: [], subscribed: true })
+		const { getByText, getByRole } = render(Chat, { userId, entries: [], subscribed: 'ok' })
 
 		expect(getByText('Share the link below to invite participants.')).toBeInTheDocument()
 		expect(getByRole('button', { name: 'Copy to clipboard.' })).toBeInTheDocument()
 	})
 
-	test('should display loading message when subscribed is false', () => {
-		const { getByText } = render(Chat, { userId, entries: [], subscribed: false })
+	test('should display loading message when subscription is loading', () => {
+		const { getByText } = render(Chat, { userId, entries: [], subscribed: 'loading' })
 
 		expect(getByText('Connecting...')).toBeInTheDocument()
 	})
 
+	test('should display error message when subscription failed', () => {
+		const { getByText } = render(Chat, { userId, entries: [], subscribed: 'error' })
+
+		expect(getByText('Could not connect to the room.')).toBeInTheDocument()
+	})
+
 	test('should display welcome message when subscribed is true', () => {
-		const { getByText } = render(Chat, { userId, entries: [], subscribed: true })
+		const { getByText } = render(Chat, { userId, entries: [], subscribed: 'ok' })
 
 		expect(getByText('Welcome to the room.')).toBeInTheDocument()
 	})
@@ -46,7 +52,7 @@ describe('Chat component', () => {
 		const { getByText } = render(Chat, {
 			userId,
 			entries: [joinedPresence, leftPresence],
-			subscribed: true
+			subscribed: 'ok'
 		})
 
 		expect(getByText('test1')).toBeInTheDocument()
@@ -64,7 +70,7 @@ describe('Chat component', () => {
 			username: 'John'
 		}
 
-		const { getByText } = render(Chat, { entries: [payload], userId, subscribed: true })
+		const { getByText } = render(Chat, { entries: [payload], userId, subscribed: 'ok' })
 
 		expect(getByText('Hello World')).toBeInTheDocument()
 	})
