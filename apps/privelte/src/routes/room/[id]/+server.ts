@@ -42,8 +42,6 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 			payload
 		})
 
-		console.info(response)
-
 		if (response !== 'ok') {
 			throw Error('Broadcast failed.')
 		}

@@ -10,7 +10,7 @@
 
 	export let data: PageData
 	let entries: (Payload | Presence)[] = []
-	let subscribed = false
+	let subscribed: 'loading' | 'ok' | 'error' = 'loading'
 
 	const channel = supabase.channel(data.roomId)
 
@@ -91,7 +91,9 @@
 			)
 			.subscribe((status) => {
 				if (status === 'SUBSCRIBED') {
-					subscribed = true
+					subscribed = 'ok'
+				} else {
+					subscribed = 'error'
 				}
 			})
 
