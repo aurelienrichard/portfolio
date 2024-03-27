@@ -65,3 +65,5 @@ jobs:
                   projectName: ${{ matrix.projectName }}
                   directory: apps/${{ matrix.projectName }}/${{ matrix.directory }}
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  # Enable Wrangler v3
+                  wranglerVersion: '3'
