@@ -7,8 +7,6 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"clean": "rm -rf .turbo && rm -rf coverage && rm -rf .wrangler",
-		"deploy:prev": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name privelte --branch preview",
-		"deploy:prod": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name privelte --branch production",
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"logs:prev": "wrangler pages deployment tail --project-name privelte --environment preview",
@@ -54,7 +52,6 @@
 		"@supabase/supabase-js": "^2.42.4",
 		"nanoid": "^5.0.7",
 		"openpgp": "^5.11.1",
-		"unique-names-generator": "^4.7.1",
 		"zod": "^3.22.4"
 	}
 }

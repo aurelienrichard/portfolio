@@ -15,12 +15,6 @@
 			"cache": false,
 			"persistent": true
 		},
-		"deploy:prev": {
-			"dependsOn": ["build"]
-		},
-		"deploy:prod": {
-			"dependsOn": ["build"]
-		},
 		"dev": {
 			"cache": false,
 			"persistent": true
