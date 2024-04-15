@@ -1,5 +1,5 @@
-import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator'
 import { error, redirect } from '@sveltejs/kit'
+import { generateRoomId } from '$lib/generate-room-id'
 import { newRoomSchema } from '$lib/types/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
@@ -7,12 +7,7 @@ import { supabase } from '$lib/server/supabaseServer'
 let currentId: string
 
 export const load: PageServerLoad = () => {
-	const id = uniqueNamesGenerator({
-		dictionaries: [adjectives, colors, animals],
-		separator: '-',
-		style: 'lowerCase',
-		length: 3
-	})
+	const id = generateRoomId()
 
 	currentId = id
 
