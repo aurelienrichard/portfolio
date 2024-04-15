@@ -1,5 +1,5 @@
 import { error, redirect } from '@sveltejs/kit'
-import { generateRoomId } from '$lib/server/generate-room-id'
+import { generateRoomId } from '$lib/generate-room-id'
 import { newRoomSchema } from '$lib/types/schemas'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'

@@ -1,5 +1,5 @@
-import { animals } from '$lib/server/generate-room-id/animals'
-import { adjectives } from '$lib/server/generate-room-id/adjectives'
+import { animals } from '$lib/generate-room-id/animals'
+import { adjectives } from '$lib/generate-room-id/adjectives'
 
 const getRandomNumber = (max: number) => Math.floor(Math.random() * max)
 
