@@ -29,7 +29,7 @@ export const actions: Actions = {
 	default: async ({ cookies, request, params }) => {
 		const room = await supabase.from('rooms').select('*').eq('id', params.id!).single()
 
-		if (room.data && room.data.participants < room.data.slots) {
+		if (room.data && (room.data.participants ?? 0) < room.data.slots) {
 			const form = await request.formData()
 			const { username } = newUserSchema.parse({
 				username: form.get('username')
