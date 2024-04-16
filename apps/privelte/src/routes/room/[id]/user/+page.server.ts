@@ -45,16 +45,6 @@ export const actions: Actions = {
 				error(500, { message: 'Internal error.' })
 			}
 
-			const channel = supabase.channel(room.data.id)
-
-			await channel.send({
-				type: 'broadcast',
-				event: 'join',
-				payload: { username }
-			})
-
-			await supabase.removeChannel(channel)
-
 			cookies.set('userid', user.data.id, {
 				path: `/room/${room.data.id}`
 			})
