@@ -10,16 +10,15 @@
 			"cache": false
 		},
 		"check": {},
-		"deploy:dev": {
-			"dependsOn": ["build"],
+		"deploy": {
 			"cache": false,
-			"persistent": true
+			"dependsOn": ["build"]
 		},
 		"dev": {
 			"cache": false,
 			"persistent": true
 		},
-		"logs:prev": {
+		"logs": {
 			"cache": false,
 			"persistent": true
 		},

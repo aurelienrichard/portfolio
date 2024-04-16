@@ -1,0 +1,19 @@
+name = "svelteflix"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_date = "2024-04-15"
+
+[env.production]
+compatibility_date = "2024-04-15"
+
+  [env.production.vars]
+  PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
+  PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvemljeWV3ZnZndGhjdmlqY2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU2NTUzMTUsImV4cCI6MjAxMTIzMTMxNX0.TJQyzo1aGBgQwAOWLNPnw5ImNNu3aHpOWniQJsTHVOg"
+  PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
+
+[env.preview]
+compatibility_date = "2024-04-15"
+
+  [env.preview.vars]
+  PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
+  PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvemljeWV3ZnZndGhjdmlqY2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU2NTUzMTUsImV4cCI6MjAxMTIzMTMxNX0.TJQyzo1aGBgQwAOWLNPnw5ImNNu3aHpOWniQJsTHVOg"
+  PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
