@@ -1,15 +1,11 @@
 import { error, json } from '@sveltejs/kit'
 import { supabase } from '$lib/server/supabaseServer'
-import { newMessageSchema } from '$lib/types/schemas'
+import { newMessageSchema, cookieSchema } from '$lib/types/schemas'
 import type { Payload } from '$lib/types/types'
 import type { RequestHandler } from './$types'
 
 export const POST: RequestHandler = async ({ request, cookies, params }) => {
-	const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
-
-	const { id, message, userId, username } = newMessageSchema.parse({
-		id: body.id,
-		message: body.message,
+	const { userId, username } = cookieSchema.parse({
 		userId: cookies.get('userid'),
 		username: cookies.get('username')
 	})
@@ -28,6 +24,13 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 	if (user.error) {
 		error(401, 'Unauthorized.')
 	}
+
+	const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
+
+	const { id, message } = newMessageSchema.parse({
+		id: body.id,
+		message: body.message
+	})
 
 	const payload: Payload = { type: 'payload', id, message, userId, username }
 
@@ -54,4 +57,33 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 	}
 
 	return json({ message: 'Message sent.' }, { status: 201 })
+}
+
+export const PATCH: RequestHandler = async ({ cookies, params }) => {
+	try {
+		const { userId, username } = cookieSchema.parse({
+			userId: cookies.get('userid'),
+			username: cookies.get('username')
+		})
+
+		if (!userId || !username) {
+			throw Error('Unauthorized.')
+		}
+
+		const user = await supabase
+			.from('users')
+			.update({ last_heartbeat: new Date().toISOString() })
+			.eq('id', userId)
+			.eq('room_id', params.id)
+			.select()
+			.single()
+
+		if (user.error) {
+			throw Error(user.error.message)
+		}
+	} catch (e) {
+		console.error(e)
+	}
+
+	return new Response(null, { status: 204 })
 }

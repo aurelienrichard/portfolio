@@ -2,7 +2,10 @@ import { z } from 'zod'
 
 export const newMessageSchema = z.object({
 	id: z.string().length(21),
-	message: z.string().min(1).max(1000),
+	message: z.string().min(1).max(1000)
+})
+
+export const cookieSchema = z.object({
 	userId: z.string().uuid().optional(),
 	username: z.string().min(3).max(20).optional()
 })

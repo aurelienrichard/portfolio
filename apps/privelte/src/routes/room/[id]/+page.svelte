@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { nanoid } from 'nanoid'
+	// import { nanoid } from 'nanoid'
 	import { pendingMessages } from '$lib/stores'
 	import type { Payload, Presence } from '$lib/types/types'
 	import type { PageData } from './$types'
@@ -14,7 +14,7 @@
 
 	const channel = supabase.channel(data.roomId)
 
-	const updatePresence = (username: string, event: 'joined' | 'left') => {
+	/* const updatePresence = (username: string, event: 'joined' | 'left') => {
 		const id = nanoid()
 		const presence: Presence = {
 			type: 'presence',
@@ -24,11 +24,9 @@
 		}
 
 		entries = [...entries, presence]
-	}
+	} */
 
-	const handleRetry = async (event: CustomEvent) => {
-		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
-
+	const sendMessage = async (message: string, id: string) => {
 		pendingMessages.setStatus(id, 'loading')
 
 		const response = await fetch(data.roomId, {
@@ -46,8 +44,14 @@
 		}
 	}
 
-	const handleSubmit = async (event: CustomEvent<{ id: string; message: string }>) => {
-		const { id, message } = event.detail
+	const handleRetry = async (event: CustomEvent) => {
+		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
+
+		await sendMessage(message, id)
+	}
+
+	const handleSubmit = async (event: CustomEvent) => {
+		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
 
 		const payload: Payload = {
 			type: 'payload',
@@ -57,38 +61,24 @@
 			id
 		}
 
-		pendingMessages.setStatus(id, 'loading')
 		entries = [...entries, payload]
 
-		const response = await fetch(data.roomId, {
-			method: 'POST',
-			body: JSON.stringify({ message, id }),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-
-		if (response.ok) {
-			pendingMessages.setStatus(id, 'success')
-		} else {
-			pendingMessages.setStatus(id, 'error')
-		}
+		await sendMessage(message, id)
 	}
 
 	onMount(() => {
+		const intervalId = setInterval(async () => {
+			await fetch(data.roomId, {
+				method: 'PATCH'
+			})
+		}, 5000)
+
 		channel
 			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
 				if (payload.userId !== data.userId) {
 					entries = [...entries, payload]
 				}
 			})
-			.on(
-				'broadcast',
-				{ event: 'join' },
-				({ payload: { username } }: { payload: { username: string } }) => {
-					updatePresence(username, 'joined')
-				}
-			)
 			.subscribe((status) => {
 				if (status === 'SUBSCRIBED') {
 					subscribed = 'ok'
@@ -98,6 +88,7 @@
 			})
 
 		return async () => {
+			clearInterval(intervalId)
 			await supabase.removeChannel(channel)
 		}
 	})
