@@ -6,7 +6,8 @@
 		"build": "vite build",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"clean": "rm -rf .turbo && rm -rf build",
+		"clean": "rm -rf .svelte-kit && rm -rf .turbo && rm -rf .wrangler",
+		"deploy": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name rock-paper-scissors-lizard-spock",
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"preview": "vite preview"
@@ -16,11 +17,12 @@
 		"@repo/typescript-config": "workspace:*",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.27.1",
-		"svelte-check": "^3.5.2",
 		"svelte": "^4.2.2",
+		"svelte-check": "^3.5.2",
 		"tslib": "^2.6.2",
 		"typescript": "^5.2.2",
-		"vite": "^4.5.2"
+		"vite": "^4.5.2",
+		"wrangler": "^3.50.0"
 	},
 	"type": "module",
 	"dependencies": {
