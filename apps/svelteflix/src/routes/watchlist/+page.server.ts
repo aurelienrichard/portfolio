@@ -16,7 +16,7 @@ const dbSchema = z
 export const load: PageServerLoad = async ({ fetch, locals: { getSession, supabase } }) => {
 	const session = await getSession()
 
-	if (!session) throw redirect(303, '/login')
+	if (!session) redirect(303, '/login')
 
 	const { data } = await supabase.from('watchlist').select('*').eq('user_id', session.user.id)
 	const ids = dbSchema.parse(data)
@@ -34,7 +34,7 @@ export const actions: Actions = {
 	add: async ({ request, locals: { supabase, getSession } }) => {
 		const session = await getSession()
 
-		if (!session) throw error(401)
+		if (!session) error(401)
 
 		const form = await request.formData()
 		const { user_id, movie_id } = formSchema.parse({
@@ -51,7 +51,7 @@ export const actions: Actions = {
 	delete: async ({ request, locals: { supabase, getSession } }) => {
 		const session = await getSession()
 
-		if (!session) throw error(401)
+		if (!session) error(401)
 
 		const form = await request.formData()
 		const { user_id, movie_id } = formSchema.parse({

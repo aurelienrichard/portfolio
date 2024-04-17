@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 	const session = await getSession()
 
 	if (session) {
-		throw redirect(303, '/watchlist')
+		redirect(303, '/watchlist')
 	}
 
 	return {
@@ -28,8 +28,8 @@ export const actions: Actions = {
 
 		const { error } = await supabase.auth.signInWithOtp({ email })
 
-		if (error) return fail(error.status ?? 500, { message: error.message })
+		if (error) fail(error.status ?? 500, { message: error.message })
 
-		throw redirect(303, '/')
+		redirect(303, '/')
 	}
 }
