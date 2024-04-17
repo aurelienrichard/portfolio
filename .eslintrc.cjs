@@ -4,5 +4,8 @@ module.exports = {
 	parserOptions: {
 		project: true
 	},
-	ignorePatterns: ['apps/**', 'packages/**']
+	ignorePatterns: ['apps/**', 'packages/**'],
+	rules: {
+		'import/no-default-export': 'off'
+	}
 }

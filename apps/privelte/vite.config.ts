@@ -1,9 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import { purgeCss } from 'vite-plugin-tailwind-purgecss'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, type PluginOption } from 'vite'
 
 export default defineConfig(({ mode }) => ({
-	plugins: [sveltekit(), purgeCss()],
+	plugins: [sveltekit() as PluginOption, purgeCss()],
 	resolve: {
 		conditions: mode === 'test' ? ['browser'] : []
 	},

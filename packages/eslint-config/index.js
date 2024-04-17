@@ -50,8 +50,6 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
 		// getting data from 3rd party apis which naming conventions I don't control makes this rule insufferable
 		'@typescript-eslint/naming-convention': 'off',
-		// yells on sveltekit protected routes redirects
-		'@typescript-eslint/no-throw-literal': 'off',
 		'@typescript-eslint/no-misused-promises': [
 			'error',
 			{

@@ -18,11 +18,11 @@
 			"cache": false,
 			"persistent": true
 		},
-		"logs": {
+		"logs:preview": {
 			"cache": false,
 			"persistent": true
 		},
-		"logs:prod": {
+		"logs:production": {
 			"cache": false,
 			"persistent": true
 		},

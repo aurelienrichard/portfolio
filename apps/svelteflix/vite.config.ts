@@ -1,8 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, type PluginOption } from 'vite'
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [sveltekit() as PluginOption],
 	test: {
 		include: ['src/**/*.test.ts'],
 		environmentMatchGlobs: [['**/[A-Z]*.test.ts', 'happy-dom']],

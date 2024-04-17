@@ -41,14 +41,13 @@
 
 	const handleSubmit: SubmitFunction = () => {
 		loading = true
+
 		return async ({ update, result }) => {
 			await update()
 			if (result.type === 'redirect') {
 				notifications.addNotification('You are now logged out')
 			} else if (result.type === 'failure') {
-				const message = result?.data?.message as string | undefined
-				if (message) notifications.addNotification(message)
-				else notifications.addNotification('An unexpected error happened')
+				notifications.addNotification('An unexpected error happened')
 			}
 			loading = false
 		}

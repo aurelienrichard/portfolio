@@ -6,7 +6,7 @@
 		"build": "vite build",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"clean": "rm -rf .svelte-kit && rm -rf .turbo && rm -rf .wrangler",
+		"clean": "rm -rf .turbo && rm -rf .wrangler",
 		"deploy": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name rock-paper-scissors-lizard-spock",
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
