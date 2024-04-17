@@ -16,16 +16,16 @@
 		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
 		"@sveltejs/adapter-static": "^2.0.3",
-		"@sveltejs/kit": "^1.27.1",
+		"@sveltejs/kit": "^1.30.4",
 		"svelte": "^4.2.2",
 		"svelte-check": "^3.5.2",
 		"tslib": "^2.6.2",
 		"typescript": "^5.2.2",
-		"vite": "^4.5.2"
+		"vite": "^4.5.3"
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/poppins": "^5.0.8",
+		"@fontsource/poppins": "^5.0.13",
 		"@neoconfetti/svelte": "^1.0.0"
 	}
 }
