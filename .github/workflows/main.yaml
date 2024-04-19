@@ -7,10 +7,6 @@ on:
 jobs:
     main:
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [20]
-                pnpm-version: [9]
         env:
             # turborepo
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -34,12 +30,12 @@ jobs:
             - name: Install Pnpm
               uses: pnpm/action-setup@v3
               with:
-                  version: ${{ matrix.pnpm-version }}
+                  version: 9
 
             - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
-                  node-version: ${{ matrix.node-version }}
+                  node-version: 20
                   cache: 'pnpm'
 
             - name: Install dependencies
