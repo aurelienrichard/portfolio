@@ -1,5 +1,6 @@
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose'
-import { createSecretKey } from 'crypto'
+import { createSecretKey } from 'node:crypto'
+import { Buffer } from 'node:buffer'
 import { PRIVELTE_JWT_SECRET } from '$env/static/private'
 
 const secret = createSecretKey(Buffer.from(PRIVELTE_JWT_SECRET, 'hex'))
