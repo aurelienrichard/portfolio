@@ -22,7 +22,8 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 			userId,
 			username
 		}
-	} catch {
+	} catch (e) {
+		console.error(e)
 		return redirect(302, `/room/${params.id}/join`)
 	}
 }

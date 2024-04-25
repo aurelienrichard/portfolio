@@ -58,7 +58,8 @@ export const actions: Actions = {
 				path: `/room/${room.data.id}`,
 				expires
 			})
-		} catch {
+		} catch (e) {
+			console.error(e)
 			return error(500, { message: 'Internal error.' })
 		}
 

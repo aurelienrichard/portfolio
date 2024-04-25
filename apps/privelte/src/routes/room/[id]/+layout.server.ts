@@ -23,7 +23,8 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 				.eq('room_id', room.data.id)
 				.single()
 				.throwOnError()
-		} catch {
+		} catch (e) {
+			console.error(e)
 			error(403, { message: 'This room is full.' })
 		}
 	}
