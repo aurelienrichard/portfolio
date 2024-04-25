@@ -71,7 +71,7 @@
 			await fetch(data.roomId, {
 				method: 'PATCH'
 			})
-		}, 5000)
+		}, 10000)
 
 		channel
 			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {

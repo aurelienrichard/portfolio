@@ -1,29 +1,28 @@
 import { redirect } from '@sveltejs/kit'
 import { supabase } from '$lib/server/supabaseServer'
+import { verifyToken } from '$lib/server/auth'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ params, cookies }) => {
-	const userId = cookies.get('userid')
-	const username = cookies.get('username')
+	const session = cookies.get('session')
 
-	if (!userId || !username) {
-		redirect(302, `/room/${params.id}/user`)
-	}
+	try {
+		const { userId, username } = await verifyToken(session)
 
-	const user = await supabase
-		.from('users')
-		.select('*')
-		.eq('id', userId)
-		.eq('room_id', params.id)
-		.single()
+		await supabase
+			.from('users')
+			.select('*')
+			.eq('id', userId)
+			.eq('room_id', params.id)
+			.single()
+			.throwOnError()
 
-	if (user.error) {
-		redirect(302, `/room/${params.id}/user`)
-	}
-
-	return {
-		title: `${params.id} - Privelte`,
-		userId,
-		username
+		return {
+			title: `${params.id} - Privelte`,
+			userId,
+			username
+		}
+	} catch {
+		return redirect(302, `/room/${params.id}/join`)
 	}
 }
