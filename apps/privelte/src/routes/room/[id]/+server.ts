@@ -22,7 +22,8 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 			.eq('room_id', params.id)
 			.single()
 			.throwOnError()
-	} catch {
+	} catch (e) {
+		console.error(e)
 		return error(401, 'Unauthorized.')
 	}
 
@@ -36,7 +37,8 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		})
 
 		payload = { type: 'payload', id, message, userId, username }
-	} catch {
+	} catch (e) {
+		console.error(e)
 		return error(400, 'Invalid ID or message.')
 	}
 
@@ -82,7 +84,8 @@ export const PATCH: RequestHandler = async ({ cookies, params }) => {
 			path: `/room/${params.id}`,
 			expires
 		})
-	} catch {
+	} catch (e) {
+		console.error(e)
 		return error(401, 'Unauthorized.')
 	}
 
