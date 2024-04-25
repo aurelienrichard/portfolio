@@ -1,7 +1,7 @@
 name = "privelte"
 pages_build_output_dir = ".svelte-kit/cloudflare"
-compatibility_date = "2024-04-15"
 compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-04-15"
 
 [env.production]
 compatibility_date = "2024-04-15"
