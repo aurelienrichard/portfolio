@@ -1,38 +1,44 @@
 import { error, json } from '@sveltejs/kit'
 import { supabase } from '$lib/server/supabaseServer'
-import { newMessageSchema, cookieSchema } from '$lib/types/schemas'
+import { verifyToken, createToken } from '$lib/server/auth'
+import { newMessageSchema } from '$lib/types/schemas'
 import type { Payload } from '$lib/types/types'
 import type { RequestHandler } from './$types'
 
 export const POST: RequestHandler = async ({ request, cookies, params }) => {
-	const { userId, username } = cookieSchema.parse({
-		userId: cookies.get('userid'),
-		username: cookies.get('username')
-	})
+	const session = cookies.get('session')
+	let userId: string
+	let username: string
 
-	if (!userId || !username) {
-		error(401, 'Unauthorized.')
-	}
+	try {
+		const payload = await verifyToken(session)
+		userId = payload.userId
+		username = payload.username
 
-	const user = await supabase
-		.from('users')
-		.select('*')
-		.eq('id', userId)
-		.eq('room_id', params.id)
-		.single()
-
-	if (user.error) {
-		error(401, 'Unauthorized.')
+		await supabase
+			.from('users')
+			.select('*')
+			.eq('id', userId)
+			.eq('room_id', params.id)
+			.single()
+			.throwOnError()
+	} catch {
+		return error(401, 'Unauthorized.')
 	}
 
 	const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
+	let payload: Payload
 
-	const { id, message } = newMessageSchema.parse({
-		id: body.id,
-		message: body.message
-	})
+	try {
+		const { id, message } = newMessageSchema.parse({
+			id: body.id,
+			message: body.message
+		})
 
-	const payload: Payload = { type: 'payload', id, message, userId, username }
+		payload = { type: 'payload', id, message, userId, username }
+	} catch {
+		return error(400, 'Invalid ID or message.')
+	}
 
 	const channel = supabase.channel(params.id, {
 		config: { broadcast: { ack: true } }
@@ -46,12 +52,8 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		})
 
 		if (response !== 'ok') {
-			throw Error('Broadcast failed.')
+			return error(500, { message: 'Internal error.' })
 		}
-	} catch (e) {
-		console.error(e)
-
-		error(500, { message: 'Internal error.' })
 	} finally {
 		await supabase.removeChannel(channel)
 	}
@@ -60,29 +62,28 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 }
 
 export const PATCH: RequestHandler = async ({ cookies, params }) => {
+	const session = cookies.get('session')
+
 	try {
-		const { userId, username } = cookieSchema.parse({
-			userId: cookies.get('userid'),
-			username: cookies.get('username')
-		})
+		const { userId, username } = await verifyToken(session)
 
-		if (!userId || !username) {
-			throw Error('Unauthorized.')
-		}
-
-		const user = await supabase
+		await supabase
 			.from('users')
 			.update({ last_heartbeat: new Date().toISOString() })
 			.eq('id', userId)
 			.eq('room_id', params.id)
 			.select()
 			.single()
+			.throwOnError()
 
-		if (user.error) {
-			throw Error(user.error.message)
-		}
-	} catch (e) {
-		console.error(e)
+		const { jwt, expires } = await createToken({ userId, username })
+
+		cookies.set('session', jwt, {
+			path: `/room/${params.id}`,
+			expires
+		})
+	} catch {
+		return error(401, 'Unauthorized.')
 	}
 
 	return new Response(null, { status: 204 })
