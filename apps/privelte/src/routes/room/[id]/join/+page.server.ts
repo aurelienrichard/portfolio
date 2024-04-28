@@ -29,13 +29,13 @@ export const actions: Actions = {
 		const room = await supabase.from('rooms').select('*').eq('id', params.id!).single()
 
 		if (room.error) {
-			return error(404, { message: 'This room does not exist.' })
+			error(404, { message: 'This room does not exist.' })
 		}
 
 		const participants = room.data.participants ?? 0
 
 		if (participants === room.data.slots) {
-			return error(403, { message: 'This room is full.' })
+			error(403, { message: 'This room is full.' })
 		}
 
 		const form = await request.formData()
@@ -60,9 +60,9 @@ export const actions: Actions = {
 			})
 		} catch (e) {
 			console.error(e)
-			return error(500, { message: 'Internal error.' })
+			error(500, { message: 'Internal error.' })
 		}
 
-		return redirect(303, `/room/${params.id}`)
+		redirect(303, `/room/${params.id}`)
 	}
 }
