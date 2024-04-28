@@ -24,7 +24,7 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 			.throwOnError()
 	} catch (e) {
 		console.error(e)
-		return error(401, 'Unauthorized.')
+		error(401, 'Unauthorized.')
 	}
 
 	const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
@@ -39,7 +39,7 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		payload = { type: 'payload', id, message, userId, username }
 	} catch (e) {
 		console.error(e)
-		return error(400, 'Invalid ID or message.')
+		error(400, 'Invalid ID or message.')
 	}
 
 	const channel = supabase.channel(params.id, {
@@ -54,7 +54,7 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		})
 
 		if (response !== 'ok') {
-			return error(500, { message: 'Internal error.' })
+			error(500, { message: 'Internal error.' })
 		}
 	} finally {
 		await supabase.removeChannel(channel)
@@ -86,7 +86,7 @@ export const PATCH: RequestHandler = async ({ cookies, params }) => {
 		})
 	} catch (e) {
 		console.error(e)
-		return error(401, 'Unauthorized.')
+		error(401, 'Unauthorized.')
 	}
 
 	return new Response(null, { status: 204 })

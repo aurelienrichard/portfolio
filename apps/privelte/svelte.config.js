@@ -15,7 +15,7 @@ const config = {
 		typescript: {
 			config: (config) => ({
 				...config,
-				include: [...config.include, '../tailwind.config.ts', '../vitest-setup.ts']
+				include: [...config.include, '../tailwind.config.ts']
 			})
 		},
 		paths: {
