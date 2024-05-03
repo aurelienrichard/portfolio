@@ -25,10 +25,8 @@ export const createToken = async (payload: JWTPayload) => {
 	return { jwt, expires }
 }
 
-export const verifyToken = async (token: string | undefined) => {
+export const verifyToken = async (token: string) => {
 	try {
-		if (!token) throw Error('No token provided.')
-
 		const { payload } = await jwtVerify<User>(token, secret, {
 			algorithms: [algorithm]
 		})

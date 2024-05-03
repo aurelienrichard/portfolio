@@ -13,6 +13,10 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 	if (room.data.participants === room.data.slots) {
 		const session = cookies.get('session')
 
+		if (!session) {
+			error(403, { message: 'This room is full.' })
+		}
+
 		try {
 			const { userId } = await verifyToken(session)
 

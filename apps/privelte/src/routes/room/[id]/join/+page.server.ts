@@ -7,6 +7,10 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const session = cookies.get('session')
 
+	if (!session) {
+		return { title: 'Join - Privelte' }
+	}
+
 	try {
 		const { userId } = await verifyToken(session)
 
@@ -47,7 +51,7 @@ export const actions: Actions = {
 
 			const user = await supabase
 				.from('users')
-				.insert({ room_id: room.data.id })
+				.insert({ room_id: room.data.id, username })
 				.select()
 				.single()
 				.throwOnError()

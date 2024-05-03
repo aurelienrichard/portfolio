@@ -7,6 +7,11 @@ import type { RequestHandler } from './$types'
 
 export const POST: RequestHandler = async ({ request, cookies, params }) => {
 	const session = cookies.get('session')
+
+	if (!session) {
+		error(401, 'Unauthorized.')
+	}
+
 	let userId: string
 	let username: string
 
@@ -66,12 +71,16 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 export const PATCH: RequestHandler = async ({ cookies, params }) => {
 	const session = cookies.get('session')
 
+	if (!session) {
+		error(401, 'Unauthorized.')
+	}
+
 	try {
 		const { userId, username } = await verifyToken(session)
 
 		await supabase
 			.from('users')
-			.update({ last_heartbeat: new Date().toISOString() })
+			.update({ last_active: new Date().toISOString() })
 			.eq('id', userId)
 			.eq('room_id', params.id)
 			.select()
