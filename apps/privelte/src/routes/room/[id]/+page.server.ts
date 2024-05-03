@@ -6,6 +6,10 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const session = cookies.get('session')
 
+	if (!session) {
+		return redirect(302, `/room/${params.id}/join`)
+	}
+
 	try {
 		const { userId, username } = await verifyToken(session)
 

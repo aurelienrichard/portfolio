@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { supabase } from '$lib/supabaseClient'
 	// import { nanoid } from 'nanoid'
 	import { pendingMessages } from '$lib/stores'
 	import type { Payload, Presence } from '$lib/types/types'
 	import type { PageData } from './$types'
-	import { supabase } from '$lib/supabaseClient'
 	import Chat from '$lib/components/Chat.svelte'
 	import NewMessageForm from '$lib/components/NewMessageForm.svelte'
 
@@ -71,7 +71,7 @@
 			await fetch(data.roomId, {
 				method: 'PATCH'
 			})
-		}, 10000)
+		}, 12000)
 
 		channel
 			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
