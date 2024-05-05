@@ -23,8 +23,8 @@
 		"@repo/tailwind-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
 		"@turbo/gen": "^1.13.3",
-		"@vitest/coverage-v8": "^1.5.2",
-		"@vitest/ui": "^1.5.2",
+		"@vitest/coverage-v8": "^1.6.0",
+		"@vitest/ui": "^1.6.0",
 		"eslint": "^8.57.0",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
@@ -32,8 +32,8 @@
 		"prettier-plugin-svelte": "^3.2.3",
 		"prettier-plugin-tailwindcss": "^0.5.14",
 		"turbo": "^1.13.3",
-		"vitest": "^1.5.2",
-		"wrangler": "^3.52.0"
+		"vitest": "^1.6.0",
+		"wrangler": "^3.53.1"
 	},
 	"packageManager": "pnpm@9.0.6",
 	"lint-staged": {
