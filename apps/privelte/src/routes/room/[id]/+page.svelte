@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { nanoid } from 'nanoid'
 	import { supabase } from '$lib/supabaseClient'
-	// import { nanoid } from 'nanoid'
 	import { pendingMessages } from '$lib/stores'
 	import type { Payload, Presence } from '$lib/types/types'
 	import type { PageData } from './$types'
@@ -13,18 +13,6 @@
 	let subscribed: 'loading' | 'ok' | 'error' = 'loading'
 
 	const channel = supabase.channel(data.roomId)
-
-	/* const updatePresence = (username: string, event: 'joined' | 'left') => {
-		const id = nanoid()
-		const presence: Presence = {
-			type: 'presence',
-			username,
-			event,
-			id
-		}
-
-		entries = [...entries, presence]
-	} */
 
 	const sendMessage = async (message: string, id: string) => {
 		pendingMessages.setStatus(id, 'loading')
@@ -74,6 +62,22 @@
 		}, 12000)
 
 		channel
+			.on('broadcast', { event: 'presence' }, ({ payload }) => {
+				const { username, event } = payload as {
+					username: string
+					event: 'joined' | 'left'
+				}
+
+				const id = nanoid()
+				const presence: Presence = {
+					type: 'presence',
+					username,
+					event,
+					id
+				}
+
+				entries = [...entries, presence]
+			})
 			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
 				if (payload.userId !== data.userId) {
 					entries = [...entries, payload]
