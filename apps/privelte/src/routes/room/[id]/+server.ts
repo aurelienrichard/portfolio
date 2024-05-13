@@ -1,6 +1,6 @@
 import { error, json } from '@sveltejs/kit'
 import { supabase } from '$lib/server/supabaseServer'
-import { verifyToken, createToken } from '$lib/server/auth'
+import { createToken, verifyToken } from '$lib/server/auth'
 import { newMessageSchema } from '$lib/types/schemas'
 import type { Payload } from '$lib/types/types'
 import type { RequestHandler } from './$types'
@@ -59,13 +59,15 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		})
 
 		if (response !== 'ok') {
-			error(500, { message: 'Internal error.' })
+			throw Error()
 		}
+
+		return json({ message: 'Message sent.' }, { status: 201 })
+	} catch {
+		return error(500, { message: 'Internal error.' })
 	} finally {
 		await supabase.removeChannel(channel)
 	}
-
-	return json({ message: 'Message sent.' }, { status: 201 })
 }
 
 export const PATCH: RequestHandler = async ({ cookies, params }) => {

@@ -1,0 +1,5 @@
+{
+	"deno.enablePaths": ["apps/privelte/supabase/functions"],
+	"deno.lint": true,
+	"deno.unstable": true
+}

@@ -18,6 +18,9 @@
 			"cache": false,
 			"persistent": true
 		},
+		"functions": {
+			"cache": false
+		},
 		"logs:preview": {
 			"cache": false,
 			"persistent": true

@@ -4,6 +4,7 @@ module.exports = {
 	parserOptions: {
 		project: true
 	},
+	ignorePatterns: ['supabase/functions'],
 	rules: {
 		'no-console': ['warn', { allow: ['error'] }]
 	}

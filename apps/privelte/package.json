@@ -10,6 +10,7 @@
 		"dev": "vite dev",
 		"lint": "prettier . --check . && eslint . --report-unused-disable-directives",
 		"deploy": "wrangler pages deploy ./.svelte-kit/cloudflare --project-name privelte",
+		"functions": "supabase functions deploy --project-ref yipoupsiomqlwjtapqda",
 		"logs:preview": "wrangler pages deployment tail --project-name privelte --environment preview",
 		"logs:production": "wrangler pages deployment tail --project-name privelte --environment production",
 		"preview": "vite preview",

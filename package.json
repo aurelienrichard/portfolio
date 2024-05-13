@@ -8,6 +8,7 @@
 		"deploy": "turbo run deploy",
 		"dev": "turbo run dev",
 		"format": "prettier --write .",
+		"functions": "turbo run functions",
 		"lint": "turbo run lint",
 		"logs:preview": "turbo run logs:preview",
 		"logs:production": "turbo run logs:production",
