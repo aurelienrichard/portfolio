@@ -46,6 +46,7 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'import/no-default-export': 'error',
 		'no-unused-vars': 'off',
+		'@typescript-eslint/no-use-before-define': ['error', { functions: false }],
 		'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '_' }],
 		'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
 		// getting data from 3rd party apis which naming conventions I don't control makes this rule insufferable

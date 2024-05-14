@@ -1,4 +1,5 @@
 import { error, json } from '@sveltejs/kit'
+import type { RealtimeChannel } from '@supabase/supabase-js'
 import { supabase } from '$lib/server/supabaseServer'
 import { createToken, verifyToken } from '$lib/server/auth'
 import { newMessageSchema } from '$lib/types/schemas'
@@ -12,59 +13,20 @@ export const POST: RequestHandler = async ({ request, cookies, params }) => {
 		error(401, 'Unauthorized.')
 	}
 
-	let userId: string
-	let username: string
-
-	try {
-		const payload = await verifyToken(session)
-		userId = payload.userId
-		username = payload.username
-
-		await supabase
-			.from('users')
-			.select('*')
-			.eq('id', userId)
-			.eq('room_id', params.id)
-			.single()
-			.throwOnError()
-	} catch (e) {
-		console.error(e)
-		error(401, 'Unauthorized.')
-	}
-
-	const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
-	let payload: Payload
-
-	try {
-		const { id, message } = newMessageSchema.parse({
-			id: body.id,
-			message: body.message
-		})
-
-		payload = { type: 'payload', id, message, userId, username }
-	} catch (e) {
-		console.error(e)
-		error(400, 'Invalid ID or message.')
-	}
-
 	const channel = supabase.channel(params.id, {
 		config: { broadcast: { ack: true } }
 	})
 
 	try {
-		const response = await channel.send({
-			type: 'broadcast',
-			event: 'message',
-			payload
-		})
+		const { userId, username } = await verifyUser(session, params.id)
+		const body = (await request.json()) as Pick<Payload, 'id' | 'message'>
+		const payload = createPayload(body, userId, username)
 
-		if (response !== 'ok') {
-			throw Error()
-		}
+		await sendMessage(channel, payload)
 
 		return json({ message: 'Message sent.' }, { status: 201 })
-	} catch {
-		return error(500, { message: 'Internal error.' })
+	} catch (e) {
+		return error(401, e as Error)
 	} finally {
 		await supabase.removeChannel(channel)
 	}
@@ -95,10 +57,56 @@ export const PATCH: RequestHandler = async ({ cookies, params }) => {
 			path: `/room/${params.id}`,
 			expires
 		})
-	} catch (e) {
-		console.error(e)
+	} catch {
 		error(401, 'Unauthorized.')
 	}
 
 	return new Response(null, { status: 204 })
+}
+
+async function sendMessage(channel: RealtimeChannel, payload: Payload): Promise<void> {
+	const response = await channel.send({
+		type: 'broadcast',
+		event: 'message',
+		payload
+	})
+
+	if (response !== 'ok') {
+		throw Error('Failed to send message.')
+	}
+}
+
+async function verifyUser(session: string, roomId: string) {
+	try {
+		const { userId, username } = await verifyToken(session)
+
+		await supabase
+			.from('users')
+			.select('*')
+			.eq('id', userId)
+			.eq('room_id', roomId)
+			.single()
+			.throwOnError()
+
+		return { userId, username }
+	} catch {
+		throw Error('Unauthorized.')
+	}
+}
+
+function createPayload(
+	body: Pick<Payload, 'id' | 'message'>,
+	userId: string,
+	username: string
+): Payload {
+	try {
+		const { id, message } = newMessageSchema.parse({
+			id: body.id,
+			message: body.message
+		})
+
+		return { type: 'payload', id, message, userId, username }
+	} catch {
+		throw Error('Invalid ID or message.')
+	}
 }
