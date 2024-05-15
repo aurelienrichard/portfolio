@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit'
-import { verifyToken } from '$lib/server/auth'
+import { verifyUser } from '$lib/server/auth'
 import { supabase } from '$lib/server/supabaseServer'
 import type { LayoutServerLoad } from './$types'
 
@@ -13,22 +13,9 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 	if (room.data.participants === room.data.slots) {
 		const session = cookies.get('session')
 
-		if (!session) {
-			error(403, { message: 'This room is full.' })
-		}
-
 		try {
-			const { userId } = await verifyToken(session)
-
-			await supabase
-				.from('users')
-				.select('*')
-				.eq('id', userId)
-				.eq('room_id', room.data.id)
-				.single()
-				.throwOnError()
-		} catch (e) {
-			console.error(e)
+			await verifyUser(session, room.data.id)
+		} catch {
 			error(403, { message: 'This room is full.' })
 		}
 	}

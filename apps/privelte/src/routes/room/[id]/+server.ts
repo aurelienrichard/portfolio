@@ -1,17 +1,13 @@
 import { error, json } from '@sveltejs/kit'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 import { supabase } from '$lib/server/supabaseServer'
-import { createToken, verifyToken } from '$lib/server/auth'
+import { createToken, verifyToken, verifyUser } from '$lib/server/auth'
 import { newMessageSchema } from '$lib/types/schemas'
 import type { Payload } from '$lib/types/types'
 import type { RequestHandler } from './$types'
 
 export const POST: RequestHandler = async ({ request, cookies, params }) => {
 	const session = cookies.get('session')
-
-	if (!session) {
-		error(401, 'Unauthorized.')
-	}
 
 	const channel = supabase.channel(params.id, {
 		config: { broadcast: { ack: true } }
@@ -73,24 +69,6 @@ async function sendMessage(channel: RealtimeChannel, payload: Payload): Promise<
 
 	if (response !== 'ok') {
 		throw Error('Failed to send message.')
-	}
-}
-
-async function verifyUser(session: string, roomId: string) {
-	try {
-		const { userId, username } = await verifyToken(session)
-
-		await supabase
-			.from('users')
-			.select('*')
-			.eq('id', userId)
-			.eq('room_id', roomId)
-			.single()
-			.throwOnError()
-
-		return { userId, username }
-	} catch {
-		throw Error('Unauthorized.')
 	}
 }
 
