@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher, afterUpdate } from 'svelte'
+	import { createEventDispatcher, afterUpdate, onMount } from 'svelte'
 	import { nanoid } from 'nanoid'
 
 	export let roomId: string
@@ -17,6 +17,10 @@
 			textarea.style.height = `${textarea.scrollHeight}px`
 		}
 	}
+
+	onMount(() => {
+		textarea.focus()
+	})
 
 	afterUpdate(() => {
 		setHeight()

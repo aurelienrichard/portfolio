@@ -29,14 +29,18 @@
 </script>
 
 <div class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto overflow-x-clip px-4">
-	<h1 class="h2 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
-		You're all
+	<h1 class="h3 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
+		Share the link
 		<span
 			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
-			>set</span
+			>below</span
+		>
+		to invite
+		<span
+			class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
+			>participants</span
 		>.
 	</h1>
-	<p class="text-center text-lg md:text-xl">Share the link below to invite participants.</p>
 	<Clipboard url={$page.url} />
 	<hr class="my-4" />
 	<div class="text-surface-600-300-token">

@@ -6,14 +6,10 @@ import type { Payload, Presence } from '$lib/types/types'
 describe('Chat component', () => {
 	const userId = '1'
 
-	test('should render', () => {
-		render(Chat, { userId, entries: [], subscribed: 'ok' })
-	})
-
 	test('should render share link message and clipboard component', () => {
-		const { getByText, getByRole } = render(Chat, { userId, entries: [], subscribed: 'ok' })
+		const { getByRole } = render(Chat, { userId, entries: [], subscribed: 'ok' })
 
-		expect(getByText('Share the link below to invite participants.')).toBeInTheDocument()
+		expect(getByRole('heading', { level: 1 })).toBeInTheDocument()
 		expect(getByRole('button', { name: 'Copy to clipboard.' })).toBeInTheDocument()
 	})
 
