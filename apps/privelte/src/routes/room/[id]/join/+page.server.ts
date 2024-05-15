@@ -1,5 +1,5 @@
 import { redirect, type Actions, error } from '@sveltejs/kit'
-import { createToken, verifyToken } from '$lib/server/auth'
+import { createToken, verifyUser } from '$lib/server/auth'
 import { newUserSchema } from '$lib/types/schemas'
 import { supabase } from '$lib/server/supabaseServer'
 import type { PageServerLoad } from './$types'
@@ -7,20 +7,8 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ params, cookies }) => {
 	const session = cookies.get('session')
 
-	if (!session) {
-		return { title: 'Join - Privelte' }
-	}
-
 	try {
-		const { userId } = await verifyToken(session)
-
-		await supabase
-			.from('users')
-			.select('*')
-			.eq('id', userId)
-			.eq('room_id', params.id)
-			.single()
-			.throwOnError()
+		await verifyUser(session, params.id)
 	} catch {
 		return { title: 'Join - Privelte' }
 	}

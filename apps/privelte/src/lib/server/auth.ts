@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose'
 import { Buffer } from 'node:buffer'
 import { PRIVELTE_JWT_SECRET } from '$env/static/private'
+import { supabase } from '$lib/server/supabaseServer'
 
 const secret = Buffer.from(PRIVELTE_JWT_SECRET, 'hex')
 const algorithm = 'HS256'
@@ -33,5 +34,27 @@ export const verifyToken = async (token: string) => {
 		return payload
 	} catch {
 		throw Error('Invalid token.')
+	}
+}
+
+export const verifyUser = async (session: string | undefined, roomId: string) => {
+	if (!session) {
+		throw Error('Unauthorized.')
+	}
+
+	try {
+		const { userId, username } = await verifyToken(session)
+
+		await supabase
+			.from('users')
+			.select('*')
+			.eq('id', userId)
+			.eq('room_id', roomId)
+			.single()
+			.throwOnError()
+
+		return { userId, username }
+	} catch {
+		throw Error('Unauthorized.')
 	}
 }
