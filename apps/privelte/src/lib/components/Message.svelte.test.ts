@@ -13,10 +13,6 @@ describe('Message component', () => {
 		id: '2'
 	}
 
-	test('should render', () => {
-		render(Message, { payload, status: 'success', isOwnMessage: false })
-	})
-
 	test('should display the message and username', () => {
 		const { getByText } = render(Message, { payload, status: 'success', isOwnMessage: false })
 
