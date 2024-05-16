@@ -22,9 +22,7 @@ export const load: PageServerLoad = () => {
 
 	currentId = id
 
-	return {
-		id
-	}
+	return { id, title: 'New Room' }
 }
 
 export const actions: Actions = {

@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 		const { userId, username } = await verifyUser(session, params.id)
 
 		return {
-			title: `${params.id} - Privelte`,
+			title: `${params.id}`,
 			userId,
 			username
 		}

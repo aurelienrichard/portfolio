@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'
 	import { nanoid } from 'nanoid'
 	import { supabase } from '$lib/supabaseClient'
-	import { pendingMessages } from '$lib/stores'
+	import { pendingMessages, unreadMessagesCount } from '$lib/stores'
 	import type { Payload, Presence } from '$lib/types/types'
 	import type { PageData } from './$types'
 	import Chat from '$lib/components/Chat.svelte'
@@ -14,7 +14,45 @@
 
 	const channel = supabase.channel(data.roomId)
 
-	const sendMessage = async (message: string, id: string) => {
+	onMount(() => {
+		;(async () => {
+			await heartbeat()
+		})()
+
+		const intervalId = setInterval(async () => {
+			await heartbeat()
+		}, 12000)
+
+		channel
+			.on('broadcast', { event: 'presence' }, ({ payload }) => {
+				const { username, event } = payload as {
+					username: string
+					event: 'joined' | 'left'
+				}
+
+				handlePresence(username, event)
+			})
+			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
+				if (payload.userId !== data.userId) {
+					unreadMessagesCount.increment()
+					entries = [...entries, payload]
+				}
+			})
+			.subscribe((status) => {
+				if (status === 'SUBSCRIBED') {
+					subscribed = 'ok'
+				} else {
+					subscribed = 'error'
+				}
+			})
+
+		return async () => {
+			clearInterval(intervalId)
+			await supabase.removeChannel(channel)
+		}
+	})
+
+	async function sendMessage(message: string, id: string) {
 		pendingMessages.setStatus(id, 'loading')
 
 		const response = await fetch(data.roomId, {
@@ -32,13 +70,13 @@
 		}
 	}
 
-	const handleRetry = async (event: CustomEvent) => {
+	async function handleRetry(event: CustomEvent) {
 		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
 
 		await sendMessage(message, id)
 	}
 
-	const handleSubmit = async (event: CustomEvent) => {
+	async function handleSubmit(event: CustomEvent) {
 		const { id, message } = event.detail as Pick<Payload, 'id' | 'message'>
 
 		const payload: Payload = {
@@ -54,48 +92,23 @@
 		await sendMessage(message, id)
 	}
 
-	onMount(() => {
-		const intervalId = setInterval(async () => {
-			await fetch(data.roomId, {
-				method: 'PATCH'
-			})
-		}, 12000)
+	async function heartbeat() {
+		await fetch(data.roomId, {
+			method: 'PATCH'
+		})
+	}
 
-		channel
-			.on('broadcast', { event: 'presence' }, ({ payload }) => {
-				const { username, event } = payload as {
-					username: string
-					event: 'joined' | 'left'
-				}
-
-				const id = nanoid()
-				const presence: Presence = {
-					type: 'presence',
-					username,
-					event,
-					id
-				}
-
-				entries = [...entries, presence]
-			})
-			.on('broadcast', { event: 'message' }, ({ payload }: { payload: Payload }) => {
-				if (payload.userId !== data.userId) {
-					entries = [...entries, payload]
-				}
-			})
-			.subscribe((status) => {
-				if (status === 'SUBSCRIBED') {
-					subscribed = 'ok'
-				} else {
-					subscribed = 'error'
-				}
-			})
-
-		return async () => {
-			clearInterval(intervalId)
-			await supabase.removeChannel(channel)
+	function handlePresence(username: string, event: 'joined' | 'left') {
+		const id = nanoid()
+		const presence: Presence = {
+			type: 'presence',
+			username,
+			event,
+			id
 		}
-	})
+
+		entries = [...entries, presence]
+	}
 </script>
 
 <div class="flex h-full flex-col">

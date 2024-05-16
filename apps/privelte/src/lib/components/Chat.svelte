@@ -2,7 +2,7 @@
 	import { afterUpdate } from 'svelte'
 	import { ProgressRadial } from '@skeletonlabs/skeleton'
 	import Message from './Message.svelte'
-	import { pendingMessages } from '$lib/stores'
+	import { pendingMessages, unreadMessagesCount } from '$lib/stores'
 	import { page } from '$app/stores'
 	import type { Payload, Presence } from '$lib/types/types'
 	import Clipboard from './Clipboard.svelte'
@@ -12,6 +12,7 @@
 	export let subscribed: 'loading' | 'ok' | 'error'
 
 	let bottom: HTMLDivElement
+	let scrollable: HTMLDivElement
 
 	$: getStatus = (id: string) => {
 		if (!$pendingMessages.get(id)) {
@@ -28,7 +29,14 @@
 	})
 </script>
 
-<div class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto overflow-x-clip px-4">
+<div
+	bind:this={scrollable}
+	on:scrollend={() => {
+		if (scrollable.scrollHeight - scrollable.scrollTop - scrollable.clientHeight < 1)
+			unreadMessagesCount.reset()
+	}}
+	class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto overflow-x-clip px-4"
+>
 	<h1 class="h3 text-surface-600-300-token mb-3 text-center leading-snug md:mb-6">
 		Share the link
 		<span
