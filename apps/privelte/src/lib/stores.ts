@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, derived } from 'svelte/store'
 
 export const createPendingMessages = () => {
 	const { subscribe, update } = writable<Map<string, 'loading' | 'error'>>(new Map())
@@ -18,3 +18,28 @@ export const createPendingMessages = () => {
 }
 
 export const pendingMessages = createPendingMessages()
+
+export const createUnreadMessagesCount = () => {
+	const { subscribe, update, set } = writable<number>(0)
+
+	return {
+		subscribe,
+		increment: () => update((value) => (value < 100 ? value + 1 : value)),
+		reset: () => set(0)
+	}
+}
+
+export const unreadMessagesCount = createUnreadMessagesCount()
+
+export const unreadMessages = derived(unreadMessagesCount, ($unreadMessagesCount) => {
+	const strValue = String($unreadMessagesCount)
+
+	switch ($unreadMessagesCount) {
+		case 0:
+			return ''
+		case 100:
+			return '(99+)'
+		default:
+			return `(${strValue})`
+	}
+})

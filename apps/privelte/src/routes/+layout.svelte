@@ -3,10 +3,13 @@
 	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton'
 	import logo from '$lib/images/github-mark.svg'
 	import { page } from '$app/stores'
+	import { unreadMessages } from '$lib/stores'
 </script>
 
 <svelte:head>
-	<title>{$page.data.title ?? 'Privelte'}</title>
+	<title>
+		{`${$unreadMessages} ${$page.data.title ? `${$page.data.title} - ` : ''}Privelte`}
+	</title>
 	<meta name="description" content="chat privately and anonymously." />
 </svelte:head>
 

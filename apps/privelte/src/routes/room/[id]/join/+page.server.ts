@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 	try {
 		await verifyUser(session, params.id)
 	} catch {
-		return { title: 'Join - Privelte' }
+		return { title: 'Join Room' }
 	}
 
 	return redirect(303, `/room/${params.id}`)
