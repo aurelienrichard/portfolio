@@ -24,16 +24,30 @@
 		return status
 	}
 
+	$: isScrolledToBottom = () => {
+		if (!scrollable) return false
+		return scrollable.scrollHeight - scrollable.scrollTop - scrollable.clientHeight < 1
+	}
+
 	afterUpdate(() => {
 		bottom.scrollIntoView?.({ behavior: 'smooth' })
 	})
 </script>
 
+<svelte:window
+	on:focus={() => {
+		if (isScrolledToBottom()) {
+			unreadMessagesCount.reset()
+		}
+	}}
+/>
+
 <div
 	bind:this={scrollable}
 	on:scrollend={() => {
-		if (scrollable.scrollHeight - scrollable.scrollTop - scrollable.clientHeight < 1)
+		if (isScrolledToBottom()) {
 			unreadMessagesCount.reset()
+		}
 	}}
 	class="absolute left-0 top-0 h-full w-full space-y-4 overflow-y-auto overflow-x-clip px-4"
 >
