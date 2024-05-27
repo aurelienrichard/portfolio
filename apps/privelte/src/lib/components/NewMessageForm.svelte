@@ -11,13 +11,6 @@
 
 	const dispatch = createEventDispatcher()
 
-	const setHeight = () => {
-		if (textarea) {
-			textarea.style.height = '40px'
-			textarea.style.height = `${textarea.scrollHeight}px`
-		}
-	}
-
 	onMount(() => {
 		textarea.focus()
 	})
@@ -26,7 +19,14 @@
 		setHeight()
 	})
 
-	const handleMessage = () => {
+	function setHeight() {
+		if (textarea) {
+			textarea.style.height = '40px'
+			textarea.style.height = `${textarea.scrollHeight}px`
+		}
+	}
+
+	function handleMessage() {
 		const id = nanoid()
 
 		dispatch('message', { message, id })

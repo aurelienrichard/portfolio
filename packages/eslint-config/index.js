@@ -1,7 +1,5 @@
 module.exports = {
 	extends: [
-		'airbnb-base',
-		'airbnb-typescript/base',
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
@@ -38,6 +36,7 @@ module.exports = {
 	rules: {
 		// https://github.com/iamturns/eslint-config-airbnb-typescript#why-is-importno-unresolved-disabled
 		'import/no-unresolved': 'off',
+		'import/no-named-as-default': 'off',
 		// unreliable for monorepos
 		'import/no-extraneous-dependencies': 'off',
 		// yells on import of env variables
