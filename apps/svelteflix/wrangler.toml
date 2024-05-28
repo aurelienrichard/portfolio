@@ -1,9 +1,9 @@
 name = "svelteflix"
 pages_build_output_dir = ".svelte-kit/cloudflare"
-compatibility_date = "2024-04-15"
+compatibility_date = "2024-05-28"
 
 [env.production]
-compatibility_date = "2024-04-15"
+compatibility_date = "2024-05-28"
 
 [env.production.vars]
 PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
@@ -11,7 +11,7 @@ PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJp
 PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
 
 [env.preview]
-compatibility_date = "2024-04-15"
+compatibility_date = "2024-05-28"
 
 [env.preview.vars]
 PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
