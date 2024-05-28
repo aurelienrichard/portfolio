@@ -21,7 +21,7 @@
 	})
 </script>
 
-<div class="mb-8 text-center md:mb-12">
+<div class="mb-6 text-center md:mb-8">
 	<h1 class="h2 text-surface-600-300-token mb-3 leading-snug md:mb-6">
 		Choose a
 		<span
@@ -29,7 +29,7 @@
 			>username</span
 		>.
 	</h1>
-	<p class="md:text-xl">Usernames are exclusive to each room.</p>
+	<p class="md:text-xl">Usernames are exclusive to their respective rooms.</p>
 </div>
 
 <form method="POST" use:enhance={handleSubmit}>

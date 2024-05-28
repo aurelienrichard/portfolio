@@ -7,10 +7,9 @@ import {
 	NumberDictionary
 } from 'unique-names-generator'
 import { newRoomSchema } from '$lib/types/schemas'
+import { isValidId } from '$lib/utils'
 import type { Actions, PageServerLoad } from './$types'
 import { supabase } from '$lib/server/supabaseServer'
-
-let currentId: string
 
 export const load: PageServerLoad = () => {
 	const number = NumberDictionary.generate({ min: 100, max: 999 })
@@ -19,8 +18,6 @@ export const load: PageServerLoad = () => {
 		separator: '-'
 	}
 	const id = uniqueNamesGenerator(config)
-
-	currentId = id
 
 	return { id, title: 'New Room' }
 }
@@ -33,14 +30,8 @@ export const actions: Actions = {
 			slots: form.get('slots')
 		})
 
-		if (id !== currentId) {
+		if (!isValidId(id, adjectives, animals)) {
 			error(400, { message: 'Invalid ID.' })
-		}
-
-		const { data } = await supabase.from('rooms').select('id').eq('id', id).single()
-
-		if (data) {
-			error(500, { message: 'Internal error.' })
 		}
 
 		const room = await supabase.from('rooms').insert({ id, slots }).select().single()

@@ -24,7 +24,10 @@
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a href="/new" class="btn btn-sm variant-filled-surface capitalize"
+				<a
+					href="/new"
+					class="btn btn-sm variant-filled-surface capitalize"
+					data-sveltekit-preload-data="hover"
 					><span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +59,7 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<div class="h-full px-4 py-8 md:py-12">
+	<div class="h-full px-4 py-6 md:py-8">
 		<slot />
 	</div>
-	<svelte:fragment slot="footer">Footer</svelte:fragment>
 </AppShell>
