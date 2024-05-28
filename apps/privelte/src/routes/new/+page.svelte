@@ -17,7 +17,7 @@
 	}
 </script>
 
-<h1 class="h2 text-surface-600-300-token mb-8 text-center leading-snug md:mb-12">
+<h1 class="h2 text-surface-600-300-token mb-6 text-center leading-snug md:mb-8">
 	Create a new
 	<span
 		class="dark:from-gradient-1-dark dark:to-gradient-2-dark from-gradient-1-light to-gradient-2-light bg-gradient-to-br box-decoration-clone bg-clip-text capitalize text-transparent"
@@ -69,7 +69,7 @@
 			<input type="range" name="slots" bind:value={slots} min="2" max="10" />
 		</label>
 	</div>
-	<div class="mt-8 flex md:mt-12">
+	<div class="mt-6 flex md:mt-8">
 		<button
 			disabled={loading}
 			type="submit"
@@ -80,20 +80,22 @@
 				<ProgressRadial class="ml-1" width="md:w-5 w-4" />
 			{:else}
 				Next
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="ml-1 h-5 w-5 md:h-6 md:w-6"
+				<span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="ml-1 h-5 w-5 md:h-6 md:w-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+						/>
+					</svg></span
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-					/>
-				</svg>
 			{/if}
 		</button>
 	</div>
