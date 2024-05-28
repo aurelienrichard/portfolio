@@ -6,7 +6,6 @@ compatibility_date = "2024-05-28"
 compatibility_date = "2024-05-28"
 
 [env.production.vars]
-NODE_VERSION = ">=20"
 PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
 PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvemljeWV3ZnZndGhjdmlqY2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU2NTUzMTUsImV4cCI6MjAxMTIzMTMxNX0.TJQyzo1aGBgQwAOWLNPnw5ImNNu3aHpOWniQJsTHVOg"
 PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
@@ -15,7 +14,6 @@ PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
 compatibility_date = "2024-05-28"
 
 [env.preview.vars]
-NODE_VERSION = ">=20"
 PUBLIC_SVELTEFLIX_MEDIA_BASE_API_URL = "https://image.tmdb.org/t/p"
 PUBLIC_SVELTEFLIX_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvemljeWV3ZnZndGhjdmlqY2ptIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU2NTUzMTUsImV4cCI6MjAxMTIzMTMxNX0.TJQyzo1aGBgQwAOWLNPnw5ImNNu3aHpOWniQJsTHVOg"
 PUBLIC_SVELTEFLIX_SUPABASE_URL = "https://eozicyewfvgthcvijcjm.supabase.co"
