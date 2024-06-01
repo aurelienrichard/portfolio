@@ -1,3 +1,4 @@
+/** @type { import("eslint").Linter.Config } */
 module.exports = {
 	extends: [
 		'eslint:recommended',
@@ -13,6 +14,7 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		sourceType: 'module',
+		ecmaVersion: 2020,
 		extraFileExtensions: ['.svelte']
 	},
 	ignorePatterns: ['*.cjs', '*.config.js', '*.config.ts'],
